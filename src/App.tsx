@@ -19,10 +19,40 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1FA598',
+      main: '#8B5CF6', // Changed to match our new brand color
     },
     secondary: {
       main: '#f50057',
+    },
+  },
+  typography: {
+    fontFamily: '"Inter", "system-ui", "Helvetica", "Arial", sans-serif',
+    button: {
+      textTransform: 'none', // Makes buttons more modern by removing all-caps
+    },
+    h1: {
+      fontWeight: 600,
+    },
+    h2: {
+      fontWeight: 600,
+    },
+    h3: {
+      fontWeight: 600,
+    },
+  },
+  shape: {
+    borderRadius: 8,
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+        },
+      },
     },
   },
 });

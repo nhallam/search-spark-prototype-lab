@@ -64,7 +64,7 @@ const InviteCode: React.FC = () => {
                   render={({ slots }) => (
                     <InputOTPGroup className="gap-2">
                       {slots.map((slot, index) => (
-                        <InputOTPSlot key={index} {...slot} index={index} className="w-12 h-12 text-xl" />
+                        <InputOTPSlot key={index} index={index} className="w-12 h-12 text-xl" />
                       ))}
                     </InputOTPGroup>
                   )}

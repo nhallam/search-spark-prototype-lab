@@ -36,10 +36,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         <div className="flex justify-between items-start">
           <div className="flex items-center space-x-2">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={property.owner.avatar} alt={property.owner.name} />
-              <AvatarFallback>{property.owner.name.charAt(0)}</AvatarFallback>
+              <AvatarImage src={property.owner?.avatar} alt={property.owner?.name} />
+              <AvatarFallback>{property.owner?.name?.charAt(0) || '?'}</AvatarFallback>
             </Avatar>
-            <h3 className="font-medium text-lg">{property.owner.name}'s {property.title}</h3>
+            <h3 className="font-medium text-lg">
+              {property.owner?.name ? `${property.owner.name}'s ` : ''}{property.title}
+            </h3>
           </div>
           <div className="flex items-center">
             <Star className="h-4 w-4 fill-yellow-400 stroke-yellow-400 mr-1" />

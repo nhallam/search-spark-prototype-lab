@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
 import { SlidersHorizontal, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import PretzelLogo from '@/components/PretzelLogo';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useState({
@@ -97,11 +98,14 @@ const Index = () => {
       <header className="bg-brand text-white shadow-sm py-6">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            <h1 className="text-3xl font-bold">
-              Find your perfect stay in NYC
-            </h1>
+            <div className="flex items-center gap-2">
+              <PretzelLogo className="h-8 w-8" />
+              <h1 className="text-3xl font-bold">
+                Kiki
+              </h1>
+            </div>
             <Link to="/invite">
-              <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900">
+              <Button variant="outline" className="border-white hover:bg-white/20 text-white">
                 <UserPlus className="mr-2 h-4 w-4" />
                 Sign Up
               </Button>

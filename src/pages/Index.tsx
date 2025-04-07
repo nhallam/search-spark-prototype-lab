@@ -5,12 +5,22 @@ import PropertyGrid from '@/components/PropertyGrid';
 import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
+import FilterDrawer from '@/components/FilterDrawer';
+import { SlidersHorizontal } from 'lucide-react';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useState({
     dateRange: { from: undefined as Date | undefined, to: undefined as Date | undefined },
     location: 'all-nyc',
     priceRange: 300,
+  });
+  
+  const [advancedFilters, setAdvancedFilters] = useState({
+    priceRange: 300,
+    propertyType: 'entire-home',
+    amenities: [] as string[],
+    instantBook: false,
+    guestCount: 2
   });
   
   const [filteredProperties, setFilteredProperties] = useState<Property[]>(mockProperties);
@@ -23,6 +33,10 @@ const Index = () => {
   }) => {
     setIsLoading(true);
     setSearchParams(params);
+    setAdvancedFilters({
+      ...advancedFilters,
+      priceRange: params.priceRange
+    });
     
     // Simulate loading state for better UX
     setTimeout(() => {
@@ -38,6 +52,35 @@ const Index = () => {
       } else {
         toast.info('Please select both check-in and check-out dates');
       }
+    }, 800);
+  };
+  
+  const handleApplyAdvancedFilters = (filters: {
+    priceRange: number;
+    propertyType: string;
+    amenities: string[];
+    instantBook: boolean;
+    guestCount: number;
+  }) => {
+    setIsLoading(true);
+    setAdvancedFilters(filters);
+    
+    // Update the price range in search params too
+    setSearchParams({
+      ...searchParams,
+      priceRange: filters.priceRange
+    });
+    
+    // Apply filters
+    setTimeout(() => {
+      // This would typically involve more complex filtering logic with the advanced filters
+      const filtered = filterProperties(mockProperties, searchParams);
+      setFilteredProperties(filtered);
+      setIsLoading(false);
+      
+      toast.success(`Applied ${filters.amenities.length} filters`, {
+        description: "Results updated with your preferences"
+      });
     }, 800);
   };
   
@@ -67,6 +110,11 @@ const Index = () => {
               {searchParams.location !== 'all-nyc' && 
                 `in ${searchParams.location === 'manhattan' ? 'Manhattan' : 'Brooklyn'}`}
             </h2>
+            
+            <FilterDrawer 
+              onApplyFilters={handleApplyAdvancedFilters} 
+              initialFilters={advancedFilters}
+            />
           </div>
           
           <PropertyGrid properties={filteredProperties} isLoading={isLoading} />

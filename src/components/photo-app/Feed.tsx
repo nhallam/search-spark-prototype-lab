@@ -75,7 +75,7 @@ const Feed: React.FC = () => {
     <div className="space-y-6">
       {posts.map(post => (
         <Card key={post.id} className="overflow-hidden">
-          <CardHeader className="p-4 pb-0">
+          <CardHeader className="p-4 pb-2">
             <div className="flex items-center space-x-3">
               <Avatar>
                 <AvatarImage src={post.userAvatar} alt={post.username} />
@@ -90,7 +90,7 @@ const Feed: React.FC = () => {
           <img 
             src={post.imageUrl} 
             alt={post.caption} 
-            className="w-full aspect-[4/3] object-cover"
+            className="w-full aspect-[4/3] object-cover mb-3"
           />
           
           <CardContent className="p-4">

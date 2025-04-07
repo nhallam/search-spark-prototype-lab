@@ -35,9 +35,10 @@ const InputOTPSlot = React.forwardRef<
 >(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext)
   
-  // Safely access the slots data using optional chaining
-  const isActive = inputOTPContext?.slots ? inputOTPContext.slots[index]?.isActive : false
-  const char = inputOTPContext?.slots ? inputOTPContext.slots[index]?.char : ''
+  // Make sure we're accessing slots data correctly
+  const slot = inputOTPContext?.slots?.[index]
+  const isActive = !!slot?.isActive
+  const char = slot?.char || ''
   const hasFakeCaret = isActive && !char
   
   return (

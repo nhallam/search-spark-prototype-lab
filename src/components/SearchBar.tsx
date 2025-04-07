@@ -89,7 +89,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
               <CalendarComponent
                 initialFocus
                 mode="range"
-                defaultMonth={dateRange.from}
+                defaultMonth={dateRange.from || new Date()}
                 selected={dateRange}
                 onSelect={handleDateRangeChange}
                 numberOfMonths={2}

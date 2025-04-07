@@ -65,7 +65,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 className="h-14 border border-gray-200 hover:border-gray-300 rounded-lg flex justify-between w-full"
               >
                 <div className="flex items-center">
-                  <Calendar weight="regular" className="mr-2 h-4 w-4" />
+                  <Calendar weight="regular" className="mr-2 h-5 w-5" />
                   <span>
                     {dateRange.from && dateRange.to ? (
                       <div className="flex flex-col items-start">
@@ -104,7 +104,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           <Select value={location} onValueChange={setLocation}>
             <SelectTrigger className="h-14 border border-gray-200 hover:border-gray-300 rounded-lg">
               <div className="flex items-center">
-                <MapPin weight="regular" className="mr-2 h-4 w-4" />
+                <MapPin weight="regular" className="mr-2 h-5 w-5" />
                 <div className="flex flex-col items-start">
                   <span className="text-xs text-gray-500">Where</span>
                   <SelectValue placeholder="All NYC" />
@@ -128,7 +128,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 className="h-14 border border-gray-200 hover:border-gray-300 rounded-lg flex justify-between w-full"
               >
                 <div className="flex items-center">
-                  <CurrencyDollar weight="regular" className="mr-2 h-4 w-4" />
+                  <CurrencyDollar weight="regular" className="mr-2 h-5 w-5" />
                   <div className="flex flex-col items-start">
                     <span className="text-xs text-gray-500">Price</span>
                     <span>Up to ${priceRange}/night</span>

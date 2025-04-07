@@ -131,7 +131,7 @@ const SignUp: React.FC = () => {
             
             <Button 
               type="submit" 
-              className="w-full" 
+              className="w-full text-gray-900" 
               disabled={isLoading}
               style={{ backgroundColor: '#1FA598' }}
             >

@@ -1,7 +1,6 @@
-
 import { Property } from '../components/PropertyCard';
 
-// Mock property data
+// Extended mock property data
 export const mockProperties: Property[] = [
   {
     id: '1',
@@ -14,7 +13,19 @@ export const mockProperties: Property[] = [
     owner: {
       name: 'Sarah',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
-    }
+    },
+    description: "This bright and modern loft is in the heart of Manhattan, offering incredible views of the city skyline. With high ceilings, large windows, and a spacious open layout, this space is perfect for both working and relaxing. Just minutes from top restaurants and attractions.",
+    amenities: ["Wifi", "Kitchen", "AC", "Workspace", "TV", "Washer", "Elevator"],
+    beds: 2,
+    baths: 1,
+    guests: 4,
+    lat: 40.7128,
+    lng: -74.0060,
+    gallery: [
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+    ]
   },
   {
     id: '2',
@@ -27,7 +38,19 @@ export const mockProperties: Property[] = [
     owner: {
       name: 'Michael',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
-    }
+    },
+    description: "Welcome to this cozy Brooklyn studio that's perfect for solo travelers or couples. The apartment features stylish decor, a comfortable queen bed, and all the essentials for a comfortable stay. Located in a vibrant neighborhood with plenty of restaurants and cafes within walking distance.",
+    amenities: ["Wifi", "Kitchen", "AC", "Washer", "Dryer"],
+    beds: 1,
+    baths: 1,
+    guests: 2,
+    lat: 40.6782,
+    lng: -73.9442,
+    gallery: [
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+      'https://images.unsplash.com/photo-1630699144867-37acec97df5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+    ]
   },
   {
     id: '3',

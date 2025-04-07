@@ -2,6 +2,7 @@
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 export interface Property {
   id: string;
@@ -11,6 +12,10 @@ export interface Property {
   rating: number;
   image: string;
   available: boolean;
+  owner: {
+    name: string;
+    avatar: string;
+  };
 }
 
 interface PropertyCardProps {
@@ -29,7 +34,13 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
       </div>
       <CardContent className="p-4">
         <div className="flex justify-between items-start">
-          <h3 className="font-medium text-lg">{property.title}</h3>
+          <div className="flex items-center space-x-2">
+            <Avatar className="h-8 w-8">
+              <AvatarImage src={property.owner.avatar} alt={property.owner.name} />
+              <AvatarFallback>{property.owner.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+            <h3 className="font-medium text-lg">{property.owner.name}'s {property.title}</h3>
+          </div>
           <div className="flex items-center">
             <Star className="h-4 w-4 fill-yellow-400 stroke-yellow-400 mr-1" />
             <span>{property.rating.toFixed(1)}</span>

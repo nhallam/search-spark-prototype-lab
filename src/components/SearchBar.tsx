@@ -41,6 +41,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const [priceRange, setPriceRange] = useState<number>(300);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
+  const handleDateRangeChange = (range: { from: Date | undefined; to: Date | undefined }) => {
+    setDateRange(range);
+  };
+
   const handleSearch = () => {
     onSearch({
       dateRange,
@@ -87,7 +91,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 mode="range"
                 defaultMonth={dateRange.from}
                 selected={dateRange}
-                onSelect={setDateRange}
+                onSelect={handleDateRangeChange}
                 numberOfMonths={2}
                 className={cn("p-3 pointer-events-auto")}
               />

@@ -35,24 +35,19 @@ const InputOTPSlot = React.forwardRef<
 >(({ index, className, ...props }, ref) => {
   const inputOTPContext = React.useContext(OTPInputContext)
   
-  // Add a safety check to ensure slots exists and has the requested index
-  const slot = inputOTPContext?.slots?.[index]
-  const char = slot?.char || ''
-  const hasFakeCaret = slot?.hasFakeCaret || false
-  const isActive = slot?.isActive || false
-
+  // Pass all props to the div without trying to extract specific slot data
   return (
     <div
       ref={ref}
       className={cn(
         "relative flex h-10 w-10 items-center justify-center border-y border-r border-input text-sm transition-all first:rounded-l-md first:border-l last:rounded-r-md",
-        isActive && "z-10 ring-2 ring-ring ring-offset-background",
+        inputOTPContext?.isActive(index) && "z-10 ring-2 ring-ring ring-offset-background",
         className
       )}
       {...props}
     >
-      {char}
-      {hasFakeCaret && (
+      {inputOTPContext?.getSlotValue(index) || ''}
+      {inputOTPContext?.isActive(index) && !inputOTPContext?.getSlotValue(index) && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" />
         </div>

@@ -7,7 +7,7 @@ import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { SlidersHorizontal, UserPlus } from 'lucide-react';
+import { UserPlus, Sliders } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 
@@ -106,7 +106,7 @@ const Index = () => {
             </div>
             <Link to="/invite">
               <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900 bg-white">
-                <UserPlus className="mr-2 h-4 w-4" />
+                <UserPlus weight="bold" className="mr-2 h-4 w-4" />
                 Sign Up
               </Button>
             </Link>

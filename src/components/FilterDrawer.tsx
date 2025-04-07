@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Filter } from 'lucide-react';
+import { Funnel } from 'phosphor-react';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 
@@ -55,7 +55,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onApplyFilters, initialFilt
     <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline" className="flex items-center gap-2">
-          <Filter className="h-4 w-4" />
+          <Funnel weight="regular" className="h-4 w-4" />
           <span>Filters</span>
         </Button>
       </DrawerTrigger>

@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
-import { Calendar as CalendarIcon, MapPin, DollarSign, Search } from 'lucide-react';
+import { Calendar, MapPin, CurrencyDollar, MagnifyingGlass } from 'phosphor-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
@@ -65,7 +65,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 className="h-14 border border-gray-200 hover:border-gray-300 rounded-lg flex justify-between w-full"
               >
                 <div className="flex items-center">
-                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  <Calendar weight="regular" className="mr-2 h-4 w-4" />
                   <span>
                     {dateRange.from && dateRange.to ? (
                       <div className="flex flex-col items-start">
@@ -86,7 +86,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
+              <CalendarComponent
                 initialFocus
                 mode="range"
                 defaultMonth={dateRange.from}
@@ -104,7 +104,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           <Select value={location} onValueChange={setLocation}>
             <SelectTrigger className="h-14 border border-gray-200 hover:border-gray-300 rounded-lg">
               <div className="flex items-center">
-                <MapPin className="mr-2 h-4 w-4" />
+                <MapPin weight="regular" className="mr-2 h-4 w-4" />
                 <div className="flex flex-col items-start">
                   <span className="text-xs text-gray-500">Where</span>
                   <SelectValue placeholder="All NYC" />
@@ -128,7 +128,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                 className="h-14 border border-gray-200 hover:border-gray-300 rounded-lg flex justify-between w-full"
               >
                 <div className="flex items-center">
-                  <DollarSign className="mr-2 h-4 w-4" />
+                  <CurrencyDollar weight="regular" className="mr-2 h-4 w-4" />
                   <div className="flex flex-col items-start">
                     <span className="text-xs text-gray-500">Price</span>
                     <span>Up to ${priceRange}/night</span>
@@ -167,7 +167,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
             onClick={handleSearch}
             className="h-14 w-full bg-brand hover:bg-brand/90 text-white rounded-lg"
           >
-            <Search className="h-5 w-5" />
+            <MagnifyingGlass weight="bold" className="h-5 w-5" />
           </Button>
         </div>
       </div>

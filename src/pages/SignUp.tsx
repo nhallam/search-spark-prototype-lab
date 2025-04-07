@@ -141,7 +141,7 @@ const SignUp: React.FC = () => {
             </Box>
             
             <Grid container spacing={2}>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <TextField
                   fullWidth
                   required
@@ -158,7 +158,7 @@ const SignUp: React.FC = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid xs={6}>
                 <TextField
                   fullWidth
                   required
@@ -168,7 +168,7 @@ const SignUp: React.FC = () => {
                   onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <TextField
                   fullWidth
                   required
@@ -186,7 +186,7 @@ const SignUp: React.FC = () => {
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid xs={12}>
                 <TextField
                   fullWidth
                   required

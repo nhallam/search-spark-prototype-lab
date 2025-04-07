@@ -1,6 +1,14 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropertyCard, { Property } from './PropertyCard';
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from '@/components/ui/pagination';
 
 interface PropertyGridProps {
   properties: Property[];
@@ -8,6 +16,18 @@ interface PropertyGridProps {
 }
 
 const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, isLoading = false }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const propertiesPerPage = 16;
+  
+  // Calculate pagination
+  const totalPages = Math.ceil(properties.length / propertiesPerPage);
+  const indexOfLastProperty = currentPage * propertiesPerPage;
+  const indexOfFirstProperty = indexOfLastProperty - propertiesPerPage;
+  const currentProperties = properties.slice(indexOfFirstProperty, indexOfLastProperty);
+
+  // Change page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   if (isLoading) {
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -35,10 +55,59 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, isLoading = fal
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {properties.map((property) => (
-        <PropertyCard key={property.id} property={property} />
-      ))}
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {currentProperties.map((property) => (
+          <PropertyCard key={property.id} property={property} />
+        ))}
+      </div>
+      
+      {totalPages > 1 && (
+        <Pagination className="mt-8">
+          <PaginationContent>
+            {currentPage > 1 && (
+              <PaginationItem>
+                <PaginationPrevious onClick={() => paginate(currentPage - 1)} />
+              </PaginationItem>
+            )}
+            
+            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+              // Show pages around current page
+              let pageNum;
+              if (totalPages <= 5) {
+                // If 5 or fewer pages, show all
+                pageNum = i + 1;
+              } else if (currentPage <= 3) {
+                // If at start, show first 5
+                pageNum = i + 1;
+              } else if (currentPage >= totalPages - 2) {
+                // If at end, show last 5
+                pageNum = totalPages - 4 + i;
+              } else {
+                // Show current page and 2 before/after
+                pageNum = currentPage - 2 + i;
+              }
+              
+              return (
+                <PaginationItem key={pageNum}>
+                  <PaginationLink 
+                    isActive={pageNum === currentPage} 
+                    onClick={() => paginate(pageNum)}
+                  >
+                    {pageNum}
+                  </PaginationLink>
+                </PaginationItem>
+              );
+            })}
+            
+            {currentPage < totalPages && (
+              <PaginationItem>
+                <PaginationNext onClick={() => paginate(currentPage + 1)} />
+              </PaginationItem>
+            )}
+          </PaginationContent>
+        </Pagination>
+      )}
     </div>
   );
 };

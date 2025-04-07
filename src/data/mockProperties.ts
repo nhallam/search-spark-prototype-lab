@@ -1,7 +1,8 @@
+
 import { Property } from '../components/PropertyCard';
 
-// Extended mock property data
-export const mockProperties: Property[] = [
+// Base properties that we'll duplicate with variations
+const baseProperties: Property[] = [
   {
     id: '1',
     title: 'Modern Loft',
@@ -131,6 +132,109 @@ export const mockProperties: Property[] = [
     }
   },
 ];
+
+// Property name variations
+const propertyNames = [
+  'Luxury Apartment', 'Cozy Studio', 'Modern Loft', 'Historic Brownstone', 
+  'Penthouse Suite', 'Charming Flat', 'Downtown Condo', 'Stylish Studio',
+  'Elegant Apartment', 'Contemporary Space', 'Urban Retreat', 'Chic Loft', 
+  'Bright Condo', 'Skyline View Apartment', 'Quiet Retreat', 'Designer Loft',
+  'Trendy Flat', 'Central Park View', 'Artist Studio', 'Executive Suite'
+];
+
+// Location variations
+const locations = [
+  'Manhattan, NYC', 'Brooklyn, NYC', 'Upper East Side, NYC', 'Lower Manhattan, NYC',
+  'Chelsea, NYC', 'SoHo, NYC', 'Greenwich Village, NYC', 'Tribeca, NYC',
+  'Williamsburg, Brooklyn', 'Upper West Side, NYC', 'East Village, NYC',
+  'Midtown, NYC', 'Financial District, NYC', 'Park Slope, Brooklyn',
+  'Hell\'s Kitchen, NYC', 'Dumbo, Brooklyn'
+];
+
+// Owner variations
+const owners = [
+  { name: 'Sarah', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Michael', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Jessica', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Daniel', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Emma', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'James', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Alex', avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Olivia', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Noah', avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' },
+  { name: 'Sophia', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80' }
+];
+
+// Image variations for properties
+const propertyImages = [
+  'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1602872030219-ad2b9a54315c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1522156373667-4c7234bbd804?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+  'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'
+];
+
+// Generate 100 properties
+const generateProperties = (count: number): Property[] => {
+  // Start with our base properties
+  const allProperties = [...baseProperties];
+  
+  // Generate additional properties
+  for (let i = baseProperties.length + 1; i <= count; i++) {
+    const propertyName = propertyNames[Math.floor(Math.random() * propertyNames.length)];
+    const location = locations[Math.floor(Math.random() * locations.length)];
+    const price = Math.floor(Math.random() * 400) + 100; // $100 to $500
+    const rating = (Math.random() * 1.5 + 3.5).toFixed(1); // 3.5 to 5.0
+    const image = propertyImages[Math.floor(Math.random() * propertyImages.length)];
+    const available = Math.random() > 0.2; // 80% available
+    const owner = owners[Math.floor(Math.random() * owners.length)];
+    const beds = Math.floor(Math.random() * 4) + 1; // 1 to 4 beds
+    const baths = Math.floor(Math.random() * 3) + 1; // 1 to 3 baths
+    const guests = beds + Math.floor(Math.random() * 3); // beds + 0 to 2 extra guests
+    
+    // Generate random coordinates near NYC
+    const lat = 40.7 + (Math.random() - 0.5) * 0.2; // Around NYC latitude
+    const lng = -74.0 + (Math.random() - 0.5) * 0.2; // Around NYC longitude
+    
+    // Create the property
+    const property: Property = {
+      id: i.toString(),
+      title: propertyName,
+      location: location,
+      price: price,
+      rating: parseFloat(rating),
+      image: image,
+      available: available,
+      owner: owner,
+      beds: beds,
+      baths: baths,
+      guests: guests,
+      lat: lat,
+      lng: lng,
+      gallery: [
+        image,
+        propertyImages[Math.floor(Math.random() * propertyImages.length)],
+        propertyImages[Math.floor(Math.random() * propertyImages.length)]
+      ]
+    };
+    
+    // Add the property to our collection
+    allProperties.push(property);
+  }
+  
+  return allProperties;
+};
+
+// Generate 100 properties
+export const mockProperties: Property[] = generateProperties(100);
 
 // Filter properties based on search criteria
 export const filterProperties = (

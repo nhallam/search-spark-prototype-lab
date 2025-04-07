@@ -1,12 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
 import PropertyGrid from '@/components/PropertyGrid';
 import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal, UserPlus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useState({
@@ -94,9 +96,17 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50">
       <header className="bg-brand text-white shadow-sm py-6">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-center">
-            Find your perfect stay in NYC
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold">
+              Find your perfect stay in NYC
+            </h1>
+            <Link to="/invite">
+              <Button variant="outline" className="text-white border-white hover:bg-white/20">
+                <UserPlus className="mr-2 h-4 w-4" />
+                Sign Up
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
       

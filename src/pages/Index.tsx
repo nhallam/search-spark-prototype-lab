@@ -101,7 +101,7 @@ const Index = () => {
               Find your perfect stay in NYC
             </h1>
             <Link to="/invite">
-              <Button variant="outline" className="text-white border-white hover:bg-white/20">
+              <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900">
                 <UserPlus className="mr-2 h-4 w-4" />
                 Sign Up
               </Button>

@@ -76,7 +76,7 @@ const InviteCode: React.FC = () => {
             </div>
             <Button 
               type="submit" 
-              className="w-full" 
+              className="w-full text-white" 
               disabled={code.length !== 5 || isLoading}
               style={{ backgroundColor: '#1FA598' }}
             >

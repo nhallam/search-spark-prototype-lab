@@ -105,7 +105,7 @@ const Index = () => {
               </h1>
             </div>
             <Link to="/invite">
-              <Button variant="outline" className="border-white hover:bg-white/20 text-white">
+              <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900 bg-white">
                 <UserPlus className="mr-2 h-4 w-4" />
                 Sign Up
               </Button>

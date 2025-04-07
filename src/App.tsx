@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import InviteCode from "./pages/InviteCode";
 import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
+import PhotoApp from "./pages/PhotoApp";
 import { SignUpProvider } from "./contexts/SignUpContext";
 
 const queryClient = new QueryClient();
@@ -72,6 +73,7 @@ const App = () => (
               <Route path="/invite" element={<InviteCode />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/welcome" element={<Welcome />} />
+              <Route path="/photos" element={<PhotoApp />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

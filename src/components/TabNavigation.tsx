@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Compass, Home, UserRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -11,6 +11,12 @@ interface TabNavigationProps {
 
 const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
   const isMobile = useIsMobile();
+  const location = useLocation();
+  
+  // Hide the navigation on the photo app
+  if (location.pathname.includes('/photos')) {
+    return null;
+  }
   
   // If not on mobile, don't render the tab navigation
   if (!isMobile) {

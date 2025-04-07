@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -9,7 +10,6 @@ import FilterDrawer from '@/components/FilterDrawer';
 import { UserPlus, Sliders, Camera } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
-import TabNavigation from '@/components/TabNavigation';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
@@ -139,7 +139,7 @@ const Index = () => {
         </div>
       </main>
       
-      <TabNavigation activeTab="explore" />
+      {/* TabNavigation removed from here since it's now added globally in App.tsx */}
     </div>
   );
 };

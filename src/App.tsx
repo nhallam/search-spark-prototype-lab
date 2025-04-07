@@ -14,6 +14,7 @@ import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
 import { SignUpProvider } from "./contexts/SignUpContext";
+import TabNavigation from "./components/TabNavigation";
 
 const queryClient = new QueryClient();
 
@@ -58,30 +59,44 @@ const theme = createTheme({
   },
 });
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <SignUpProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/property/:id" element={<PropertyDetails />} />
-              <Route path="/invite" element={<InviteCode />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/welcome" element={<Welcome />} />
-              <Route path="/photos" element={<PhotoApp />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </SignUpProvider>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Determine which tab should be active based on the current route
+  const getActiveTab = () => {
+    const path = window.location.pathname;
+    
+    if (path === '/') return 'explore';
+    if (path.includes('/property')) return 'explore';
+    // Add more route mappings as needed
+    
+    return undefined;
+  };
+  
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <SignUpProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/property/:id" element={<PropertyDetails />} />
+                <Route path="/invite" element={<InviteCode />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/welcome" element={<Welcome />} />
+                <Route path="/photos" element={<PhotoApp />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+              <TabNavigation activeTab={getActiveTab()} />
+            </BrowserRouter>
+          </SignUpProvider>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

@@ -4,7 +4,20 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
 
-export interface Property {
+export type Review = {
+  id: string;
+  userId: string;
+  propertyId: string;
+  rating: number;
+  comment: string;
+  date: string;
+  user: {
+    name: string;
+    avatar?: string;
+  };
+};
+
+export type Property = {
   id: string;
   title: string;
   location: string;
@@ -12,9 +25,9 @@ export interface Property {
   rating: number;
   image: string;
   available: boolean;
-  owner: {
-    name: string;
-    avatar: string;
+  owner?: {
+    name?: string;
+    avatar?: string;
   };
   description?: string;
   amenities?: string[];
@@ -24,7 +37,8 @@ export interface Property {
   lat?: number;
   lng?: number;
   gallery?: string[];
-}
+  reviews?: Review[];
+};
 
 interface PropertyCardProps {
   property: Property;

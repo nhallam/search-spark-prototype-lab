@@ -1,9 +1,14 @@
 
 import { mockProperties } from '@/data/mockProperties';
+import { getReviewsForProperty } from '@/data/mockReviews';
 import { Property } from '@/components/PropertyCard';
 
 export const getPropertyById = (id: string): Property | undefined => {
-  return mockProperties.find(property => property.id === id);
+  const property = mockProperties.find(property => property.id === id);
+  if (property) {
+    property.reviews = getReviewsForProperty(id);
+  }
+  return property;
 };
 
 export const getRelatedProperties = (currentId: string, limit: number = 3): Property[] => {

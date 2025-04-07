@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getPropertyById, getRelatedProperties } from '@/utils/propertyUtils';
+import { getReviewsForProperty } from '@/data/mockReviews';
 import { Star, ArrowLeft, Wifi, Home, User, Bath, Bed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -9,6 +10,7 @@ import PropertyGallery from '@/components/PropertyGallery';
 import PropertyMap from '@/components/PropertyMap';
 import BookingForm from '@/components/BookingForm';
 import PropertyCard, { Property } from '@/components/PropertyCard';
+import PropertyReviews from '@/components/PropertyReviews';
 import { toast } from 'sonner';
 
 const PropertyDetails: React.FC = () => {
@@ -25,10 +27,16 @@ const PropertyDetails: React.FC = () => {
     setTimeout(() => {
       if (id) {
         const foundProperty = getPropertyById(id);
-        setProperty(foundProperty);
         
         if (foundProperty) {
+          // Get reviews for this property
+          const propertyReviews = getReviewsForProperty(id);
+          // Attach reviews to the property
+          foundProperty.reviews = propertyReviews;
+          setProperty(foundProperty);
           setRelatedProperties(getRelatedProperties(id));
+        } else {
+          setProperty(undefined);
         }
       }
       setIsLoading(false);
@@ -174,6 +182,13 @@ const PropertyDetails: React.FC = () => {
                 />
               </div>
             </div>
+
+            {/* Reviews Section */}
+            {property.reviews && property.reviews.length > 0 && (
+              <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <PropertyReviews reviews={property.reviews} />
+              </div>
+            )}
           </div>
           
           {/* Right column - Booking form */}

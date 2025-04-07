@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { Input } from '@/components/ui/input';
 import { useSignUp } from '@/contexts/SignUpContext';
 import { useToast } from '@/hooks/use-toast';
 
@@ -16,6 +16,12 @@ const InviteCode: React.FC = () => {
   const navigate = useNavigate();
   const { setInviteCode } = useSignUp();
   const { toast } = useToast();
+
+  const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Only allow numeric input and limit to 5 characters
+    const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 5);
+    setCode(value);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,17 +63,14 @@ const InviteCode: React.FC = () => {
                 Enter your 5-digit invitation code
               </p>
               <div className="flex justify-center">
-                <InputOTP
-                  maxLength={5}
+                <Input
+                  type="text"
                   value={code}
-                  onChange={setCode}
-                  render={({ slots }) => (
-                    <InputOTPGroup className="gap-2">
-                      {slots.map((slot, index) => (
-                        <InputOTPSlot key={index} index={index} className="w-12 h-12 text-xl" />
-                      ))}
-                    </InputOTPGroup>
-                  )}
+                  onChange={handleCodeChange}
+                  placeholder="Enter 5-digit code"
+                  className="text-center text-xl tracking-widest py-6 max-w-[200px]"
+                  inputMode="numeric"
+                  autoComplete="off"
                 />
               </div>
             </div>

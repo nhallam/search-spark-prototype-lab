@@ -7,7 +7,7 @@ import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { UserPlus, Sliders } from 'phosphor-react';
+import { UserPlus, Sliders, Camera } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 
@@ -104,12 +104,20 @@ const Index = () => {
                 Kiki
               </h1>
             </div>
-            <Link to="/invite">
-              <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900 bg-white">
-                <UserPlus weight="bold" className="mr-2 h-4 w-4" />
-                Sign Up
-              </Button>
-            </Link>
+            <div className="flex gap-2">
+              <Link to="/photos">
+                <Button variant="outline" className="border-white hover:bg-white/20 text-white">
+                  <Camera weight="bold" className="mr-2 h-4 w-4" />
+                  Photo App
+                </Button>
+              </Link>
+              <Link to="/invite">
+                <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900 bg-white">
+                  <UserPlus weight="bold" className="mr-2 h-4 w-4" />
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </header>

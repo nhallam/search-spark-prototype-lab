@@ -6,14 +6,17 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useSignUp } from '@/contexts/SignUpContext';
-import { Instagram, User, Mail } from 'lucide-react';
+import { Instagram, User, Mail, Camera } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
   const { inviteCode, firstName, setFirstName, lastName, setLastName, email, setEmail, instagram, setInstagram } = useSignUp();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
+  const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string>('');
 
   // Redirect to invite page if no valid invite code
   useEffect(() => {
@@ -21,6 +24,35 @@ const SignUp: React.FC = () => {
       navigate('/invite');
     }
   }, [inviteCode, navigate]);
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const selectedFile = e.target.files[0];
+      
+      // Check file size (max 5MB)
+      if (selectedFile.size > 5 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Please select an image under 5MB",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Check file type
+      if (!selectedFile.type.startsWith('image/')) {
+        toast({
+          title: "Invalid file type",
+          description: "Please select an image file",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      setProfilePhoto(selectedFile);
+      setPhotoPreviewUrl(URL.createObjectURL(selectedFile));
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,6 +103,32 @@ const SignUp: React.FC = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="flex justify-center mb-4">
+              <div className="relative">
+                <input
+                  type="file"
+                  id="profilePhoto"
+                  accept="image/*"
+                  onChange={handlePhotoChange}
+                  className="hidden"
+                />
+                <Label htmlFor="profilePhoto" className="cursor-pointer block">
+                  <Avatar className="h-24 w-24 border-2 border-dashed border-gray-300 hover:border-primary">
+                    {photoPreviewUrl ? (
+                      <AvatarImage src={photoPreviewUrl} alt="Profile preview" />
+                    ) : (
+                      <AvatarFallback className="bg-muted flex items-center justify-center">
+                        <Camera className="h-8 w-8 text-muted-foreground" />
+                      </AvatarFallback>
+                    )}
+                  </Avatar>
+                  <span className="block text-center text-sm mt-2 text-muted-foreground">
+                    {profilePhoto ? 'Change photo' : 'Add photo'}
+                  </span>
+                </Label>
+              </div>
+            </div>
+            
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>

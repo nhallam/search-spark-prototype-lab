@@ -12,6 +12,10 @@ interface SignUpContextType {
   setEmail: (email: string) => void;
   instagram: string;
   setInstagram: (handle: string) => void;
+  profilePhoto: File | null;
+  setProfilePhoto: (photo: File | null) => void;
+  photoPreviewUrl: string;
+  setPhotoPreviewUrl: (url: string) => void;
 }
 
 const SignUpContext = createContext<SignUpContextType | undefined>(undefined);
@@ -34,6 +38,8 @@ export const SignUpProvider: React.FC<SignUpProviderProps> = ({ children }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [instagram, setInstagram] = useState('');
+  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
+  const [photoPreviewUrl, setPhotoPreviewUrl] = useState('');
 
   return (
     <SignUpContext.Provider
@@ -48,6 +54,10 @@ export const SignUpProvider: React.FC<SignUpProviderProps> = ({ children }) => {
         setEmail,
         instagram,
         setInstagram,
+        profilePhoto,
+        setProfilePhoto,
+        photoPreviewUrl,
+        setPhotoPreviewUrl,
       }}
     >
       {children}

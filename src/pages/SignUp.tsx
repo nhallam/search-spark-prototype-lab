@@ -1,22 +1,27 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { 
+  Button, 
+  Card, 
+  CardContent, 
+  Typography, 
+  TextField, 
+  Box, 
+  Avatar, 
+  Container, 
+  Grid, 
+  InputAdornment
+} from '@mui/material';
+import { Instagram, Person, Email, PhotoCamera } from '@mui/icons-material';
 import { useSignUp } from '@/contexts/SignUpContext';
-import { Instagram, User, Mail, Camera } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
-  const { inviteCode, firstName, setFirstName, lastName, setLastName, email, setEmail, instagram, setInstagram } = useSignUp();
+  const { inviteCode, firstName, setFirstName, lastName, setLastName, email, setEmail, instagram, setInstagram, setProfilePhoto, photoPreviewUrl, setPhotoPreviewUrl } = useSignUp();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
-  const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
-  const [photoPreviewUrl, setPhotoPreviewUrl] = useState<string>('');
 
   // Redirect to invite page if no valid invite code
   useEffect(() => {
@@ -93,112 +98,134 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold mb-2">Create your account</CardTitle>
-          <CardDescription className="text-lg">
+    <Container maxWidth="sm" sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', py: 4 }}>
+      <Card sx={{ width: '100%', boxShadow: 3 }}>
+        <Box sx={{ textAlign: 'center', pt: 3, pb: 1 }}>
+          <Typography variant="h4" component="h1" fontWeight="bold" gutterBottom>
+            Create your account
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary">
             Complete your profile to join Kiki
-          </CardDescription>
-        </CardHeader>
+          </Typography>
+        </Box>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex justify-center mb-4">
-              <div className="relative">
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+              <Box sx={{ position: 'relative' }}>
                 <input
-                  type="file"
-                  id="profilePhoto"
                   accept="image/*"
+                  id="profilePhoto"
+                  type="file"
                   onChange={handlePhotoChange}
-                  className="hidden"
+                  style={{ display: 'none' }}
                 />
-                <Label htmlFor="profilePhoto" className="cursor-pointer block">
-                  <Avatar className="h-24 w-24 border-2 border-dashed border-gray-300 hover:border-primary">
-                    {photoPreviewUrl ? (
-                      <AvatarImage src={photoPreviewUrl} alt="Profile preview" />
-                    ) : (
-                      <AvatarFallback className="bg-muted flex items-center justify-center">
-                        <Camera className="h-8 w-8 text-muted-foreground" />
-                      </AvatarFallback>
-                    )}
-                  </Avatar>
-                  <span className="block text-center text-sm mt-2 text-muted-foreground">
-                    {profilePhoto ? 'Change photo' : 'Add photo'}
-                  </span>
-                </Label>
-              </div>
-            </div>
+                <label htmlFor="profilePhoto">
+                  <Box sx={{ position: 'relative', cursor: 'pointer' }}>
+                    <Avatar 
+                      sx={{ 
+                        width: 100, 
+                        height: 100,
+                        border: '2px dashed',
+                        borderColor: 'primary.light'
+                      }}
+                      src={photoPreviewUrl}
+                    >
+                      {!photoPreviewUrl && <PhotoCamera />}
+                    </Avatar>
+                    <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mt: 1, textAlign: 'center' }}>
+                      {photoPreviewUrl ? 'Change photo' : 'Add photo'}
+                    </Typography>
+                  </Box>
+                </label>
+              </Box>
+            </Box>
             
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                  <Input
-                    id="firstName"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="pl-10"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  required
+                  id="firstName"
+                  label="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Person fontSize="small" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  fullWidth
+                  required
                   id="lastName"
-                  placeholder="Last Name"
+                  label="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  required
                 />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                <Input
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
                   id="email"
+                  label="Email"
                   type="email"
-                  placeholder="you@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10"
-                  required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Email fontSize="small" />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-              </div>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="instagram">Instagram Handle</Label>
-              <div className="relative">
-                <Instagram className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                <Input
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
                   id="instagram"
-                  placeholder="@yourusername"
+                  label="Instagram Handle"
                   value={instagram}
                   onChange={(e) => setInstagram(e.target.value.replace(/^@/, ''))}
-                  className="pl-10"
-                  required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Instagram fontSize="small" />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-              </div>
-            </div>
+              </Grid>
+            </Grid>
             
-            <Button 
-              type="submit" 
-              className="w-full text-gray-900" 
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
               disabled={isLoading}
-              style={{ backgroundColor: '#1FA598' }}
+              sx={{ 
+                mt: 4, 
+                py: 1.5,
+                color: 'white',
+                backgroundColor: '#1FA598',
+                '&:hover': {
+                  backgroundColor: '#1a8a80',
+                }
+              }}
             >
               {isLoading ? "Creating account..." : "Complete Sign Up"}
             </Button>
-          </form>
+          </Box>
         </CardContent>
       </Card>
-    </div>
+    </Container>
   );
 };
 

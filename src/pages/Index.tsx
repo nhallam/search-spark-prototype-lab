@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -10,6 +9,8 @@ import FilterDrawer from '@/components/FilterDrawer';
 import { UserPlus, Sliders, Camera } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
+import TabNavigation from '@/components/TabNavigation';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useState({
@@ -28,6 +29,7 @@ const Index = () => {
   
   const [filteredProperties, setFilteredProperties] = useState<Property[]>(mockProperties);
   const [isLoading, setIsLoading] = useState(false);
+  const isMobile = useIsMobile();
   
   const handleSearch = (params: {
     dateRange: { from: Date | undefined; to: Date | undefined };
@@ -122,7 +124,7 @@ const Index = () => {
         </div>
       </header>
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 pb-24">
         <SearchBar onSearch={handleSearch} />
         
         <div className="mt-8">
@@ -142,6 +144,8 @@ const Index = () => {
           <PropertyGrid properties={filteredProperties} isLoading={isLoading} />
         </div>
       </main>
+      
+      <TabNavigation activeTab="explore" />
     </div>
   );
 };

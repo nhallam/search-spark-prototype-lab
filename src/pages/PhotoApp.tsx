@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Home, User } from "lucide-react";
 import Feed from '@/components/photo-app/Feed';
 import Profile from '@/components/photo-app/Profile';
+import { Link } from 'react-router-dom';
 
 const PhotoApp: React.FC = () => {
   return (
@@ -11,6 +12,9 @@ const PhotoApp: React.FC = () => {
       <header className="border-b bg-white p-4 shadow-sm">
         <div className="container mx-auto flex items-center justify-between">
           <h1 className="text-2xl font-bold text-brand">Dan's Photo App</h1>
+          <Link to="/" className="text-sm font-medium text-gray-600 hover:text-brand">
+            Back to Kiki
+          </Link>
         </div>
       </header>
       

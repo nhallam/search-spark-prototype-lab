@@ -19,7 +19,7 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#8B5CF6', // Changed to match our new brand color
+      main: '#0066FF', // Changed to a vibrant blue
     },
     secondary: {
       main: '#f50057',

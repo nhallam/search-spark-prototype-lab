@@ -39,7 +39,7 @@ const Welcome: React.FC = () => {
   return (
     <div 
       className="min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden"
-      style={{ backgroundColor: '#8B5CF6' }}
+      style={{ backgroundColor: '#0066FF' }}
     >
       {showConfetti && <Confetti duration={5000} />}
 

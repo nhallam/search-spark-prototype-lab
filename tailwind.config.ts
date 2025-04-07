@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -66,7 +65,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				brand: '#8B5CF6' // Changed from the teal color to a modern purple
+				brand: '#0066FF' // Changed from the teal color to a modern blue
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

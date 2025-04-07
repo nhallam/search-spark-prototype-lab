@@ -43,13 +43,11 @@ const Index = () => {
       priceRange: params.priceRange
     });
     
-    // Simulate loading state for better UX
     setTimeout(() => {
       const filtered = filterProperties(mockProperties, params);
       setFilteredProperties(filtered);
       setIsLoading(false);
       
-      // Show toast notification with search results
       if (params.dateRange.from && params.dateRange.to) {
         toast.success(`Found ${filtered.length} properties for your dates`, {
           description: "Showing results that match your criteria"
@@ -70,15 +68,12 @@ const Index = () => {
     setIsLoading(true);
     setAdvancedFilters(filters);
     
-    // Update the price range in search params too
     setSearchParams({
       ...searchParams,
       priceRange: filters.priceRange
     });
     
-    // Apply filters
     setTimeout(() => {
-      // This would typically involve more complex filtering logic with the advanced filters
       const filtered = filterProperties(mockProperties, searchParams);
       setFilteredProperties(filtered);
       setIsLoading(false);
@@ -89,14 +84,13 @@ const Index = () => {
     }, 800);
   };
   
-  // Initial load simulation
   useEffect(() => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
   }, []);
   
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 pb-16">
       <header className="bg-brand text-white shadow-sm py-6">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
@@ -127,7 +121,7 @@ const Index = () => {
       <main className="container mx-auto px-4 py-8 pb-24">
         <SearchBar onSearch={handleSearch} />
         
-        <div className="mt-8">
+        <div className="mt-8 mb-20">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold text-gray-800">
               {filteredProperties.length} homes{' '}

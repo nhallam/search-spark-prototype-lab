@@ -18,8 +18,8 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
   }
   
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-30">
-      <div className="flex justify-around items-center h-16 px-2">
+    <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg z-50 border-t border-gray-200 dark:border-gray-700">
+      <div className="flex justify-around items-center h-16 px-2 max-w-screen-xl mx-auto">
         <Link 
           to="/" 
           className={cn(

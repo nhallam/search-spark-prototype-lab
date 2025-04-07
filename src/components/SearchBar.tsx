@@ -165,7 +165,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         <div className="md:col-span-1">
           <Button 
             onClick={handleSearch}
-            className="h-14 w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+            className="h-14 w-full bg-brand hover:bg-brand/90 text-white rounded-lg"
           >
             <Search className="h-5 w-5" />
           </Button>

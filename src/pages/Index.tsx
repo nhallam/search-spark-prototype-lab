@@ -92,9 +92,9 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm py-6">
+      <header className="bg-brand text-white shadow-sm py-6">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold text-center text-gray-800">
+          <h1 className="text-3xl font-bold text-center">
             Find your perfect stay in NYC
           </h1>
         </div>
@@ -105,7 +105,7 @@ const Index = () => {
         
         <div className="mt-8">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold">
+            <h2 className="text-xl font-semibold text-gray-800">
               {filteredProperties.length} homes{' '}
               {searchParams.location !== 'all-nyc' && 
                 `in ${searchParams.location === 'manhattan' ? 'Manhattan' : 'Brooklyn'}`}

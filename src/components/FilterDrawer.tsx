@@ -76,6 +76,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onApplyFilters, initialFilt
                 max={1000} 
                 step={10}
                 onValueChange={(values) => setPriceRange(values[0])} 
+                className="text-brand"
               />
               <div className="flex justify-between text-sm text-gray-500">
                 <span>$50</span>
@@ -169,7 +170,7 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onApplyFilters, initialFilt
         </div>
         
         <DrawerFooter className="pt-2">
-          <Button onClick={handleApplyFilters}>Apply Filters</Button>
+          <Button onClick={handleApplyFilters} className="bg-brand hover:bg-brand/90 text-white">Apply Filters</Button>
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -17,6 +16,14 @@ export interface Property {
     name: string;
     avatar: string;
   };
+  description?: string;
+  amenities?: string[];
+  beds?: number;
+  baths?: number;
+  guests?: number;
+  lat?: number;
+  lng?: number;
+  gallery?: string[];
 }
 
 interface PropertyCardProps {

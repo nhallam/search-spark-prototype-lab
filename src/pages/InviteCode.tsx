@@ -75,7 +75,7 @@ const InviteCode: React.FC = () => {
               type="submit" 
               className="w-full" 
               disabled={code.length !== 5 || isLoading}
-              style={{ backgroundColor: '#1FA598', hover: 'opacity-90' }}
+              style={{ backgroundColor: '#1FA598' }}
             >
               {isLoading ? "Verifying..." : "Continue"}
             </Button>

@@ -133,7 +133,7 @@ const SignUp: React.FC = () => {
               type="submit" 
               className="w-full" 
               disabled={isLoading}
-              style={{ backgroundColor: '#1FA598', hover: 'opacity-90' }}
+              style={{ backgroundColor: '#1FA598' }}
             >
               {isLoading ? "Creating account..." : "Complete Sign Up"}
             </Button>

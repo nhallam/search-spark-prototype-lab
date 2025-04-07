@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import InviteCode from "./pages/InviteCode";
 import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
+import { SignUpProvider } from "./contexts/SignUpContext";
 
 const queryClient = new QueryClient();
 
@@ -18,17 +19,19 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/invite" element={<InviteCode />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/welcome" element={<Welcome />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <SignUpProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/property/:id" element={<PropertyDetails />} />
+            <Route path="/invite" element={<InviteCode />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/welcome" element={<Welcome />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </SignUpProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

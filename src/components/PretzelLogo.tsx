@@ -18,12 +18,12 @@ const PretzelLogo: React.FC<PretzelLogoProps> = ({ className, ...props }) => {
       className={className}
       {...props}
     >
-      <path d="M7.5 12c-1.667 1.667-5 1-5-2.5S7 4.5 9.5 7c2.5 2.5 0 8.5-5 6.5" />
-      <path d="M16.5 12c1.667 1.667 5 1 5-2.5S17 4.5 14.5 7c-2.5 2.5 0 8.5 5 6.5" />
-      <path d="M8.5 7C11.167 5.167 14.5 6.5 16 9c2.5 4-2 8.5-7 7.5s-5.499-7-3-9Z" />
-      <path d="M15.5 7C12.833 5.167 9.5 6.5 8 9c-2.5 4 2 8.5 7 7.5s5.499-7 3-9Z" />
-      <path d="m11.5 11.5 1 1" />
-      <path d="m12.5 11.5-1 1" />
+      {/* Simple pretzel shape with three loops */}
+      <path d="M8 12c0-2.5 2-4.5 4-4.5s4 2 4 4.5-2 4.5-4 4.5-4-2-4-4.5z" />
+      <path d="M6 7c-2 1-3 3-3 5s1 4 3 5" />
+      <path d="M18 7c2 1 3 3 3 5s-1 4-3 5" />
+      <path d="M8 6c2-1.5 6-1.5 8 0" />
+      <path d="M8 18c2 1.5 6 1.5 8 0" />
     </svg>
   );
 };

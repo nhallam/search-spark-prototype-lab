@@ -176,7 +176,7 @@ const MarketAnalysis: React.FC = () => {
                         <LineChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="month" stroke="#94A3B8" />
-                          <YAxis stroke="#94A3B8" />
+                          <YAxis stroke="#94A3B8" domain={[0, 'auto']} />
                           <ChartTooltip
                             content={({ active, payload }) => (
                               <ChartTooltipContent 
@@ -221,7 +221,7 @@ const MarketAnalysis: React.FC = () => {
                         <BarChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="month" stroke="#94A3B8" />
-                          <YAxis stroke="#94A3B8" />
+                          <YAxis stroke="#94A3B8" domain={[0, 'auto']} />
                           <ChartTooltip
                             content={({ active, payload }) => (
                               <ChartTooltipContent 
@@ -261,7 +261,7 @@ const MarketAnalysis: React.FC = () => {
                         >
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="season" stroke="#94A3B8" />
-                          <YAxis stroke="#94A3B8" />
+                          <YAxis stroke="#94A3B8" domain={[0, 'auto']} />
                           <ChartTooltip
                             content={({ active, payload }) => (
                               <ChartTooltipContent active={active} payload={payload} />
@@ -287,8 +287,8 @@ const MarketAnalysis: React.FC = () => {
                         <LineChart data={seasonalAggregateData} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="season" stroke="#94A3B8" />
-                          <YAxis yAxisId="left" orientation="left" stroke="#1FA598" />
-                          <YAxis yAxisId="right" orientation="right" stroke="#F97316" />
+                          <YAxis yAxisId="left" orientation="left" stroke="#1FA598" domain={[0, 'auto']} />
+                          <YAxis yAxisId="right" orientation="right" stroke="#F97316" domain={[0, 'auto']} />
                           <ChartTooltip
                             content={({ active, payload }) => (
                               <ChartTooltipContent 

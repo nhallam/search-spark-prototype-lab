@@ -77,7 +77,7 @@ const AppContent = () => {
     if (path.includes('/property')) return 'explore';
     if (path === '/bookings' || path.includes('/booking/')) return 'bookings';
     if (path === '/notifications') return 'notifications';
-    if (path === '/profile') return 'profile';
+    if (path === '/profile' || path === '/your-home') return 'profile';
     
     return undefined;
   };
@@ -94,6 +94,7 @@ const AppContent = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/photos" element={<PhotoApp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/your-home" element={<Profile />} /> {/* Temporarily pointing to Profile */}
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/booking/:id" element={<BookingDetails />} />
         <Route path="/notifications" element={<Notifications />} />

@@ -1,12 +1,28 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Home, User, Compass, Bell, Camera } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const NavigationMenu: React.FC = () => {
   const navigate = useNavigate();
+  const [homeBooked, setHomeBooked] = useState(false);
+  
+  // Simulate checking if home is currently booked
+  useEffect(() => {
+    // This would typically be an API call to check booking status
+    const checkHomeBookingStatus = async () => {
+      // Simulating an API call with a timeout
+      setTimeout(() => {
+        // For demo purposes, randomly determine if home is booked
+        setHomeBooked(Math.random() > 0.5);
+      }, 1000);
+    };
+    
+    checkHomeBookingStatus();
+  }, []);
 
   const navigationOptions = [
     {
@@ -14,6 +30,16 @@ const NavigationMenu: React.FC = () => {
       description: 'Browse available properties and listings',
       icon: <Compass className="h-5 w-5" />,
       path: '/'
+    },
+    {
+      title: 'Your Home',
+      description: 'Manage your property listings',
+      icon: <Home className="h-5 w-5" />,
+      path: '/your-home',
+      status: homeBooked ? {
+        text: 'Currently Booked',
+        variant: 'success' as const
+      } : null
     },
     {
       title: 'Profile',
@@ -62,8 +88,15 @@ const NavigationMenu: React.FC = () => {
                 <div className="bg-primary/10 p-2 rounded-full mr-4">
                   {option.icon}
                 </div>
-                <div>
-                  <div className="font-medium">{option.title}</div>
+                <div className="flex-1">
+                  <div className="font-medium flex items-center gap-2">
+                    {option.title}
+                    {option.status && (
+                      <Badge variant={option.status.variant} className="text-xs">
+                        {option.status.text}
+                      </Badge>
+                    )}
+                  </div>
                   <div className="text-xs text-muted-foreground">{option.description}</div>
                 </div>
               </Button>

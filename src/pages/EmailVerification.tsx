@@ -6,8 +6,6 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useSignUp } from '@/contexts/SignUpContext';
 
-// Mock list of existing user emails
-const EXISTING_USERS = ['test@example.com', 'user@example.com', 'alex@example.com'];
 const VALID_VERIFICATION_CODE = '555555';
 
 const EmailVerification: React.FC = () => {

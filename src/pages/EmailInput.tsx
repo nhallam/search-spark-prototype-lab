@@ -9,9 +9,6 @@ import { useSignUp } from '@/contexts/SignUpContext';
 import { useToast } from '@/hooks/use-toast';
 import { AtSign } from 'lucide-react';
 
-// Mock list of existing user emails
-const EXISTING_USERS = ['test@example.com', 'user@example.com', 'alex@example.com'];
-
 const EmailInput: React.FC = () => {
   const [inputEmail, setInputEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -46,9 +43,9 @@ const EmailInput: React.FC = () => {
       return;
     }
 
-    // Simulate checking if user exists
+    // Check if email has @kiki.club domain (existing user)
     setTimeout(() => {
-      const isExisting = EXISTING_USERS.includes(inputEmail.toLowerCase());
+      const isExisting = inputEmail.toLowerCase().endsWith('@kiki.club');
       setIsExistingUser(isExisting);
       setEmail(inputEmail);
       

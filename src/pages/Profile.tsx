@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu, BarChart2 } from 'lucide-react';
+import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu, BarChart2, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import EarningsHistory from '@/components/profile/EarningsHistory';
@@ -19,6 +19,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { generateMockData } from '@/components/profile/EarningsHistory';
+import { connections } from '@/data/photoAppData';
 
 const Profile = () => {
   const [copied, setCopied] = useState(false);
@@ -162,6 +163,37 @@ const Profile = () => {
           </Card>
           
           <div className="md:col-span-2 space-y-6">
+            <Card className="bg-white shadow-sm border-brand/10">
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  <span className="flex items-center gap-2">
+                    <Users size={20} />
+                    Kiki Circles
+                  </span>
+                </CardTitle>
+                <CardDescription>Your connections on Kiki</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                  {connections.map(connection => (
+                    <div key={connection.id} className="flex flex-col items-center text-center">
+                      <Avatar className="w-16 h-16 mb-2">
+                        <AvatarImage src={connection.avatar} alt={connection.username} />
+                        <AvatarFallback>{connection.username.substring(0, 2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <p className="font-medium text-sm">{connection.username}</p>
+                      <p className="text-xs text-gray-500">{connection.relationship}</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" size="sm" className="w-full border-brand text-brand hover:bg-brand/10">
+                  Invite Friends
+                </Button>
+              </CardFooter>
+            </Card>
+            
             <EarningsHistory />
             
             <Card>

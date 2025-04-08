@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -7,7 +6,8 @@ import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { Sliders, UserPlus, Menu } from 'phosphor-react';
+import { Sliders, UserPlus } from 'phosphor-react';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -103,7 +103,7 @@ const Index = () => {
             <div className="flex gap-2">
               <Link to="/menu">
                 <Button variant="ghost" className="rounded-full w-10 h-10 p-0">
-                  <Menu weight="bold" className="h-5 w-5" />
+                  <Menu className="h-5 w-5" />
                 </Button>
               </Link>
               <Link to="/invite">

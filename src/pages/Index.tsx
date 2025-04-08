@@ -91,24 +91,24 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
-      <header className="bg-brand text-white shadow-sm py-6">
+      <header className="bg-white text-brand shadow-sm py-6">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <PretzelLogo className="h-8 w-8" />
-              <h1 className="text-3xl font-bold">
+              <PretzelLogo className="h-8 w-8 text-brand" />
+              <h1 className="text-3xl font-bold text-brand">
                 Kiki
               </h1>
             </div>
             <div className="flex gap-2">
               <Link to="/photos">
-                <Button variant="outline" className="border-white hover:bg-white/20 text-white">
+                <Button variant="outline" className="border-brand hover:bg-brand/10 text-brand">
                   <Camera weight="bold" className="mr-2 h-4 w-4" />
                   Photo App
                 </Button>
               </Link>
               <Link to="/invite">
-                <Button variant="outline" className="border-white hover:bg-white/20 text-gray-900 bg-white">
+                <Button className="bg-brand hover:bg-brand/90 text-white">
                   <UserPlus weight="bold" className="mr-2 h-4 w-4" />
                   Sign Up
                 </Button>

@@ -38,7 +38,7 @@ const NavigationMenu: React.FC = () => {
       path: '/your-home',
       status: homeBooked ? {
         text: 'Currently Booked',
-        variant: 'success' as const
+        variant: 'default' as const // Changed from 'success' to 'default'
       } : null
     },
     {

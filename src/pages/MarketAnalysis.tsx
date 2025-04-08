@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -328,47 +329,6 @@ const MarketAnalysis: React.FC = () => {
                   </div>
                 </TabsContent>
               </Tabs>
-              
-              <div className="mt-24">
-                <h3 className="text-lg font-semibold mb-4">Key Insights</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card className="bg-blue-50 border-blue-200">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base">Winter (Dec-Feb)</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0 text-sm">
-                      <p>Demand drops during colder months, but so does supply. Consider offering winter discounts or seasonal promotions to attract more bookings.</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-green-50 border-green-200">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base">Spring (Mar-May)</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0 text-sm">
-                      <p>Tourism begins to pick up, making this an ideal time to gradually increase prices as demand grows. Focus on advertising outdoor amenities.</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-orange-50 border-orange-200">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base">Summer (Jun-Aug)</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0 text-sm">
-                      <p>Peak demand season with highest booking rates. Consider premium pricing and minimum stay requirements to maximize revenue.</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card className="bg-purple-50 border-purple-200">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="text-base">Fall (Sep-Nov)</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-0 text-sm">
-                      <p>High booking rate with slightly lower prices than summer. Highlight fall activities in NYC to attract more guests during this transitional season.</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>

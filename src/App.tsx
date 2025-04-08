@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Index from "./pages/Index";
@@ -15,6 +15,7 @@ import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
 import Profile from "./pages/Profile";
 import Bookings from "./pages/Bookings";
+import BookingDetails from "./pages/BookingDetails";
 import Notifications from "./pages/Notifications";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
@@ -68,7 +69,7 @@ const App = () => {
     
     if (path === '/') return 'explore';
     if (path.includes('/property')) return 'explore';
-    if (path === '/bookings') return 'bookings';
+    if (path === '/bookings' || path.includes('/booking/')) return 'bookings';
     if (path === '/notifications') return 'notifications';
     if (path === '/profile') return 'profile';
     
@@ -93,6 +94,7 @@ const App = () => {
                 <Route path="/photos" element={<PhotoApp />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/bookings" element={<Bookings />} />
+                <Route path="/booking/:id" element={<BookingDetails />} />
                 <Route path="/notifications" element={<Notifications />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

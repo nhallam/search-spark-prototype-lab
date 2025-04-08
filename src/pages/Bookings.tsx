@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -14,6 +15,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
 
 const Bookings = () => {
+  const navigate = useNavigate();
+  
   // Mock booking data - in a real app, this would come from an API
   const bookings = [
     { 
@@ -64,6 +67,10 @@ const Bookings = () => {
       year: 'numeric'
     });
   };
+  
+  const handleRowClick = (bookingId: number) => {
+    navigate(`/booking/${bookingId}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -97,7 +104,11 @@ const Bookings = () => {
               </TableHeader>
               <TableBody>
                 {bookings.map((booking) => (
-                  <TableRow key={booking.id} className="cursor-pointer hover:bg-gray-50">
+                  <TableRow 
+                    key={booking.id} 
+                    className="cursor-pointer hover:bg-gray-50"
+                    onClick={() => handleRowClick(booking.id)}
+                  >
                     <TableCell className="font-medium">
                       <div>
                         <p className="font-semibold">{booking.property}</p>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -8,7 +7,6 @@ import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
 import { Sliders, UserPlus } from 'phosphor-react';
-import { UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -102,12 +100,6 @@ const Index = () => {
               </h1>
             </div>
             <div className="flex gap-2">
-              <Link to="/profile">
-                <Button variant="outline" className="border-brand hover:bg-brand/10 text-brand">
-                  <UserRound className="mr-2 h-4 w-4" />
-                  My Profile
-                </Button>
-              </Link>
               <Link to="/invite">
                 <Button className="bg-brand hover:bg-brand/90 text-white">
                   <UserPlus weight="bold" className="mr-2 h-4 w-4" />

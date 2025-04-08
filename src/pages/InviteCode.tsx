@@ -35,7 +35,7 @@ const InviteCode: React.FC = () => {
           title: "Valid invite code",
           description: "Welcome to the club! Proceeding to sign up.",
         });
-        navigate('/signup');
+        navigate('/email'); // Navigate to email input instead of signup
       } else {
         toast({
           title: "Invalid invite code",

@@ -13,22 +13,40 @@ import {
   Grid, 
   InputAdornment
 } from '@mui/material';
-import { Instagram, Person, Email, PhotoCamera } from '@mui/icons-material';
+import { Instagram, Person, PhotoCamera } from '@mui/icons-material';
 import { useSignUp } from '@/contexts/SignUpContext';
 import { useToast } from '@/hooks/use-toast';
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
-  const { inviteCode, firstName, setFirstName, lastName, setLastName, email, setEmail, instagram, setInstagram, setProfilePhoto, photoPreviewUrl, setPhotoPreviewUrl } = useSignUp();
+  const { 
+    inviteCode, 
+    firstName, 
+    setFirstName, 
+    lastName, 
+    setLastName, 
+    email, 
+    instagram, 
+    setInstagram, 
+    setProfilePhoto, 
+    photoPreviewUrl, 
+    setPhotoPreviewUrl,
+    isVerified 
+  } = useSignUp();
+  
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  // Redirect to invite page if no valid invite code
+  // Redirect if not verified or no invite code or no email
   useEffect(() => {
     if (!inviteCode) {
       navigate('/invite');
+    } else if (!email) {
+      navigate('/email');
+    } else if (!isVerified) {
+      navigate('/verify');
     }
-  }, [inviteCode, navigate]);
+  }, [inviteCode, email, isVerified, navigate]);
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -64,22 +82,10 @@ const SignUp: React.FC = () => {
     setIsLoading(true);
 
     // Form validation
-    if (!firstName || !lastName || !email || !instagram) {
+    if (!firstName || !lastName || !instagram) {
       toast({
         title: "Missing information",
         description: "Please fill in all required fields",
-        variant: "destructive",
-      });
-      setIsLoading(false);
-      return;
-    }
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast({
-        title: "Invalid email",
-        description: "Please enter a valid email address",
         variant: "destructive",
       });
       setIsLoading(false);
@@ -102,10 +108,10 @@ const SignUp: React.FC = () => {
       <Card sx={{ width: '100%', boxShadow: 3 }}>
         <Box sx={{ textAlign: 'center', pt: 3, pb: 1 }}>
           <Typography variant="h4" component="h1" fontWeight="bold" gutterBottom>
-            Create your account
+            Complete your profile
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            Complete your profile to join Kiki
+            Just a few more details to get started
           </Typography>
         </Box>
         <CardContent>
@@ -166,24 +172,6 @@ const SignUp: React.FC = () => {
                   label="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                />
-              </Grid>
-              <Grid component="div" sx={{ gridColumn: 'span 12' }}>
-                <TextField
-                  fullWidth
-                  required
-                  id="email"
-                  label="Email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Email fontSize="small" />
-                      </InputAdornment>
-                    ),
-                  }}
                 />
               </Grid>
               <Grid component="div" sx={{ gridColumn: 'span 12' }}>

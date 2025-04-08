@@ -16,6 +16,10 @@ interface SignUpContextType {
   setProfilePhoto: (photo: File | null) => void;
   photoPreviewUrl: string;
   setPhotoPreviewUrl: (url: string) => void;
+  isExistingUser: boolean;
+  setIsExistingUser: (isExisting: boolean) => void;
+  isVerified: boolean;
+  setIsVerified: (isVerified: boolean) => void;
 }
 
 const SignUpContext = createContext<SignUpContextType | undefined>(undefined);
@@ -40,6 +44,8 @@ export const SignUpProvider: React.FC<SignUpProviderProps> = ({ children }) => {
   const [instagram, setInstagram] = useState('');
   const [profilePhoto, setProfilePhoto] = useState<File | null>(null);
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState('');
+  const [isExistingUser, setIsExistingUser] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   return (
     <SignUpContext.Provider
@@ -58,6 +64,10 @@ export const SignUpProvider: React.FC<SignUpProviderProps> = ({ children }) => {
         setProfilePhoto,
         photoPreviewUrl,
         setPhotoPreviewUrl,
+        isExistingUser,
+        setIsExistingUser,
+        isVerified,
+        setIsVerified,
       }}
     >
       {children}

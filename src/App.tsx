@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import PropertyDetails from "./pages/PropertyDetails";
 import NotFound from "./pages/NotFound";
 import InviteCode from "./pages/InviteCode";
+import EmailInput from "./pages/EmailInput";
+import EmailVerification from "./pages/EmailVerification";
 import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
@@ -85,6 +87,8 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/property/:id" element={<PropertyDetails />} />
         <Route path="/invite" element={<InviteCode />} />
+        <Route path="/email" element={<EmailInput />} />
+        <Route path="/verify" element={<EmailVerification />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/photos" element={<PhotoApp />} />

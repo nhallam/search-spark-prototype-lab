@@ -49,7 +49,7 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         </Link>
         
         <Link 
-          to="/" 
+          to="/profile" 
           className={cn(
             "flex flex-col items-center justify-center w-1/3 py-2",
             activeTab === 'profile' ? 'text-primary' : 'text-muted-foreground'

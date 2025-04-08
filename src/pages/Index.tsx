@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -6,7 +7,7 @@ import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { UserPlus, Sliders, Camera } from 'phosphor-react';
+import { UserPlus, Sliders, UserRound } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -100,6 +101,12 @@ const Index = () => {
               </h1>
             </div>
             <div className="flex gap-2">
+              <Link to="/profile">
+                <Button variant="outline" className="border-brand hover:bg-brand/10 text-brand">
+                  <UserRound weight="bold" className="mr-2 h-4 w-4" />
+                  My Profile
+                </Button>
+              </Link>
               <Link to="/invite">
                 <Button className="bg-brand hover:bg-brand/90 text-white">
                   <UserPlus weight="bold" className="mr-2 h-4 w-4" />
@@ -131,8 +138,6 @@ const Index = () => {
           <PropertyGrid properties={filteredProperties} isLoading={isLoading} />
         </div>
       </main>
-      
-      {/* TabNavigation removed from here since it's now added globally in App.tsx */}
     </div>
   );
 };

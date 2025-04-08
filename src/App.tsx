@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,7 +28,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Inter", "system-ui", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Faktum", "Inter", "system-ui", "Helvetica", "Arial", sans-serif',
     button: {
       textTransform: 'none',
     },

@@ -76,7 +76,7 @@ const Welcome: React.FC = () => {
                 onClick={handleContinue}
                 variant="secondary"
                 size="lg"
-                className="mt-4 text-lg px-8 font-medium bg-white text-primary hover:bg-white/90"
+                className="mt-4 text-lg px-8 font-medium bg-white text-[#1FA598] hover:bg-white/90"
               >
                 Let's go!
               </Button>

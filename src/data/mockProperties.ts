@@ -1,4 +1,3 @@
-
 import { Property } from '../components/PropertyCard';
 
 // Base properties that we'll duplicate with variations
@@ -22,6 +21,10 @@ const baseProperties: Property[] = [
     guests: 4,
     lat: 40.7128,
     lng: -74.0060,
+    nationality: {
+      country: "United States",
+      flag: "🇺🇸"
+    },
     gallery: [
       'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
@@ -39,6 +42,10 @@ const baseProperties: Property[] = [
     owner: {
       name: 'Michael',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
+    },
+    nationality: {
+      country: "Canada",
+      flag: "🇨🇦"
     },
     description: "Welcome to this cozy Brooklyn studio that's perfect for solo travelers or couples. The apartment features stylish decor, a comfortable queen bed, and all the essentials for a comfortable stay. Located in a vibrant neighborhood with plenty of restaurants and cafes within walking distance.",
     amenities: ["Wifi", "Kitchen", "AC", "Washer", "Dryer"],
@@ -61,6 +68,10 @@ const baseProperties: Property[] = [
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     available: false,
+    nationality: {
+      country: "France",
+      flag: "🇫🇷"
+    },
     owner: {
       name: 'Jessica',
       avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
@@ -74,6 +85,10 @@ const baseProperties: Property[] = [
     rating: 4.6,
     image: 'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     available: true,
+    nationality: {
+      country: "Italy",
+      flag: "🇮🇹"
+    },
     owner: {
       name: 'Daniel',
       avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
@@ -87,6 +102,10 @@ const baseProperties: Property[] = [
     rating: 4.7,
     image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     available: true,
+    nationality: {
+      country: "Spain",
+      flag: "🇪🇸"
+    },
     owner: {
       name: 'Emma',
       avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
@@ -100,6 +119,10 @@ const baseProperties: Property[] = [
     rating: 4.9,
     image: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     available: true,
+    nationality: {
+      country: "Germany",
+      flag: "🇩🇪"
+    },
     owner: {
       name: 'James',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
@@ -113,6 +136,10 @@ const baseProperties: Property[] = [
     rating: 4.5,
     image: 'https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     available: true,
+    nationality: {
+      country: "Japan",
+      flag: "🇯🇵"
+    },
     owner: {
       name: 'Alex',
       avatar: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
@@ -126,6 +153,10 @@ const baseProperties: Property[] = [
     rating: 4.4,
     image: 'https://images.unsplash.com/photo-1602872030219-ad2b9a54315c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
     available: false,
+    nationality: {
+      country: "Australia",
+      flag: "🇦🇺"
+    },
     owner: {
       name: 'Olivia',
       avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80'
@@ -182,6 +213,25 @@ const propertyImages = [
   'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80'
 ];
 
+// Nationality variations
+const nationalities = [
+  { country: "United States", flag: "🇺🇸" },
+  { country: "Canada", flag: "🇨🇦" },
+  { country: "United Kingdom", flag: "🇬🇧" },
+  { country: "France", flag: "🇫🇷" },
+  { country: "Germany", flag: "🇩🇪" },
+  { country: "Spain", flag: "🇪🇸" },
+  { country: "Italy", flag: "🇮🇹" },
+  { country: "Japan", flag: "🇯🇵" },
+  { country: "Australia", flag: "🇦🇺" },
+  { country: "Brazil", flag: "🇧🇷" },
+  { country: "Mexico", flag: "🇲🇽" },
+  { country: "China", flag: "🇨🇳" },
+  { country: "India", flag: "🇮🇳" },
+  { country: "South Korea", flag: "🇰🇷" },
+  { country: "Sweden", flag: "🇸🇪" }
+];
+
 // Generate 100 properties
 const generateProperties = (count: number): Property[] => {
   // Start with our base properties
@@ -199,6 +249,7 @@ const generateProperties = (count: number): Property[] => {
     const beds = Math.floor(Math.random() * 4) + 1; // 1 to 4 beds
     const baths = Math.floor(Math.random() * 3) + 1; // 1 to 3 baths
     const guests = beds + Math.floor(Math.random() * 3); // beds + 0 to 2 extra guests
+    const nationality = nationalities[Math.floor(Math.random() * nationalities.length)];
     
     // Generate random coordinates near NYC
     const lat = 40.7 + (Math.random() - 0.5) * 0.2; // Around NYC latitude
@@ -219,6 +270,7 @@ const generateProperties = (count: number): Property[] => {
       guests: guests,
       lat: lat,
       lng: lng,
+      nationality: nationality,
       gallery: [
         image,
         propertyImages[Math.floor(Math.random() * propertyImages.length)],

@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Flag } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
@@ -38,6 +39,10 @@ export type Property = {
   lng?: number;
   gallery?: string[];
   reviews?: Review[];
+  nationality?: {
+    country: string;
+    flag: string;
+  };
 };
 
 interface PropertyCardProps {
@@ -54,6 +59,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             alt={property.title}
             className="object-cover w-full h-full transition-transform duration-500 hover:scale-110"
           />
+          {property.nationality && (
+            <div className="absolute bottom-2 left-2 bg-white/80 backdrop-blur-sm py-1 px-2 rounded-full flex items-center gap-1.5">
+              <span className="text-sm">{property.nationality.flag}</span>
+              <span className="text-xs font-medium">{property.nationality.country}</span>
+            </div>
+          )}
         </div>
         <CardContent className="p-4">
           <div className="flex justify-between items-start">

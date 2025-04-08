@@ -7,7 +7,8 @@ import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { UserPlus, Sliders, UserRound } from 'phosphor-react';
+import { Sliders, UserPlus } from 'phosphor-react';
+import { UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -103,7 +104,7 @@ const Index = () => {
             <div className="flex gap-2">
               <Link to="/profile">
                 <Button variant="outline" className="border-brand hover:bg-brand/10 text-brand">
-                  <UserRound weight="bold" className="mr-2 h-4 w-4" />
+                  <UserRound className="mr-2 h-4 w-4" />
                   My Profile
                 </Button>
               </Link>

@@ -77,7 +77,7 @@ const EarningsHistory = () => {
           ))}
         </div>
         
-        <div className="h-[300px] w-full">
+        <div className="h-[250px] w-full">
           <ChartContainer
             config={{
               earnings: {
@@ -88,7 +88,7 @@ const EarningsHistory = () => {
           >
             <AreaChart
               data={mockData[timePeriod]}
-              margin={{ top: 5, right: 10, left: 10, bottom: 0 }}
+              margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
             >
               <defs>
                 <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
@@ -101,12 +101,14 @@ const EarningsHistory = () => {
                 tickLine={false}
                 axisLine={false}
                 tick={{ fontSize: 12 }}
+                dy={5}  // Add some padding at the bottom
               />
               <YAxis
                 tickFormatter={formatCurrency}
                 tickLine={false}
                 axisLine={false}
                 tick={{ fontSize: 12 }}
+                dx={-5}  // Move labels slightly inward
               />
               <ChartTooltip content={<ChartTooltipContent labelFormatter={(label) => `${label}`} />} />
               <Area

@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Compass, Home, UserRound } from 'lucide-react';
+import { Bell, Calendar, Compass, UserRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface TabNavigationProps {
-  activeTab?: 'explore' | 'home' | 'profile';
+  activeTab?: 'explore' | 'bookings' | 'notifications' | 'profile';
 }
 
 const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
@@ -29,7 +29,7 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         <Link 
           to="/" 
           className={cn(
-            "flex flex-col items-center justify-center w-1/3 py-2",
+            "flex flex-col items-center justify-center w-1/4 py-2",
             activeTab === 'explore' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
@@ -38,25 +38,36 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         </Link>
         
         <Link 
-          to="/" 
+          to="/bookings" 
           className={cn(
-            "flex flex-col items-center justify-center w-1/3 py-2",
-            activeTab === 'home' ? 'text-primary' : 'text-muted-foreground'
+            "flex flex-col items-center justify-center w-1/4 py-2",
+            activeTab === 'bookings' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
-          <Home size={24} />
-          <span className="text-xs mt-1">My Home</span>
+          <Calendar size={24} />
+          <span className="text-xs mt-1">Bookings</span>
+        </Link>
+        
+        <Link 
+          to="/notifications" 
+          className={cn(
+            "flex flex-col items-center justify-center w-1/4 py-2",
+            activeTab === 'notifications' ? 'text-primary' : 'text-muted-foreground'
+          )}
+        >
+          <Bell size={24} />
+          <span className="text-xs mt-1">Notifications</span>
         </Link>
         
         <Link 
           to="/profile" 
           className={cn(
-            "flex flex-col items-center justify-center w-1/3 py-2",
+            "flex flex-col items-center justify-center w-1/4 py-2",
             activeTab === 'profile' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
           <UserRound size={24} />
-          <span className="text-xs mt-1">My Profile</span>
+          <span className="text-xs mt-1">Profile</span>
         </Link>
       </div>
     </div>

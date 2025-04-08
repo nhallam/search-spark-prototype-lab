@@ -14,6 +14,8 @@ import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
 import Profile from "./pages/Profile";
+import Bookings from "./pages/Bookings";
+import Notifications from "./pages/Notifications";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
 
@@ -66,7 +68,8 @@ const App = () => {
     
     if (path === '/') return 'explore';
     if (path.includes('/property')) return 'explore';
-    if (path.includes('/home')) return 'home';
+    if (path === '/bookings') return 'bookings';
+    if (path === '/notifications') return 'notifications';
     if (path === '/profile') return 'profile';
     
     return undefined;
@@ -89,6 +92,8 @@ const App = () => {
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/photos" element={<PhotoApp />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/bookings" element={<Bookings />} />
+                <Route path="/notifications" element={<Notifications />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <TabNavigation activeTab={getActiveTab()} />

@@ -172,7 +172,7 @@ const MarketAnalysis: React.FC = () => {
                       }}
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                        <LineChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="month" stroke="#94A3B8" />
                           <YAxis stroke="#94A3B8" />
@@ -217,7 +217,7 @@ const MarketAnalysis: React.FC = () => {
                       }}
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                        <BarChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="month" stroke="#94A3B8" />
                           <YAxis stroke="#94A3B8" />
@@ -254,7 +254,7 @@ const MarketAnalysis: React.FC = () => {
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart 
                           data={seasonalAggregateData}
-                          margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                          margin={{ top: 20, right: 30, left: 20, bottom: 30 }}
                           barGap={0}
                           barCategoryGap="20%"
                         >
@@ -283,7 +283,7 @@ const MarketAnalysis: React.FC = () => {
                       }}
                     >
                       <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={seasonalAggregateData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                        <LineChart data={seasonalAggregateData} margin={{ top: 20, right: 30, left: 20, bottom: 30 }}>
                           <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
                           <XAxis dataKey="season" stroke="#94A3B8" />
                           <YAxis yAxisId="left" orientation="left" stroke="#1FA598" />
@@ -329,7 +329,7 @@ const MarketAnalysis: React.FC = () => {
                 </TabsContent>
               </Tabs>
               
-              <div className="mt-16">
+              <div className="mt-24">
                 <h3 className="text-lg font-semibold mb-4">Key Insights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Card className="bg-blue-50 border-blue-200">

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,7 +19,8 @@ import Bookings from "./pages/Bookings";
 import BookingDetails from "./pages/BookingDetails";
 import Notifications from "./pages/Notifications";
 import NavigationMenu from "./pages/NavigationMenu";
-import MarketAnalysis from "./pages/MarketAnalysis"; // Add this import
+import MarketAnalysis from "./pages/MarketAnalysis";
+import MyHome from "./pages/MyHome";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
 
@@ -29,7 +29,7 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1FA598', // Changed from blue to the welcome page green
+      main: '#1FA598',
     },
     secondary: {
       main: '#f50057',
@@ -67,7 +67,6 @@ const theme = createTheme({
   },
 });
 
-// Create a wrapper component to access the route location
 const AppContent = () => {
   const location = useLocation();
   
@@ -78,6 +77,7 @@ const AppContent = () => {
     if (path.includes('/property')) return 'explore';
     if (path === '/bookings' || path.includes('/booking/')) return 'bookings';
     if (path === '/notifications') return 'notifications';
+    if (path === '/my-home') return 'my-home';
     if (path === '/profile' || path === '/your-home') return 'profile';
     
     return undefined;
@@ -95,12 +95,13 @@ const AppContent = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/photos" element={<PhotoApp />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/your-home" element={<Profile />} /> {/* Temporarily pointing to Profile */}
+        <Route path="/your-home" element={<Profile />} />
+        <Route path="/my-home" element={<MyHome />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/booking/:id" element={<BookingDetails />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/menu" element={<NavigationMenu />} />
-        <Route path="/market-analysis" element={<MarketAnalysis />} /> {/* Add this route */}
+        <Route path="/market-analysis" element={<MarketAnalysis />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <TabNavigation activeTab={getActiveTab()} />

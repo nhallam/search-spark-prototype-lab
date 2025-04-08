@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import HomeListingForm from '@/components/profile/HomeListingForm';
+import { DateRange } from "react-day-picker";
 
 interface AvailabilityDate {
   id: string;
@@ -31,10 +31,7 @@ interface HomeListing {
 const MyHome = () => {
   const [isListingDialogOpen, setIsListingDialogOpen] = useState(false);
   const [isDateDialogOpen, setIsDateDialogOpen] = useState(false);
-  const [dateRange, setDateRange] = useState<{
-    from: Date | undefined;
-    to: Date | undefined;
-  }>({
+  const [dateRange, setDateRange] = useState<DateRange>({
     from: undefined,
     to: undefined,
   });
@@ -260,11 +257,8 @@ const MyHome = () => {
             <Calendar
               mode="range"
               defaultMonth={new Date()}
-              selected={{
-                from: dateRange.from,
-                to: dateRange.to
-              }}
-              onSelect={setDateRange}
+              selected={dateRange}
+              onSelect={(range) => setDateRange(range || { from: undefined, to: undefined })}
               numberOfMonths={2}
               className="rounded-md border shadow-sm"
             />

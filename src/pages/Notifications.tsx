@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Bell, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -59,6 +60,167 @@ const Notifications = () => {
       date: '2025-03-15',
       type: 'booking'
     },
+    // Additional mock notifications
+    { 
+      id: 6, 
+      message: 'Your host has accepted your booking request', 
+      description: 'Your stay at Soho Designer Loft is confirmed',
+      read: false, 
+      date: '2025-03-14',
+      type: 'booking'
+    },
+    { 
+      id: 7, 
+      message: 'Message from Alex about your stay', 
+      description: 'Thanks for choosing our property! Let me know if you need anything.',
+      read: false, 
+      date: '2025-03-12',
+      type: 'message'
+    },
+    { 
+      id: 8, 
+      message: 'Kiki monthly newsletter is here!', 
+      description: 'Check out the top trending destinations for Spring',
+      read: true, 
+      date: '2025-03-10',
+      type: 'kiki-team'
+    },
+    { 
+      id: 9, 
+      message: 'Price drop alert: Upper East Side Penthouse', 
+      description: '20% discount for weekday bookings',
+      read: true, 
+      date: '2025-03-08',
+      type: 'general'
+    },
+    { 
+      id: 10, 
+      message: 'Your booking is approaching', 
+      description: 'Your stay at Tribeca Luxury Loft starts in 7 days',
+      read: false, 
+      date: '2025-03-05',
+      type: 'booking'
+    },
+    { 
+      id: 11, 
+      message: 'New message from your host Sarah', 
+      description: 'Here is some info about local attractions near your stay',
+      read: true, 
+      date: '2025-03-03',
+      type: 'message'
+    },
+    { 
+      id: 12, 
+      message: 'Special offer for loyal Kiki members', 
+      description: 'Earn double points on your next booking',
+      read: false, 
+      date: '2025-03-01',
+      type: 'kiki-team'
+    },
+    { 
+      id: 13, 
+      message: 'Your favorites list has been updated', 
+      description: 'One of your saved properties has new availability',
+      read: true, 
+      date: '2025-02-28',
+      type: 'general'
+    },
+    { 
+      id: 14, 
+      message: 'Payment reminder for upcoming stay', 
+      description: 'Please complete payment for Brooklyn Brownstone',
+      read: false, 
+      date: '2025-02-25',
+      type: 'booking'
+    },
+    { 
+      id: 15, 
+      message: 'Host responded to your question', 
+      description: 'Check your messages for details about parking options',
+      read: false, 
+      date: '2025-02-23',
+      type: 'message'
+    },
+    { 
+      id: 16, 
+      message: 'Welcome to Kiki Premium!', 
+      description: 'Your account has been upgraded with exclusive benefits',
+      read: true, 
+      date: '2025-02-20',
+      type: 'kiki-team'
+    },
+    { 
+      id: 17, 
+      message: 'Recommended properties based on your searches', 
+      description: '8 new listings match your preferences in Queens',
+      read: true, 
+      date: '2025-02-18',
+      type: 'general'
+    },
+    { 
+      id: 18, 
+      message: 'Booking modification request accepted', 
+      description: 'Your dates for Midtown Executive Suite have been changed',
+      read: false, 
+      date: '2025-02-15',
+      type: 'booking'
+    },
+    { 
+      id: 19, 
+      message: 'New review on your profile', 
+      description: 'Host James gave you a 5-star rating!',
+      read: true, 
+      date: '2025-02-12',
+      type: 'message'
+    },
+    { 
+      id: 20, 
+      message: 'Important update to our COVID-19 policies', 
+      description: 'We\'ve updated our cleaning and safety procedures',
+      read: false, 
+      date: '2025-02-10',
+      type: 'kiki-team'
+    },
+    { 
+      id: 21, 
+      message: 'Weekend flash sale - 25% off', 
+      description: 'Book any available property for this weekend at special rates',
+      read: true, 
+      date: '2025-02-08',
+      type: 'general'
+    },
+    { 
+      id: 22, 
+      message: 'Your booking for Hudson River View Apartment is complete', 
+      description: 'Check-in details and door codes have been sent to your email',
+      read: false, 
+      date: '2025-02-05',
+      type: 'booking'
+    },
+    { 
+      id: 23, 
+      message: 'Question from potential guest', 
+      description: 'Someone is interested in your East Village listing',
+      read: true, 
+      date: '2025-02-03',
+      type: 'message'
+    },
+    { 
+      id: 24, 
+      message: 'Kiki Gift Card received!', 
+      description: 'You\'ve received a $200 gift card from Maria',
+      read: false, 
+      date: '2025-02-01',
+      type: 'kiki-team'
+    },
+    { 
+      id: 25, 
+      message: 'Similar property alert', 
+      description: 'New listing similar to ones you\'ve viewed in Williamsburg',
+      read: true, 
+      date: '2025-01-28',
+      type: 'general'
+    }
   ];
 
   const formatDate = (dateString: string) => {

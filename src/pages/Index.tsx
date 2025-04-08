@@ -11,6 +11,9 @@ import { UserPlus } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
 import PretzelLogo from '@/components/PretzelLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { findPropertyCombinations } from '@/utils/combinationUtils';
+import PropertyCombinations from '@/components/PropertyCombinations';
+import { PropertyCombination } from '@/types/property';
 
 const Index = () => {
   const [searchParams, setSearchParams] = useState({
@@ -28,6 +31,8 @@ const Index = () => {
   
   const [filteredProperties, setFilteredProperties] = useState<Property[]>(mockProperties);
   const [isLoading, setIsLoading] = useState(false);
+  const [propertyCombinations, setPropertyCombinations] = useState<PropertyCombination[]>([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
   const isMobile = useIsMobile();
   
   const handleSearch = (params: {
@@ -45,7 +50,35 @@ const Index = () => {
     setTimeout(() => {
       const filtered = filterProperties(mockProperties, params);
       setFilteredProperties(filtered);
+      
+      // Find property combinations if date range is provided
+      if (params.dateRange.from && params.dateRange.to) {
+        // Calculate stay duration
+        const days = Math.round((params.dateRange.to.getTime() - params.dateRange.from.getTime()) / (1000 * 60 * 60 * 24));
+        
+        // Only suggest combinations for longer stays (more than 14 days)
+        if (days > 14) {
+          const combinations = findPropertyCombinations(
+            filtered, 
+            params.dateRange.from, 
+            params.dateRange.to
+          );
+          setPropertyCombinations(combinations);
+          
+          if (combinations.length > 0) {
+            toast.success(`Found ${combinations.length} property combinations for your ${days}-day stay`, {
+              description: "These combinations perfectly cover your requested dates"
+            });
+          }
+        } else {
+          setPropertyCombinations([]);
+        }
+      } else {
+        setPropertyCombinations([]);
+      }
+      
       setIsLoading(false);
+      setSearchPerformed(true);
       
       if (params.dateRange.from && params.dateRange.to) {
         toast.success(`Found ${filtered.length} properties for your dates`, {
@@ -74,6 +107,17 @@ const Index = () => {
     setTimeout(() => {
       const filtered = filterProperties(mockProperties, searchParams);
       setFilteredProperties(filtered);
+      
+      // Recalculate property combinations with new filters
+      if (searchParams.dateRange.from && searchParams.dateRange.to) {
+        const combinations = findPropertyCombinations(
+          filtered,
+          searchParams.dateRange.from,
+          searchParams.dateRange.to
+        );
+        setPropertyCombinations(combinations);
+      }
+      
       setIsLoading(false);
       
       toast.success(`Applied ${filters.amenities.length} filters`, {
@@ -126,6 +170,18 @@ const Index = () => {
               initialFilters={{...advancedFilters, instantBook: false}}
             />
           </div>
+          
+          {/* Show property combinations for long stays */}
+          {searchPerformed && searchParams.dateRange.from && searchParams.dateRange.to && (
+            <PropertyCombinations 
+              combinations={propertyCombinations} 
+              dateRange={{
+                from: searchParams.dateRange.from,
+                to: searchParams.dateRange.to
+              }}
+              isLoading={isLoading}
+            />
+          )}
           
           <PropertyGrid properties={filteredProperties} isLoading={isLoading} />
         </div>

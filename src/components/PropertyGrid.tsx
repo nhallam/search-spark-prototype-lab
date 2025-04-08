@@ -9,13 +9,18 @@ import {
   PaginationNext, 
   PaginationPrevious 
 } from '@/components/ui/pagination';
+import PropertyAvailability from './PropertyAvailability';
 
 interface PropertyGridProps {
   properties: Property[];
   isLoading?: boolean;
+  dateRange?: {
+    from: Date | undefined;
+    to: Date | undefined;
+  };
 }
 
-const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, isLoading = false }) => {
+const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, isLoading = false, dateRange }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const propertiesPerPage = 16;
   
@@ -58,7 +63,10 @@ const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, isLoading = fal
     <div className="space-y-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {currentProperties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
+          <PropertyCard 
+            key={property.id} 
+            property={property} 
+          />
         ))}
       </div>
       

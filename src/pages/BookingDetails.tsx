@@ -1,10 +1,21 @@
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 // Mock booking data - in a real app, this would come from an API based on the ID
 const mockBookings = [
@@ -101,6 +112,14 @@ const BookingDetails = () => {
     const diffTime = Math.abs(end.getTime() - start.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
     return diffDays;
+  };
+  
+  const handleCancelBooking = () => {
+    toast.success("Booking cancelled successfully", {
+      description: "Your booking has been cancelled."
+    });
+    
+    navigate('/bookings');
   };
   
   const nights = getTotalNights(booking.checkIn, booking.checkOut);
@@ -224,9 +243,32 @@ const BookingDetails = () => {
                 
                 {booking.status === 'confirmed' && (
                   <div className="mt-6">
-                    <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-50">
-                      Cancel Booking
-                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-50">
+                          Cancel Booking
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Cancel your booking?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently cancel your reservation
+                            at {booking.property} and you may be subject to cancellation fees according
+                            to the host's cancellation policy.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Keep Reservation</AlertDialogCancel>
+                          <AlertDialogAction 
+                            onClick={handleCancelBooking}
+                            className="bg-red-500 hover:bg-red-600"
+                          >
+                            Yes, Cancel Booking
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </div>
                 )}
                 

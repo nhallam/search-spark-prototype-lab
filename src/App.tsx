@@ -63,9 +63,12 @@ const theme = createTheme({
   },
 });
 
-const App = () => {
+// Create a wrapper component to access the route location
+const AppContent = () => {
+  const location = useLocation();
+  
   const getActiveTab = () => {
-    const path = window.location.pathname;
+    const path = location.pathname;
     
     if (path === '/') return 'explore';
     if (path.includes('/property')) return 'explore';
@@ -77,6 +80,27 @@ const App = () => {
   };
   
   return (
+    <>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/property/:id" element={<PropertyDetails />} />
+        <Route path="/invite" element={<InviteCode />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/welcome" element={<Welcome />} />
+        <Route path="/photos" element={<PhotoApp />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/booking/:id" element={<BookingDetails />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <TabNavigation activeTab={getActiveTab()} />
+    </>
+  );
+};
+
+const App = () => {
+  return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
@@ -85,20 +109,7 @@ const App = () => {
           <Sonner />
           <SignUpProvider>
             <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/property/:id" element={<PropertyDetails />} />
-                <Route path="/invite" element={<InviteCode />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/welcome" element={<Welcome />} />
-                <Route path="/photos" element={<PhotoApp />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/bookings" element={<Bookings />} />
-                <Route path="/booking/:id" element={<BookingDetails />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-              <TabNavigation activeTab={getActiveTab()} />
+              <AppContent />
             </BrowserRouter>
           </SignUpProvider>
         </TooltipProvider>

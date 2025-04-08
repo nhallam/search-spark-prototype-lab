@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Bell, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,7 +17,6 @@ const Notifications = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilter, setSelectedFilter] = useState<string>('all');
   
-  // Mock notifications data - in a real app, this would come from an API
   const notifications = [
     { 
       id: 1, 
@@ -60,7 +58,6 @@ const Notifications = () => {
       date: '2025-03-15',
       type: 'booking'
     },
-    // Additional mock notifications
     { 
       id: 6, 
       message: 'Your host has accepted your booking request', 
@@ -336,7 +333,7 @@ const Notifications = () => {
                 filterNotifications().map((notification, index) => (
                   <React.Fragment key={notification.id}>
                     <div 
-                      className={`p-4 rounded-lg ${!notification.read ? 'bg-primary/5 border-l-4 border-primary' : ''}`}
+                      className={`p-4 ${!notification.read ? 'bg-primary/5 border-l-4 border-primary' : ''}`}
                     >
                       <div className="flex justify-between items-start">
                         <div>

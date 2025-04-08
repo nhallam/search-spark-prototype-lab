@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -92,7 +93,7 @@ const EmailVerification: React.FC = () => {
                   render={({ slots }) => (
                     <InputOTPGroup>
                       {slots.map((slot, index) => (
-                        <InputOTPSlot key={index} {...slot} index={index} />
+                        <InputOTPSlot key={index} index={index} />
                       ))}
                     </InputOTPGroup>
                   )}

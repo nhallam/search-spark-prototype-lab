@@ -30,6 +30,13 @@ export interface Post {
   liked?: boolean;
 }
 
+export interface Connection {
+  id: string;
+  username: string;
+  avatar: string;
+  relationship: string; // e.g., "Invited by you", "Friend", etc.
+}
+
 // Main user data (me)
 export const currentUser: User = {
   id: "user1",
@@ -40,6 +47,34 @@ export const currentUser: User = {
   followers: 1248,
   following: 562
 };
+
+// Connections data (friends, invited users)
+export const connections: Connection[] = [
+  {
+    id: "conn1",
+    username: "emily_travels",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120",
+    relationship: "Invited by you"
+  },
+  {
+    id: "conn2",
+    username: "alex_design",
+    avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=120&h=120",
+    relationship: "Friend"
+  },
+  {
+    id: "conn3",
+    username: "sarah_j",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120",
+    relationship: "Invited by you"
+  },
+  {
+    id: "conn4",
+    username: "mike_photo",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&h=120",
+    relationship: "Friend"
+  }
+];
 
 // Mock Posts Data
 export const posts: Post[] = [

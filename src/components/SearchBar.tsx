@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Calendar, MapPin, CurrencyDollar, MagnifyingGlass } from 'phosphor-react';
+import { Calendar, MapPin, CurrencyDollar, MagnifyingGlass, X } from 'phosphor-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -50,6 +49,24 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       dateRange,
       location,
       priceRange,
+    });
+  };
+  
+  const handleClearSearch = () => {
+    setDateRange({
+      from: undefined,
+      to: undefined,
+    });
+    setLocation("all-nyc");
+    setPriceRange(300);
+    
+    onSearch({
+      dateRange: {
+        from: undefined,
+        to: undefined,
+      },
+      location: "all-nyc",
+      priceRange: 300,
     });
   };
 
@@ -120,7 +137,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         </div>
 
         {/* Price Range Selector */}
-        <div className="md:col-span-3">
+        <div className="md:col-span-2">
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -161,13 +178,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           </Popover>
         </div>
 
-        {/* Search Button */}
-        <div className="md:col-span-1">
+        {/* Search and Clear Buttons */}
+        <div className="md:col-span-2 flex gap-2">
           <Button 
             onClick={handleSearch}
-            className="h-14 w-full bg-brand hover:bg-brand/90 text-white rounded-lg"
+            className="h-14 flex-1 bg-brand hover:bg-brand/90 text-white rounded-lg"
+            title="Search"
           >
             <MagnifyingGlass weight="bold" size={22} />
+          </Button>
+          
+          <Button 
+            onClick={handleClearSearch}
+            variant="outline"
+            className="h-14 border-gray-200 hover:bg-gray-100 rounded-lg"
+            title="Clear search"
+          >
+            <X weight="bold" size={22} />
           </Button>
         </div>
       </div>

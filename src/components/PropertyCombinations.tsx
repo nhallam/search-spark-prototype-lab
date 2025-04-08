@@ -6,8 +6,8 @@ import { PropertyCombination as PropertyCombinationType } from '@/types/property
 interface PropertyCombinationsProps {
   combinations: PropertyCombinationType[];
   dateRange: {
-    from: Date;
-    to: Date;
+    from: Date | undefined;
+    to: Date | undefined;
   };
   isLoading?: boolean;
 }
@@ -30,6 +30,10 @@ const PropertyCombinations: React.FC<PropertyCombinationsProps> = ({
   }
   
   if (combinations.length === 0) {
+    return null;
+  }
+  
+  if (!dateRange.from || !dateRange.to) {
     return null;
   }
   

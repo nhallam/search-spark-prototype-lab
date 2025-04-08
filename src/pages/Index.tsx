@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -101,12 +100,6 @@ const Index = () => {
               </h1>
             </div>
             <div className="flex gap-2">
-              <Link to="/photos">
-                <Button variant="outline" className="border-brand hover:bg-brand/10 text-brand">
-                  <Camera weight="bold" className="mr-2 h-4 w-4" />
-                  Photo App
-                </Button>
-              </Link>
               <Link to="/invite">
                 <Button className="bg-brand hover:bg-brand/90 text-white">
                   <UserPlus weight="bold" className="mr-2 h-4 w-4" />

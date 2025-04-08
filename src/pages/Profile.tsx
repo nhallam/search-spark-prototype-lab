@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Bell, Search, LogOut, Calendar, Copy, Check, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
+import EarningsHistory from '@/components/profile/EarningsHistory';
 
 const Profile = () => {
   const [copied, setCopied] = useState(false);
@@ -123,6 +124,9 @@ const Profile = () => {
           
           {/* Main Content Area */}
           <div className="md:col-span-2 space-y-6">
+            {/* Earnings History Graph */}
+            <EarningsHistory />
+            
             {/* Booking Requests */}
             <Card>
               <CardHeader>

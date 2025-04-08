@@ -1,4 +1,37 @@
 import { Property } from '../components/PropertyCard';
+import { AvailabilityWindow } from '@/types/property';
+
+// Generate random availability windows
+const generateAvailabilityWindows = (): AvailabilityWindow[] => {
+  const now = new Date();
+  const windows: AvailabilityWindow[] = [];
+  
+  // Generate 2-4 availability windows per property
+  const windowCount = Math.floor(Math.random() * 3) + 2;
+  
+  for (let i = 0; i < windowCount; i++) {
+    // Random start date between now and 6 months from now
+    const startOffset = Math.floor(Math.random() * 180) + 1;
+    const startDate = new Date(now);
+    startDate.setDate(startDate.getDate() + startOffset);
+    
+    // Random duration between 5 and 14 days
+    const duration = Math.floor(Math.random() * 10) + 5;
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + duration);
+    
+    windows.push({
+      id: `window-${i}`,
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString()
+    });
+  }
+  
+  // Sort windows by start date
+  return windows.sort((a, b) => 
+    new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+  );
+};
 
 // Base properties that we'll duplicate with variations
 const baseProperties: Property[] = [
@@ -29,6 +62,23 @@ const baseProperties: Property[] = [
       'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+    ],
+    availabilityWindows: [
+      {
+        id: 'manloft-1',
+        startDate: '2025-04-15T00:00:00Z',
+        endDate: '2025-04-25T00:00:00Z'
+      },
+      {
+        id: 'manloft-2',
+        startDate: '2025-05-10T00:00:00Z',
+        endDate: '2025-05-20T00:00:00Z'
+      },
+      {
+        id: 'manloft-3',
+        startDate: '2025-06-05T00:00:00Z',
+        endDate: '2025-06-18T00:00:00Z'
+      }
     ]
   },
   {
@@ -58,6 +108,18 @@ const baseProperties: Property[] = [
       'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1584622781564-1d987f7333c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       'https://images.unsplash.com/photo-1630699144867-37acec97df5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+    ],
+    availabilityWindows: [
+      {
+        id: 'brklnstudio-1',
+        startDate: '2025-04-10T00:00:00Z',
+        endDate: '2025-04-20T00:00:00Z'
+      },
+      {
+        id: 'brklnstudio-2',
+        startDate: '2025-05-15T00:00:00Z',
+        endDate: '2025-05-30T00:00:00Z'
+      }
     ]
   },
   {
@@ -275,7 +337,8 @@ const generateProperties = (count: number): Property[] => {
         image,
         propertyImages[Math.floor(Math.random() * propertyImages.length)],
         propertyImages[Math.floor(Math.random() * propertyImages.length)]
-      ]
+      ],
+      availabilityWindows: generateAvailabilityWindows()
     };
     
     // Add the property to our collection

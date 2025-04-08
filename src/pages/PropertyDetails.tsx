@@ -11,6 +11,7 @@ import PropertyMap from '@/components/PropertyMap';
 import BookingForm from '@/components/BookingForm';
 import PropertyCard, { Property } from '@/components/PropertyCard';
 import PropertyReviews from '@/components/PropertyReviews';
+import PropertyAvailability from '@/components/PropertyAvailability';
 import { toast } from 'sonner';
 
 const PropertyDetails: React.FC = () => {
@@ -172,6 +173,11 @@ const PropertyDetails: React.FC = () => {
                   </div>
                 </div>
               )}
+              
+              {/* Add Availability Windows section */}
+              <div className="border-t border-gray-200 pt-6 mb-6">
+                <PropertyAvailability availabilityWindows={property.availabilityWindows} />
+              </div>
               
               <div className="border-t border-gray-200 pt-6">
                 <h3 className="text-xl font-semibold mb-3">Location</h3>

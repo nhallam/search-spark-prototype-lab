@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
 import { Separator } from '@/components/ui/separator';
+import { AvailabilityWindow } from '@/types/property';
 
 export type Review = {
   id: string;
@@ -44,6 +44,7 @@ export type Property = {
     country: string;
     flag: string;
   };
+  availabilityWindows?: AvailabilityWindow[];
 };
 
 interface PropertyCardProps {

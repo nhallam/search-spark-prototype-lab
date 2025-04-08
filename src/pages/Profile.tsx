@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -203,8 +202,8 @@ const Profile = () => {
                 )}
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10">
-                  View All Bookings
+                <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10" asChild>
+                  <Link to="/bookings">View All Bookings</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -269,7 +268,6 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            {/* Market Analysis Card - Moved to bottom after FAQs */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
@@ -311,7 +309,6 @@ const Profile = () => {
         </div>
       </main>
       
-      {/* Home Listing Dialog */}
       <Dialog open={isListingDialogOpen} onOpenChange={setIsListingDialogOpen}>
         <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>

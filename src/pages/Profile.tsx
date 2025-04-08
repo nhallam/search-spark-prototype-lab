@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu } from 'lucide-react';
+import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu, BarChart2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import EarningsHistory from '@/components/profile/EarningsHistory';
@@ -107,6 +107,9 @@ const Profile = () => {
                   <DropdownMenuItem asChild>
                     <Link to="/notifications">Notifications</Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/market-analysis">Market Analysis</Link>
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <Button variant="outline" onClick={handleLogout} className="border-brand text-brand hover:bg-brand/10">
@@ -161,6 +164,45 @@ const Profile = () => {
           
           <div className="md:col-span-2 space-y-6">
             <EarningsHistory />
+            
+            {/* Add Market Analysis Card */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex justify-between items-center">
+                  <span>NYC Market Analysis</span>
+                  <BarChart2 size={20} />
+                </CardTitle>
+                <CardDescription>View seasonal trends to optimize your listing</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="p-4 bg-brand/5 rounded-lg border border-brand/10">
+                  <h3 className="font-medium text-lg mb-2">Make data-driven decisions</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Understand how NYC's rental market fluctuates throughout the year. Optimize your pricing,
+                    availability, and marketing based on seasonal demand patterns.
+                  </p>
+                  <ul className="space-y-2 mb-4">
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Analyze supply and demand across all seasons</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Track average pricing by month and season</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm">Get strategic insights to maximize your revenue</span>
+                    </li>
+                  </ul>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full bg-brand hover:bg-brand/90" asChild>
+                  <Link to="/market-analysis">View Market Analysis</Link>
+                </Button>
+              </CardFooter>
+            </Card>
             
             <Card>
               <CardHeader>

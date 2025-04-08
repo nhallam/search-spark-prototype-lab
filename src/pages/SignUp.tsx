@@ -31,22 +31,35 @@ const SignUp: React.FC = () => {
     setProfilePhoto, 
     photoPreviewUrl, 
     setPhotoPreviewUrl,
-    isVerified 
+    isVerified,
+    isGoogleSignIn
   } = useSignUp();
   
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   // Redirect if not verified or no invite code or no email
+  // For Google sign-in users, we skip verification step
   useEffect(() => {
     if (!inviteCode) {
       navigate('/invite');
     } else if (!email) {
       navigate('/email');
-    } else if (!isVerified) {
+    } else if (!isVerified && !isGoogleSignIn) {
       navigate('/verify');
     }
-  }, [inviteCode, email, isVerified, navigate]);
+  }, [inviteCode, email, isVerified, isGoogleSignIn, navigate]);
+
+  // For Google sign-in users, we can pre-fill some information
+  useEffect(() => {
+    if (isGoogleSignIn && email) {
+      const emailName = email.split('@')[0];
+      if (!firstName && emailName) {
+        // This is just a simple example, in a real app you'd get this from Google profile
+        setFirstName(emailName);
+      }
+    }
+  }, [isGoogleSignIn, email, firstName, setFirstName]);
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -113,6 +126,11 @@ const SignUp: React.FC = () => {
           <Typography variant="subtitle1" color="text.secondary">
             Just a few more details to get started
           </Typography>
+          {isGoogleSignIn && (
+            <Typography variant="subtitle2" color="primary" sx={{ mt: 1 }}>
+              Signed in with Google: {email}
+            </Typography>
+          )}
         </Box>
         <CardContent>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2 }}>

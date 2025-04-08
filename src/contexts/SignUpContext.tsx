@@ -20,6 +20,8 @@ interface SignUpContextType {
   setIsExistingUser: (isExisting: boolean) => void;
   isVerified: boolean;
   setIsVerified: (isVerified: boolean) => void;
+  isGoogleSignIn: boolean;
+  setIsGoogleSignIn: (isGoogle: boolean) => void;
 }
 
 const SignUpContext = createContext<SignUpContextType | undefined>(undefined);
@@ -46,6 +48,7 @@ export const SignUpProvider: React.FC<SignUpProviderProps> = ({ children }) => {
   const [photoPreviewUrl, setPhotoPreviewUrl] = useState('');
   const [isExistingUser, setIsExistingUser] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [isGoogleSignIn, setIsGoogleSignIn] = useState(false);
 
   return (
     <SignUpContext.Provider
@@ -68,6 +71,8 @@ export const SignUpProvider: React.FC<SignUpProviderProps> = ({ children }) => {
         setIsExistingUser,
         isVerified,
         setIsVerified,
+        isGoogleSignIn,
+        setIsGoogleSignIn,
       }}
     >
       {children}

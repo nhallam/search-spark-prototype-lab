@@ -23,7 +23,6 @@ const Index = () => {
     priceRange: 300,
     propertyType: 'entire-home',
     amenities: [] as string[],
-    instantBook: false,
     guestCount: 2
   });
   
@@ -62,7 +61,6 @@ const Index = () => {
     priceRange: number;
     propertyType: string;
     amenities: string[];
-    instantBook: boolean;
     guestCount: number;
   }) => {
     setIsLoading(true);
@@ -125,7 +123,7 @@ const Index = () => {
             
             <FilterDrawer 
               onApplyFilters={handleApplyAdvancedFilters} 
-              initialFilters={advancedFilters}
+              initialFilters={{...advancedFilters, instantBook: false}}
             />
           </div>
           

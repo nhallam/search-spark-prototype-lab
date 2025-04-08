@@ -14,7 +14,6 @@ interface FilterDrawerProps {
     priceRange: number;
     propertyType: string;
     amenities: string[];
-    instantBook: boolean;
     guestCount: number;
   }) => void;
   initialFilters: {
@@ -30,7 +29,6 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onApplyFilters, initialFilt
   const [priceRange, setPriceRange] = useState<number>(initialFilters.priceRange);
   const [propertyType, setPropertyType] = useState<string>(initialFilters.propertyType);
   const [amenities, setAmenities] = useState<string[]>(initialFilters.amenities);
-  const [instantBook, setInstantBook] = useState<boolean>(initialFilters.instantBook);
   const [guestCount, setGuestCount] = useState<number>(initialFilters.guestCount);
   
   const handleAmenityToggle = (amenity: string) => {
@@ -46,7 +44,6 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onApplyFilters, initialFilt
       priceRange,
       propertyType,
       amenities,
-      instantBook,
       guestCount
     });
   };
@@ -149,21 +146,6 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({ onApplyFilters, initialFilt
                     +
                   </Button>
                 </div>
-              </div>
-            </div>
-            
-            <Separator />
-            
-            {/* Instant Book */}
-            <div className="flex items-center space-x-2">
-              <Checkbox 
-                id="instant-book" 
-                checked={instantBook} 
-                onCheckedChange={(checked) => setInstantBook(checked as boolean)}
-              />
-              <div>
-                <Label htmlFor="instant-book" className="font-medium">Instant Book</Label>
-                <p className="text-sm text-gray-500">Book without waiting for host approval</p>
               </div>
             </div>
           </div>

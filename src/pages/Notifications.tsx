@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Bell, Search, Filter } from 'lucide-react';
+import { Bell, Search } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -147,7 +146,6 @@ const Notifications = () => {
               </div>
               
               <div className="flex items-center gap-3">
-                <Filter className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-medium">Filter by:</span>
                 <Select value={selectedFilter} onValueChange={setSelectedFilter}>
                   <SelectTrigger className="w-[180px]">

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,11 +9,14 @@ import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { LogOut, Calendar, Copy, Check, ChevronRight, Building } from 'lucide-react';
 import { toast } from 'sonner';
 import EarningsHistory from '@/components/profile/EarningsHistory';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import HomeListingForm from '@/components/profile/HomeListingForm';
 
 import { generateMockData } from '@/components/profile/EarningsHistory';
 
 const Profile = () => {
   const [copied, setCopied] = useState(false);
+  const [isListingDialogOpen, setIsListingDialogOpen] = useState(false);
   
   const allTimeEarningsData = generateMockData(24);
   const totalEarnings = allTimeEarningsData.reduce((sum, item) => sum + item.earnings, 0);
@@ -64,6 +68,10 @@ const Profile = () => {
   
   const formatCurrency = (value: number) => {
     return `$${value.toLocaleString()}`;
+  };
+  
+  const openListingDialog = () => {
+    setIsListingDialogOpen(true);
   };
   
   return (
@@ -200,7 +208,7 @@ const Profile = () => {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button className="w-full bg-brand hover:bg-brand/90">
+                <Button className="w-full bg-brand hover:bg-brand/90" onClick={openListingDialog}>
                   List My Home
                 </Button>
               </CardFooter>
@@ -230,6 +238,19 @@ const Profile = () => {
           </div>
         </div>
       </main>
+      
+      {/* Home Listing Dialog */}
+      <Dialog open={isListingDialogOpen} onOpenChange={setIsListingDialogOpen}>
+        <DialogContent className="sm:max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>List Your Home</DialogTitle>
+            <DialogDescription>
+              Fill out the details about your apartment to start earning money on Kiki.
+            </DialogDescription>
+          </DialogHeader>
+          <HomeListingForm onClose={() => setIsListingDialogOpen(false)} />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

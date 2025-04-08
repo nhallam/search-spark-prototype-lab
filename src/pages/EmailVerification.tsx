@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useSignUp } from '@/contexts/SignUpContext';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 
 // Mock list of existing user emails
 const EXISTING_USERS = ['test@example.com', 'user@example.com', 'alex@example.com'];
@@ -86,17 +85,13 @@ const EmailVerification: React.FC = () => {
                 We sent a code to <strong>{email}</strong>
               </p>
               <div className="flex justify-center">
-                <InputOTP
+                <Input
+                  type="text"
                   maxLength={6}
                   value={verificationCode}
-                  onChange={setVerificationCode}
-                  render={({ slots }) => (
-                    <InputOTPGroup>
-                      {slots.map((slot, index) => (
-                        <InputOTPSlot key={index} index={index} />
-                      ))}
-                    </InputOTPGroup>
-                  )}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                  placeholder="Enter 6-digit code"
+                  className="text-center text-lg"
                 />
               </div>
             </div>

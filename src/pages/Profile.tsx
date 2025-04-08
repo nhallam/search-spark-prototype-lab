@@ -5,12 +5,21 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu, BarChart2, Users } from 'lucide-react';
+import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu, BarChart2, Users, List } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import EarningsHistory from '@/components/profile/EarningsHistory';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import HomeListingForm from '@/components/profile/HomeListingForm';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,6 +44,22 @@ const Profile = () => {
     inviteCode: 'AB123',
     earningRank: 11,
     totalEarnings: totalEarnings
+  };
+  
+  const sections = [
+    { id: 'kiki-circles', label: 'Kiki Circles', icon: <Users className="h-4 w-4" /> },
+    { id: 'earnings', label: 'Earnings History', icon: <BarChart2 className="h-4 w-4" /> },
+    { id: 'bookings', label: 'Booking Requests', icon: <Calendar className="h-4 w-4" /> },
+    { id: 'list-home', label: 'List Your Home', icon: <Building className="h-4 w-4" /> },
+    { id: 'faq', label: 'FAQ', icon: <List className="h-4 w-4" /> },
+    { id: 'market', label: 'Market Analysis', icon: <BarChart2 className="h-4 w-4" /> }
+  ];
+  
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
   };
   
   const mockBookings = [
@@ -121,6 +146,28 @@ const Profile = () => {
         </div>
       </header>
       
+      <div className="bg-white border-b py-2 sticky top-0 z-10">
+        <div className="container mx-auto px-4">
+          <NavigationMenu>
+            <NavigationMenuList className="flex-wrap justify-start">
+              {sections.map((section) => (
+                <NavigationMenuItem key={section.id}>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-sm flex items-center gap-1"
+                    onClick={() => scrollToSection(section.id)}
+                  >
+                    {section.icon}
+                    {section.label}
+                  </Button>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+      </div>
+      
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="md:col-span-1">
@@ -163,7 +210,7 @@ const Profile = () => {
           </Card>
           
           <div className="md:col-span-2 space-y-6">
-            <Card className="bg-white shadow-sm border-brand/10">
+            <Card className="bg-white shadow-sm border-brand/10" id="kiki-circles">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
                   <span className="flex items-center gap-2">
@@ -194,9 +241,11 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            <EarningsHistory />
+            <div id="earnings">
+              <EarningsHistory />
+            </div>
             
-            <Card>
+            <Card id="bookings">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
                   <span>Booking Requests</span>
@@ -240,7 +289,7 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card id="list-home">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
                   <span>My Home</span>
@@ -278,7 +327,7 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card id="faq">
               <CardHeader>
                 <CardTitle>Frequently Asked Questions</CardTitle>
                 <CardDescription>Get answers to common questions</CardDescription>
@@ -300,7 +349,7 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            <Card>
+            <Card id="market">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
                   <span>NYC Market Analysis</span>

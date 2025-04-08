@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,7 +20,7 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0066FF', // Changed to a vibrant blue
+      main: '#0066FF',
     },
     secondary: {
       main: '#f50057',
@@ -30,7 +29,7 @@ const theme = createTheme({
   typography: {
     fontFamily: '"Inter", "system-ui", "Helvetica", "Arial", sans-serif',
     button: {
-      textTransform: 'none', // Makes buttons more modern by removing all-caps
+      textTransform: 'none',
     },
     h1: {
       fontWeight: 600,
@@ -60,13 +59,13 @@ const theme = createTheme({
 });
 
 const App = () => {
-  // Determine which tab should be active based on the current route
   const getActiveTab = () => {
     const path = window.location.pathname;
     
     if (path === '/') return 'explore';
     if (path.includes('/property')) return 'explore';
-    // Add more route mappings as needed
+    if (path.includes('/home')) return 'home';
+    if (path.includes('/profile')) return 'profile';
     
     return undefined;
   };
@@ -87,7 +86,6 @@ const App = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/welcome" element={<Welcome />} />
                 <Route path="/photos" element={<PhotoApp />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <TabNavigation activeTab={getActiveTab()} />

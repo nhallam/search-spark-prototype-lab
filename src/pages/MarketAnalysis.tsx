@@ -165,7 +165,8 @@ const MarketAnalysis: React.FC = () => {
                 </TabsList>
                 
                 <TabsContent value="monthly" className="space-y-8">
-                  <div className="h-80">
+                  <div className="h-80 mt-6">
+                    <h3 className="text-lg font-semibold mb-4">Supply vs. Demand by Month</h3>
                     <ChartContainer 
                       config={{
                         supply: { label: "Available Listings", color: "#94A3B8" },
@@ -210,8 +211,8 @@ const MarketAnalysis: React.FC = () => {
                     </ChartContainer>
                   </div>
                   
-                  <div className="h-80">
-                    <h3 className="text-lg font-semibold mb-2">Average Price per Night ($)</h3>
+                  <div className="h-80 mt-12">
+                    <h3 className="text-lg font-semibold mb-4">Average Price per Night ($)</h3>
                     <ChartContainer
                       config={{
                         averagePrice: { color: "#1FA598" }
@@ -244,8 +245,8 @@ const MarketAnalysis: React.FC = () => {
                 </TabsContent>
                 
                 <TabsContent value="seasonal" className="space-y-8">
-                  <div className="h-80">
-                    <h3 className="text-lg font-semibold mb-2">Supply vs. Demand by Season</h3>
+                  <div className="h-80 mt-6">
+                    <h3 className="text-lg font-semibold mb-4">Supply vs. Demand by Season</h3>
                     <ChartContainer
                       config={{
                         supply: { color: "#94A3B8" },
@@ -275,8 +276,8 @@ const MarketAnalysis: React.FC = () => {
                     </ChartContainer>
                   </div>
                   
-                  <div className="h-80">
-                    <h3 className="text-lg font-semibold mb-2">Pricing & Occupancy by Season</h3>
+                  <div className="h-80 mt-12">
+                    <h3 className="text-lg font-semibold mb-4">Pricing & Occupancy by Season</h3>
                     <ChartContainer
                       config={{
                         averagePrice: { color: "#1FA598" },
@@ -338,3 +339,4 @@ const MarketAnalysis: React.FC = () => {
 };
 
 export default MarketAnalysis;
+

@@ -4,16 +4,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { Bell, Search, LogOut, Calendar, Copy, Check, ChevronRight } from 'lucide-react';
+import { LogOut, Calendar, Copy, Check, ChevronRight } from 'lucide-react';
 import { toast } from 'sonner';
 import EarningsHistory from '@/components/profile/EarningsHistory';
 
 const Profile = () => {
   const [copied, setCopied] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   
   // Mock user data - in a real app, this would come from authentication context
   const userData = {
@@ -26,12 +24,6 @@ const Profile = () => {
   const mockBookings = [
     { id: 1, property: 'Manhattan Loft', date: '2025-05-15', status: 'pending' },
     { id: 2, property: 'Brooklyn Heights Apartment', date: '2025-06-22', status: 'confirmed' },
-  ];
-  
-  const mockNotifications = [
-    { id: 1, message: 'Your booking for Manhattan Loft was confirmed', read: false, date: '2025-04-01' },
-    { id: 2, message: 'New property listings in your favorite areas', read: true, date: '2025-03-28' },
-    { id: 3, message: 'Limited time offer: 15% off for summer bookings', read: false, date: '2025-03-25' },
   ];
   
   const faqs = [
@@ -65,14 +57,6 @@ const Profile = () => {
     toast.info('Logging out...');
     // For demo purposes, we'll just redirect to home
     window.location.href = '/';
-  };
-  
-  const filterNotifications = () => {
-    if (!searchQuery.trim()) return mockNotifications;
-    
-    return mockNotifications.filter(notification => 
-      notification.message.toLowerCase().includes(searchQuery.toLowerCase())
-    );
   };
   
   return (
@@ -170,54 +154,6 @@ const Profile = () => {
                   View All Bookings
                 </Button>
               </CardFooter>
-            </Card>
-            
-            {/* Notifications */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span>Notifications</span>
-                  <Bell size={20} />
-                </CardTitle>
-                <CardDescription>Stay updated with your account activity</CardDescription>
-                <div className="relative mt-2">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search notifications"
-                    className="pl-8"
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
-                  />
-                </div>
-              </CardHeader>
-              <CardContent>
-                {filterNotifications().length > 0 ? (
-                  <div className="space-y-3">
-                    {filterNotifications().map(notification => (
-                      <div 
-                        key={notification.id} 
-                        className={`p-3 rounded-lg border ${!notification.read ? 'bg-primary/5 border-primary/20' : ''}`}
-                      >
-                        <div className="flex justify-between">
-                          <p className={`text-sm ${!notification.read ? 'font-medium' : ''}`}>
-                            {notification.message}
-                          </p>
-                          {!notification.read && (
-                            <Badge variant="default" className="h-fit">New</Badge>
-                          )}
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {new Date(notification.date).toLocaleDateString('en-US', { 
-                            month: 'short', day: 'numeric' 
-                          })}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-center text-muted-foreground py-4">No notifications found</p>
-                )}
-              </CardContent>
             </Card>
             
             {/* FAQs */}

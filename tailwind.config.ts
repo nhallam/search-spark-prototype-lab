@@ -66,7 +66,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				brand: '#0066FF' // Changed from the teal color to a modern blue
+				brand: '#1FA598' // Changed from blue to the welcome page green
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -21,7 +21,7 @@ const queryClient = new QueryClient();
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0066FF',
+      main: '#1FA598', // Changed from blue to the welcome page green
     },
     secondary: {
       main: '#f50057',

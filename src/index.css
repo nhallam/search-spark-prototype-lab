@@ -14,8 +14,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 210 100% 50%; /* Changed to blue */
-    --primary-foreground: 210 40% 98%;
+    --primary: 171 70% 37%; /* Changed to the welcome page green */
+    --primary-foreground: 171 40% 98%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -31,7 +31,7 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 50%; /* Changed to match primary */
+    --ring: 171 70% 37%; /* Changed to match primary */
 
     --radius: 0.5rem;
 
@@ -42,7 +42,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 210 100% 50%; /* Changed to match primary */
+    --sidebar-ring: 171 70% 37%; /* Changed to match primary */
   }
 
   .dark {

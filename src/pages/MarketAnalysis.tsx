@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -164,177 +163,173 @@ const MarketAnalysis: React.FC = () => {
                   <TabsTrigger value="seasonal">Seasonal Comparison</TabsTrigger>
                 </TabsList>
                 
-                <TabsContent value="monthly">
-                  <div className="space-y-6">
-                    <div className="h-80">
-                      <ChartContainer 
-                        config={{
-                          supply: { label: "Available Listings", color: "#94A3B8" },
-                          demand: { label: "Booking Requests", color: "#1FA598" }
-                        }}
-                      >
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                            <XAxis dataKey="month" stroke="#94A3B8" />
-                            <YAxis stroke="#94A3B8" />
-                            <ChartTooltip
-                              content={({ active, payload }) => (
-                                <ChartTooltipContent 
-                                  active={active} 
-                                  payload={payload} 
-                                  labelClassName="font-medium text-sm"
-                                />
-                              )}
-                            />
-                            <Legend />
-                            <Line 
-                              type="monotone" 
-                              dataKey="supply" 
-                              stroke="#94A3B8" 
-                              strokeWidth={2}
-                              dot={{ r: 4 }} 
-                              activeDot={{ r: 6 }} 
-                              name="Available Listings"
-                            />
-                            <Line 
-                              type="monotone" 
-                              dataKey="demand" 
-                              stroke="#1FA598" 
-                              strokeWidth={2}
-                              dot={{ r: 4 }} 
-                              activeDot={{ r: 6 }}
-                              name="Booking Requests" 
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
-                      </ChartContainer>
-                    </div>
-                    
-                    <div className="h-80">
-                      <h3 className="text-lg font-semibold mb-2">Average Price per Night ($)</h3>
-                      <ChartContainer
-                        config={{
-                          averagePrice: { color: "#1FA598" }
-                        }}
-                      >
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                            <XAxis dataKey="month" stroke="#94A3B8" />
-                            <YAxis stroke="#94A3B8" />
-                            <ChartTooltip
-                              content={({ active, payload }) => (
-                                <ChartTooltipContent 
-                                  active={active} 
-                                  payload={payload}
-                                  formatter={(value) => [`$${value}`, 'Average Price']}
-                                />
-                              )}
-                            />
-                            <Bar 
-                              dataKey="averagePrice" 
-                              fill="#1FA598" 
-                              name="Average Price"
-                              radius={[4, 4, 0, 0]}
-                            />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </ChartContainer>
-                    </div>
+                <TabsContent value="monthly" className="space-y-8">
+                  <div className="h-80">
+                    <ChartContainer 
+                      config={{
+                        supply: { label: "Available Listings", color: "#94A3B8" },
+                        demand: { label: "Booking Requests", color: "#1FA598" }
+                      }}
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                          <XAxis dataKey="month" stroke="#94A3B8" />
+                          <YAxis stroke="#94A3B8" />
+                          <ChartTooltip
+                            content={({ active, payload }) => (
+                              <ChartTooltipContent 
+                                active={active} 
+                                payload={payload} 
+                                labelClassName="font-medium text-sm"
+                              />
+                            )}
+                          />
+                          <Legend />
+                          <Line 
+                            type="monotone" 
+                            dataKey="supply" 
+                            stroke="#94A3B8" 
+                            strokeWidth={2}
+                            dot={{ r: 4 }} 
+                            activeDot={{ r: 6 }} 
+                            name="Available Listings"
+                          />
+                          <Line 
+                            type="monotone" 
+                            dataKey="demand" 
+                            stroke="#1FA598" 
+                            strokeWidth={2}
+                            dot={{ r: 4 }} 
+                            activeDot={{ r: 6 }}
+                            name="Booking Requests" 
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </ChartContainer>
+                  </div>
+                  
+                  <div className="h-80">
+                    <h3 className="text-lg font-semibold mb-2">Average Price per Night ($)</h3>
+                    <ChartContainer
+                      config={{
+                        averagePrice: { color: "#1FA598" }
+                      }}
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={nycMarketData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                          <XAxis dataKey="month" stroke="#94A3B8" />
+                          <YAxis stroke="#94A3B8" />
+                          <ChartTooltip
+                            content={({ active, payload }) => (
+                              <ChartTooltipContent 
+                                active={active} 
+                                payload={payload}
+                                formatter={(value) => [`$${value}`, 'Average Price']}
+                              />
+                            )}
+                          />
+                          <Bar 
+                            dataKey="averagePrice" 
+                            fill="#1FA598" 
+                            name="Average Price"
+                            radius={[4, 4, 0, 0]}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </ChartContainer>
                   </div>
                 </TabsContent>
                 
-                <TabsContent value="seasonal">
-                  <div className="space-y-6">
-                    <div className="h-80">
-                      <h3 className="text-lg font-semibold mb-2">Supply vs. Demand by Season</h3>
-                      <ChartContainer
-                        config={{
-                          supply: { color: "#94A3B8" },
-                          demand: { color: "#1FA598" }
-                        }}
-                      >
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart 
-                            data={seasonalAggregateData}
-                            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-                            barGap={0}
-                            barCategoryGap="20%"
-                          >
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                            <XAxis dataKey="season" stroke="#94A3B8" />
-                            <YAxis stroke="#94A3B8" />
-                            <ChartTooltip
-                              content={({ active, payload }) => (
-                                <ChartTooltipContent active={active} payload={payload} />
-                              )}
-                            />
-                            <Legend />
-                            <Bar dataKey="supply" fill="#94A3B8" name="Available Listings" radius={[4, 4, 0, 0]} />
-                            <Bar dataKey="demand" fill="#1FA598" name="Booking Requests" radius={[4, 4, 0, 0]} />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </ChartContainer>
-                    </div>
-                    
-                    <div className="h-80">
-                      <h3 className="text-lg font-semibold mb-2">Pricing & Occupancy by Season</h3>
-                      <ChartContainer
-                        config={{
-                          averagePrice: { color: "#1FA598" },
-                          bookingRate: { color: "#F97316" }
-                        }}
-                      >
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={seasonalAggregateData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
-                            <XAxis dataKey="season" stroke="#94A3B8" />
-                            <YAxis yAxisId="left" orientation="left" stroke="#1FA598" />
-                            <YAxis yAxisId="right" orientation="right" stroke="#F97316" />
-                            <ChartTooltip
-                              content={({ active, payload }) => (
-                                <ChartTooltipContent 
-                                  active={active} 
-                                  payload={payload}
-                                  formatter={(value, name) => {
-                                    if (name === 'averagePrice') return [`$${value}`, 'Average Price'];
-                                    if (name === 'bookingRate') return [`${value}%`, 'Booking Rate'];
-                                    return [value, name];
-                                  }}
-                                />
-                              )}
-                            />
-                            <Legend />
-                            <Line 
-                              yAxisId="left"
-                              type="monotone" 
-                              dataKey="averagePrice" 
-                              stroke="#1FA598" 
-                              strokeWidth={2}
-                              dot={{ r: 4 }} 
-                              activeDot={{ r: 6 }} 
-                              name="Average Price ($)"
-                            />
-                            <Line 
-                              yAxisId="right"
-                              type="monotone" 
-                              dataKey="bookingRate" 
-                              stroke="#F97316" 
-                              strokeWidth={2}
-                              dot={{ r: 4 }} 
-                              activeDot={{ r: 6 }}
-                              name="Booking Rate (%)" 
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
-                      </ChartContainer>
-                    </div>
+                <TabsContent value="seasonal" className="space-y-8">
+                  <div className="h-80">
+                    <h3 className="text-lg font-semibold mb-2">Supply vs. Demand by Season</h3>
+                    <ChartContainer
+                      config={{
+                        supply: { color: "#94A3B8" },
+                        demand: { color: "#1FA598" }
+                      }}
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart 
+                          data={seasonalAggregateData}
+                          margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                          barGap={0}
+                          barCategoryGap="20%"
+                        >
+                          <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                          <XAxis dataKey="season" stroke="#94A3B8" />
+                          <YAxis stroke="#94A3B8" />
+                          <ChartTooltip
+                            content={({ active, payload }) => (
+                              <ChartTooltipContent active={active} payload={payload} />
+                            )}
+                          />
+                          <Legend />
+                          <Bar dataKey="supply" fill="#94A3B8" name="Available Listings" radius={[4, 4, 0, 0]} />
+                          <Bar dataKey="demand" fill="#1FA598" name="Booking Requests" radius={[4, 4, 0, 0]} />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </ChartContainer>
+                  </div>
+                  
+                  <div className="h-80">
+                    <h3 className="text-lg font-semibold mb-2">Pricing & Occupancy by Season</h3>
+                    <ChartContainer
+                      config={{
+                        averagePrice: { color: "#1FA598" },
+                        bookingRate: { color: "#F97316" }
+                      }}
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={seasonalAggregateData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+                          <XAxis dataKey="season" stroke="#94A3B8" />
+                          <YAxis yAxisId="left" orientation="left" stroke="#1FA598" />
+                          <YAxis yAxisId="right" orientation="right" stroke="#F97316" />
+                          <ChartTooltip
+                            content={({ active, payload }) => (
+                              <ChartTooltipContent 
+                                active={active} 
+                                payload={payload}
+                                formatter={(value, name) => {
+                                  if (name === 'averagePrice') return [`$${value}`, 'Average Price'];
+                                  if (name === 'bookingRate') return [`${value}%`, 'Booking Rate'];
+                                  return [value, name];
+                                }}
+                              />
+                            )}
+                          />
+                          <Legend />
+                          <Line 
+                            yAxisId="left"
+                            type="monotone" 
+                            dataKey="averagePrice" 
+                            stroke="#1FA598" 
+                            strokeWidth={2}
+                            dot={{ r: 4 }} 
+                            activeDot={{ r: 6 }} 
+                            name="Average Price ($)"
+                          />
+                          <Line 
+                            yAxisId="right"
+                            type="monotone" 
+                            dataKey="bookingRate" 
+                            stroke="#F97316" 
+                            strokeWidth={2}
+                            dot={{ r: 4 }} 
+                            activeDot={{ r: 6 }}
+                            name="Booking Rate (%)" 
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </ChartContainer>
                   </div>
                 </TabsContent>
               </Tabs>
               
-              <div className="mt-8">
+              <div className="mt-16">
                 <h3 className="text-lg font-semibold mb-4">Key Insights</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Card className="bg-blue-50 border-blue-200">

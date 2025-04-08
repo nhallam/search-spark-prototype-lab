@@ -7,7 +7,7 @@ import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { ChartLine } from "lucide-react";
 
 // Mock data for earnings history
-const generateMockData = (months: number) => {
+export const generateMockData = (months: number) => {
   const data = [];
   const now = new Date();
   

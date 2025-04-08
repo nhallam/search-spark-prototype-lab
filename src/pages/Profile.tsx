@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -10,17 +9,21 @@ import { LogOut, Calendar, Copy, Check, ChevronRight, Building } from 'lucide-re
 import { toast } from 'sonner';
 import EarningsHistory from '@/components/profile/EarningsHistory';
 
+import { generateMockData } from '@/components/profile/EarningsHistory';
+
 const Profile = () => {
   const [copied, setCopied] = useState(false);
   
-  // Mock user data - in a real app, this would come from authentication context
+  const allTimeEarningsData = generateMockData(24);
+  const totalEarnings = allTimeEarningsData.reduce((sum, item) => sum + item.earnings, 0);
+  
   const userData = {
     name: 'Alex Johnson',
     email: 'alex@example.com',
     avatar: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=100&h=100',
     inviteCode: 'AB123',
     earningRank: 11,
-    totalEarnings: 6700 // This would be calculated from actual earnings data
+    totalEarnings: totalEarnings
   };
   
   const mockBookings = [
@@ -55,9 +58,7 @@ const Profile = () => {
   };
   
   const handleLogout = () => {
-    // In a real app, this would call your logout function
     toast.info('Logging out...');
-    // For demo purposes, we'll just redirect to home
     window.location.href = '/';
   };
   
@@ -81,7 +82,6 @@ const Profile = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Profile Card */}
           <Card className="md:col-span-1">
             <CardHeader className="flex flex-col items-center">
               <Avatar className="h-24 w-24 mb-4">
@@ -92,7 +92,6 @@ const Profile = () => {
               <CardDescription>{userData.email}</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
-              {/* New Earnings Rank UI */}
               <div className="bg-brand/5 p-4 rounded-lg mb-4 border border-brand/10">
                 <p className="text-sm text-muted-foreground mb-1">Your Earnings Rank</p>
                 <p className="text-lg font-bold text-brand mb-1">#{userData.earningRank} Top Earner</p>
@@ -122,12 +121,9 @@ const Profile = () => {
             </CardContent>
           </Card>
           
-          {/* Main Content Area */}
           <div className="md:col-span-2 space-y-6">
-            {/* Earnings History Graph */}
             <EarningsHistory />
             
-            {/* Booking Requests */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
@@ -172,7 +168,6 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            {/* My Home Section - NEW */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
@@ -211,7 +206,6 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            {/* FAQs */}
             <Card>
               <CardHeader>
                 <CardTitle>Frequently Asked Questions</CardTitle>

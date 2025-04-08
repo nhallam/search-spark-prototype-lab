@@ -13,6 +13,7 @@ import PropertyCard, { Property } from '@/components/PropertyCard';
 import PropertyReviews from '@/components/PropertyReviews';
 import PropertyAvailability from '@/components/PropertyAvailability';
 import { toast } from 'sonner';
+import { Separator } from '@/components/ui/separator';
 
 const PropertyDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -130,6 +131,14 @@ const PropertyDetails: React.FC = () => {
                       Hosted by {property.owner?.name || 'Unknown'}
                     </h2>
                     <p className="text-gray-500">Superhost · 5 years hosting</p>
+                    
+                    {/* Added nationality information here */}
+                    {property.nationality && (
+                      <div className="flex items-center gap-1.5 mt-1">
+                        <span className="text-base">{property.nationality.flag}</span>
+                        <span className="text-sm text-gray-500">From {property.nationality.country}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

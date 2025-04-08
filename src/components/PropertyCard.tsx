@@ -1,9 +1,9 @@
+
 import React from 'react';
 import { Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Link } from 'react-router-dom';
-import { Separator } from '@/components/ui/separator';
 import { AvailabilityWindow } from '@/types/property';
 
 export type Review = {
@@ -79,16 +79,6 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
             </div>
           </div>
           <p className="text-gray-500 text-sm mt-1">{property.location}</p>
-          
-          {property.nationality && (
-            <div className="mt-2">
-              <Separator className="my-2" />
-              <div className="flex items-center gap-1.5">
-                <span className="text-base">{property.nationality.flag}</span>
-                <span className="text-xs text-gray-500">{property.nationality.country}</span>
-              </div>
-            </div>
-          )}
           
           <div className="mt-3 flex justify-between items-end">
             <div>

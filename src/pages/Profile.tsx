@@ -18,7 +18,9 @@ const Profile = () => {
     name: 'Alex Johnson',
     email: 'alex@example.com',
     avatar: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=100&h=100',
-    inviteCode: 'AB123'
+    inviteCode: 'AB123',
+    earningRank: 11,
+    totalEarnings: 6700 // This would be calculated from actual earnings data
   };
   
   const mockBookings = [
@@ -59,6 +61,10 @@ const Profile = () => {
     window.location.href = '/';
   };
   
+  const formatCurrency = (value: number) => {
+    return `$${value.toLocaleString()}`;
+  };
+  
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       <header className="bg-white text-brand shadow-sm py-6">
@@ -86,6 +92,16 @@ const Profile = () => {
               <CardDescription>{userData.email}</CardDescription>
             </CardHeader>
             <CardContent className="text-center">
+              {/* New Earnings Rank UI */}
+              <div className="bg-brand/5 p-4 rounded-lg mb-4 border border-brand/10">
+                <p className="text-sm text-muted-foreground mb-1">Your Earnings Rank</p>
+                <p className="text-lg font-bold text-brand mb-1">#{userData.earningRank} Top Earner</p>
+                <div className="flex justify-center items-center gap-1.5">
+                  <span className="text-sm text-muted-foreground">Total Earned:</span>
+                  <span className="text-sm font-semibold">{formatCurrency(userData.totalEarnings)}</span>
+                </div>
+              </div>
+              
               <div className="bg-gray-50 p-4 rounded-lg mb-4">
                 <p className="text-sm text-muted-foreground mb-2">Your Invite Code</p>
                 <div className="flex justify-center items-center space-x-2">

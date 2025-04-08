@@ -119,8 +119,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           </Select>
         </div>
 
-        {/* Price Range Selector */}
-        <div className="md:col-span-2">
+        {/* Price Range Selector - Increased width */}
+        <div className="md:col-span-3">
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -161,8 +161,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           </Popover>
         </div>
 
-        {/* Search Button (removed clear button) */}
-        <div className="md:col-span-2">
+        {/* Search Button - Reduced width */}
+        <div className="md:col-span-1">
           <Button 
             onClick={handleSearch}
             className="h-14 w-full bg-brand hover:bg-brand/90 text-white rounded-lg"

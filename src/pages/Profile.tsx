@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -47,7 +46,6 @@ const Profile = () => {
     totalEarnings: totalEarnings
   };
   
-  // Updated sections array - removed bookings section
   const sections = [
     { id: 'kiki-circles', label: 'Kiki Circles', icon: <Users className="h-4 w-4" /> },
     { id: 'earnings', label: 'Earnings History', icon: <BarChart2 className="h-4 w-4" /> },
@@ -62,8 +60,6 @@ const Profile = () => {
       section.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  
-  // Removed mockBookings array as it's no longer needed
   
   const faqs = [
     {
@@ -243,8 +239,6 @@ const Profile = () => {
               <EarningsHistory />
             </div>
             
-            {/* Booking Requests section has been removed */}
-            
             <Card id="list-home">
               <CardHeader>
                 <CardTitle className="flex justify-between items-center">
@@ -305,43 +299,68 @@ const Profile = () => {
               </CardFooter>
             </Card>
             
-            <Card id="market">
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span>NYC Market Analysis</span>
-                  <BarChart2 size={20} />
-                </CardTitle>
-                <CardDescription>View seasonal trends to optimize your listing</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="p-4 bg-brand/5 rounded-lg border border-brand/10">
-                  <h3 className="font-medium text-lg mb-2">Make data-driven decisions</h3>
-                  <p className="text-muted-foreground mb-4">
+            <div id="market" className="overflow-hidden rounded-xl shadow-lg border border-indigo-100">
+              <div className="bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                    <BarChart2 size={20} className="text-indigo-100" />
+                    NYC Market Analysis
+                  </h3>
+                </div>
+                <p className="text-indigo-100 text-sm mt-1">View seasonal trends to optimize your listing</p>
+              </div>
+              
+              <div className="p-6 bg-white">
+                <div className="p-4 bg-indigo-50 rounded-lg border border-indigo-100 mb-4">
+                  <h3 className="font-medium text-lg mb-2 text-indigo-900">Make data-driven decisions</h3>
+                  <p className="text-indigo-700 mb-4">
                     Understand how NYC's rental market fluctuates throughout the year. Optimize your pricing,
                     availability, and marketing based on seasonal demand patterns.
                   </p>
                   <ul className="space-y-2 mb-4">
                     <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm">Analyze supply and demand across all seasons</span>
+                      <div className="mt-1 h-4 w-4 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm text-indigo-900">Analyze supply and demand across all seasons</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm">Track average pricing by month and season</span>
+                      <div className="mt-1 h-4 w-4 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm text-indigo-900">Track average pricing by month and season</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm">Get strategic insights to maximize your revenue</span>
+                      <div className="mt-1 h-4 w-4 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-sm text-indigo-900">Get strategic insights to maximize your revenue</span>
                     </li>
                   </ul>
                 </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full bg-brand hover:bg-brand/90" asChild>
-                  <Link to="/market-analysis">View Market Analysis</Link>
+                
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  <div className="bg-indigo-100 p-2 rounded text-center">
+                    <p className="text-xs text-indigo-600 font-medium">Winter</p>
+                    <p className="text-lg font-bold text-indigo-800">$195</p>
+                    <p className="text-xs text-indigo-500">Avg. price</p>
+                  </div>
+                  <div className="bg-purple-100 p-2 rounded text-center">
+                    <p className="text-xs text-purple-600 font-medium">Spring</p>
+                    <p className="text-lg font-bold text-purple-800">$230</p>
+                    <p className="text-xs text-purple-500">Avg. price</p>
+                  </div>
+                  <div className="bg-amber-100 p-2 rounded text-center">
+                    <p className="text-xs text-amber-600 font-medium">Summer</p>
+                    <p className="text-lg font-bold text-amber-800">$300</p>
+                    <p className="text-xs text-amber-500">Avg. price</p>
+                  </div>
+                  <div className="bg-emerald-100 p-2 rounded text-center">
+                    <p className="text-xs text-emerald-600 font-medium">Fall</p>
+                    <p className="text-lg font-bold text-emerald-800">$240</p>
+                    <p className="text-xs text-emerald-500">Avg. price</p>
+                  </div>
+                </div>
+                
+                <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white" asChild>
+                  <Link to="/market-analysis">View Full Market Analysis</Link>
                 </Button>
-              </CardFooter>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </main>

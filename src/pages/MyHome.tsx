@@ -36,7 +36,6 @@ const MyHome = () => {
     to: undefined,
   });
   
-  // Mock listings data (in a real app, this would come from a backend)
   const [listings, setListings] = useState<HomeListing[]>([
     {
       id: '1',
@@ -80,7 +79,7 @@ const MyHome = () => {
   
   const handleRemoveDate = (dateId: string) => {
     const updatedListings = [...listings];
-    const listingIndex = 0; // For this example we're just working with the first listing
+    const listingIndex = 0;
     
     updatedListings[listingIndex].availabilityDates = updatedListings[listingIndex]
       .availabilityDates.filter(date => date.id !== dateId);
@@ -111,10 +110,6 @@ const MyHome = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-brand">My Home</h1>
-            <Button onClick={() => setIsListingDialogOpen(true)} className="bg-brand hover:bg-brand/90">
-              <PlusCircle size={16} className="mr-2" />
-              Add New Listing
-            </Button>
           </div>
         </div>
       </header>

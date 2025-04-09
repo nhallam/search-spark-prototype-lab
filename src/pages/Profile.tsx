@@ -197,9 +197,30 @@ const Profile = () => {
                   </Button>
                 </div>
               </div>
-              <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10">
+              <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10 mb-4">
                 Edit Profile
               </Button>
+              
+              <Card className="border border-brand/10">
+                <CardHeader>
+                  <CardTitle className="flex justify-between items-center text-base">
+                    <span>My Home</span>
+                    <Building size={18} />
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-3">
+                  <p className="text-sm text-muted-foreground mb-3">
+                    List your NYC apartment on Kiki and earn while you travel.
+                  </p>
+                  <Button 
+                    className="w-full bg-brand hover:bg-brand/90 text-sm" 
+                    size="sm"
+                    onClick={openListingDialog}
+                  >
+                    List My Home
+                  </Button>
+                </CardContent>
+              </Card>
             </CardContent>
           </Card>
           
@@ -238,44 +259,6 @@ const Profile = () => {
             <div id="earnings">
               <EarningsHistory />
             </div>
-            
-            <Card id="list-home">
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span>My Home</span>
-                  <Building size={20} />
-                </CardTitle>
-                <CardDescription>Earn money by listing your NYC apartment</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="p-4 bg-brand/5 rounded-lg border border-brand/10">
-                  <h3 className="font-medium text-lg mb-2">Turn your apartment into income</h3>
-                  <p className="text-muted-foreground mb-4">
-                    List your NYC apartment on Kiki and earn money while you travel. Our trusted platform connects you with 
-                    verified guests looking for authentic New York experiences.
-                  </p>
-                  <ul className="space-y-2 mb-4">
-                    <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm">Earn up to $4,500 per month on average</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm">24/7 customer support and automated payments</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm">$1M host protection insurance included</span>
-                    </li>
-                  </ul>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button className="w-full bg-brand hover:bg-brand/90" onClick={openListingDialog}>
-                  List My Home
-                </Button>
-              </CardFooter>
-            </Card>
             
             <Card id="faq">
               <CardHeader>

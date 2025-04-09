@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import HomeListingForm from '@/components/profile/HomeListingForm';
 import { DateRange } from "react-day-picker";
+import { Separator } from '@/components/ui/separator';
 
 interface AvailabilityDate {
   id: string;
@@ -25,6 +27,7 @@ interface HomeListing {
   address: string;
   price: number;
   image: string;
+  listedDate: Date;
   availabilityDates: AvailabilityDate[];
 }
 
@@ -44,6 +47,7 @@ const MyHome = () => {
       address: '123 Broadway, New York, NY 10001',
       price: 250,
       image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBhcnRtZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
+      listedDate: new Date(2024, 2, 15), // March 15, 2024
       availabilityDates: [
         {
           id: 'a1',
@@ -108,8 +112,13 @@ const MyHome = () => {
     <div className="min-h-screen bg-gray-50 pb-24">
       <header className="bg-white text-brand shadow-sm py-6">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col">
             <h1 className="text-2xl font-bold text-brand">My Home</h1>
+            {listings.length > 0 && (
+              <div className="text-sm text-muted-foreground mt-1">
+                Listed on {format(listings[0].listedDate, "MMMM d, yyyy")}
+              </div>
+            )}
           </div>
         </div>
       </header>

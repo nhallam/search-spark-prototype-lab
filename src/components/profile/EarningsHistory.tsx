@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { ChartLine } from "lucide-react";
 
 // Mock data for earnings history
@@ -73,6 +75,56 @@ const EarningsHistory = () => {
               {period === 'ALL' ? 'All' : period}
             </Button>
           ))}
+        </div>
+        
+        <div style={{ height: '200px', width: '100%' }} className="mb-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <ChartContainer
+              config={{
+                earnings: {
+                  label: "Earnings",
+                  color: "#1FA598",
+                },
+              }}
+            >
+              <AreaChart
+                data={mockData[timePeriod]}
+                margin={{ top: 5, right: 10, left: 10, bottom: 15 }}
+              >
+                <defs>
+                  <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#1FA598" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="#1FA598" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <XAxis
+                  dataKey="month"
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fontSize: 10 }}
+                  dy={10}
+                />
+                <YAxis
+                  tickFormatter={formatCurrency}
+                  tickLine={false}
+                  axisLine={false}
+                  tick={{ fontSize: 10 }}
+                  dx={-5}
+                  width={60}
+                />
+                <ChartTooltip content={<ChartTooltipContent labelFormatter={(label) => `${label}`} />} />
+                <Area
+                  type="monotone"
+                  dataKey="earnings"
+                  name="Earnings"
+                  stroke="#1FA598"
+                  fillOpacity={1}
+                  fill="url(#colorEarnings)"
+                  strokeWidth={2}
+                />
+              </AreaChart>
+            </ChartContainer>
+          </ResponsiveContainer>
         </div>
         
         <div className="bg-gray-50 p-4 rounded-lg">

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Select,
   SelectContent,
@@ -24,7 +25,9 @@ const Notifications = () => {
       description: 'Your stay is scheduled for May 15-20, 2025',
       read: false, 
       date: '2025-04-01',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=120&h=120',
+      user: 'Host Alex'
     },
     { 
       id: 2, 
@@ -32,7 +35,9 @@ const Notifications = () => {
       description: '5 new properties in Manhattan match your preferences',
       read: true, 
       date: '2025-03-28',
-      type: 'general'
+      type: 'general',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki'
     },
     { 
       id: 3, 
@@ -40,7 +45,9 @@ const Notifications = () => {
       description: 'Use code SUMMER25 at checkout before April 30',
       read: false, 
       date: '2025-03-25',
-      type: 'kiki-team'
+      type: 'kiki-team',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki Team'
     },
     { 
       id: 4, 
@@ -48,7 +55,9 @@ const Notifications = () => {
       description: 'Share your experience to help other travelers',
       read: true, 
       date: '2025-03-20',
-      type: 'message'
+      type: 'message',
+      avatar: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=120&h=120',
+      user: 'Sarah'
     },
     { 
       id: 5, 
@@ -56,7 +65,9 @@ const Notifications = () => {
       description: 'The host will respond within 24 hours',
       read: true, 
       date: '2025-03-15',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120',
+      user: 'Host Emma'
     },
     { 
       id: 6, 
@@ -64,7 +75,9 @@ const Notifications = () => {
       description: 'Your stay at Soho Designer Loft is confirmed',
       read: false, 
       date: '2025-03-14',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&h=120',
+      user: 'Host James'
     },
     { 
       id: 7, 
@@ -72,7 +85,9 @@ const Notifications = () => {
       description: 'Thanks for choosing our property! Let me know if you need anything.',
       read: false, 
       date: '2025-03-12',
-      type: 'message'
+      type: 'message',
+      avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=120&h=120',
+      user: 'Alex'
     },
     { 
       id: 8, 
@@ -80,7 +95,9 @@ const Notifications = () => {
       description: 'Check out the top trending destinations for Spring',
       read: true, 
       date: '2025-03-10',
-      type: 'kiki-team'
+      type: 'kiki-team',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki Team'
     },
     { 
       id: 9, 
@@ -88,7 +105,9 @@ const Notifications = () => {
       description: '20% discount for weekday bookings',
       read: true, 
       date: '2025-03-08',
-      type: 'general'
+      type: 'general',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki'
     },
     { 
       id: 10, 
@@ -96,7 +115,9 @@ const Notifications = () => {
       description: 'Your stay at Tribeca Luxury Loft starts in 7 days',
       read: false, 
       date: '2025-03-05',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&h=120',
+      user: 'Host James'
     },
     { 
       id: 11, 
@@ -104,7 +125,9 @@ const Notifications = () => {
       description: 'Here is some info about local attractions near your stay',
       read: true, 
       date: '2025-03-03',
-      type: 'message'
+      type: 'message',
+      avatar: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=120&h=120',
+      user: 'Sarah'
     },
     { 
       id: 12, 
@@ -112,7 +135,9 @@ const Notifications = () => {
       description: 'Earn double points on your next booking',
       read: false, 
       date: '2025-03-01',
-      type: 'kiki-team'
+      type: 'kiki-team',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki Team'
     },
     { 
       id: 13, 
@@ -120,7 +145,9 @@ const Notifications = () => {
       description: 'One of your saved properties has new availability',
       read: true, 
       date: '2025-02-28',
-      type: 'general'
+      type: 'general',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki'
     },
     { 
       id: 14, 
@@ -128,7 +155,9 @@ const Notifications = () => {
       description: 'Please complete payment for Brooklyn Brownstone',
       read: false, 
       date: '2025-02-25',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120',
+      user: 'Host James'
     },
     { 
       id: 15, 
@@ -136,7 +165,9 @@ const Notifications = () => {
       description: 'Check your messages for details about parking options',
       read: false, 
       date: '2025-02-23',
-      type: 'message'
+      type: 'message',
+      avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=120&h=120',
+      user: 'Alex'
     },
     { 
       id: 16, 
@@ -144,7 +175,9 @@ const Notifications = () => {
       description: 'Your account has been upgraded with exclusive benefits',
       read: true, 
       date: '2025-02-20',
-      type: 'kiki-team'
+      type: 'kiki-team',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki Team'
     },
     { 
       id: 17, 
@@ -152,7 +185,9 @@ const Notifications = () => {
       description: '8 new listings match your preferences in Queens',
       read: true, 
       date: '2025-02-18',
-      type: 'general'
+      type: 'general',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki'
     },
     { 
       id: 18, 
@@ -160,7 +195,9 @@ const Notifications = () => {
       description: 'Your dates for Midtown Executive Suite have been changed',
       read: false, 
       date: '2025-02-15',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120',
+      user: 'Host James'
     },
     { 
       id: 19, 
@@ -168,7 +205,9 @@ const Notifications = () => {
       description: 'Host James gave you a 5-star rating!',
       read: true, 
       date: '2025-02-12',
-      type: 'message'
+      type: 'message',
+      avatar: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=120&h=120',
+      user: 'Sarah'
     },
     { 
       id: 20, 
@@ -176,7 +215,9 @@ const Notifications = () => {
       description: 'We\'ve updated our cleaning and safety procedures',
       read: false, 
       date: '2025-02-10',
-      type: 'kiki-team'
+      type: 'kiki-team',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki Team'
     },
     { 
       id: 21, 
@@ -184,7 +225,9 @@ const Notifications = () => {
       description: 'Book any available property for this weekend at special rates',
       read: true, 
       date: '2025-02-08',
-      type: 'general'
+      type: 'general',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki'
     },
     { 
       id: 22, 
@@ -192,7 +235,9 @@ const Notifications = () => {
       description: 'Check-in details and door codes have been sent to your email',
       read: false, 
       date: '2025-02-05',
-      type: 'booking'
+      type: 'booking',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120',
+      user: 'Host James'
     },
     { 
       id: 23, 
@@ -200,7 +245,9 @@ const Notifications = () => {
       description: 'Someone is interested in your East Village listing',
       read: true, 
       date: '2025-02-03',
-      type: 'message'
+      type: 'message',
+      avatar: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=120&h=120',
+      user: 'Sarah'
     },
     { 
       id: 24, 
@@ -208,7 +255,9 @@ const Notifications = () => {
       description: 'You\'ve received a $200 gift card from Maria',
       read: false, 
       date: '2025-02-01',
-      type: 'kiki-team'
+      type: 'kiki-team',
+      avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=120&h=120',
+      user: 'Alex'
     },
     { 
       id: 25, 
@@ -216,7 +265,9 @@ const Notifications = () => {
       description: 'New listing similar to ones you\'ve viewed in Williamsburg',
       read: true, 
       date: '2025-01-28',
-      type: 'general'
+      type: 'general',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120',
+      user: 'Kiki'
     }
   ];
 
@@ -273,6 +324,14 @@ const Notifications = () => {
   };
 
   const unreadCount = notifications.filter(notification => !notification.read).length;
+  
+  const getAvatarFallback = (name: string) => {
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .join('')
+      .toUpperCase();
+  };
   
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -336,21 +395,27 @@ const Notifications = () => {
                       className={`p-4 ${!notification.read ? 'bg-primary/5 border-l-4 border-primary' : ''}`}
                     >
                       <div className="flex justify-between items-start">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <Badge className={`${getTagColor(notification.type)} border`} variant="outline">
-                              {getTagLabel(notification.type)}
-                            </Badge>
-                            {!notification.read && (
-                              <span className="h-2 w-2 rounded-full bg-primary"></span>
-                            )}
+                        <div className="flex">
+                          <Avatar className="h-10 w-10 mr-3 flex-shrink-0">
+                            <AvatarImage src={notification.avatar} alt={notification.user || 'User'} />
+                            <AvatarFallback>{getAvatarFallback(notification.user || 'User')}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              <Badge className={`${getTagColor(notification.type)} border`} variant="outline">
+                                {getTagLabel(notification.type)}
+                              </Badge>
+                              {!notification.read && (
+                                <span className="h-2 w-2 rounded-full bg-primary"></span>
+                              )}
+                            </div>
+                            <p className={`text-sm ${!notification.read ? 'font-medium' : ''}`}>
+                              {notification.message}
+                            </p>
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {notification.description}
+                            </p>
                           </div>
-                          <p className={`text-sm ${!notification.read ? 'font-medium' : ''}`}>
-                            {notification.message}
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-1">
-                            {notification.description}
-                          </p>
                         </div>
                         <div className="text-xs text-muted-foreground">
                           {formatDate(notification.date)}

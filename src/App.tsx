@@ -15,13 +15,12 @@ import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
 import Profile from "./pages/Profile";
-import YourHome from "./pages/YourHome";
+import MyHome from "./pages/MyHome";
 import Bookings from "./pages/Bookings";
 import BookingDetails from "./pages/BookingDetails";
 import Notifications from "./pages/Notifications";
 import NavigationMenu from "./pages/NavigationMenu";
 import MarketAnalysis from "./pages/MarketAnalysis";
-import MyHome from "./pages/MyHome";
 import RatingExperiments from "./pages/RatingExperiments";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
@@ -80,7 +79,7 @@ const AppContent = () => {
     if (path === '/bookings' || path.includes('/booking/')) return 'bookings';
     if (path === '/notifications') return 'notifications';
     if (path === '/my-home') return 'my-home';
-    if (path === '/profile' || path === '/your-home') return 'profile';
+    if (path === '/profile') return 'profile';
     
     return undefined;
   };
@@ -97,7 +96,6 @@ const AppContent = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/photos" element={<PhotoApp />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/your-home" element={<YourHome />} />
         <Route path="/my-home" element={<MyHome />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/booking/:id" element={<BookingDetails />} />

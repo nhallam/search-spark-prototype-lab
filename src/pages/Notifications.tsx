@@ -402,7 +402,7 @@ const Notifications = () => {
                           </Avatar>
                           <div>
                             <div className="flex items-center gap-2 mb-1">
-                              <Badge className={`${getTagColor(notification.type)} border`} variant="outline">
+                              <Badge size="sm" className={`${getTagColor(notification.type)} border`} variant="outline">
                                 {getTagLabel(notification.type)}
                               </Badge>
                               {!notification.read && (

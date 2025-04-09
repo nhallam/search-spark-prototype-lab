@@ -73,14 +73,15 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         </Link>
         
         <Link 
-          to="/menu" 
+          to="/profile" 
           className={cn(
             "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/5" : "w-16"
+            isMobile ? "w-1/5" : "w-16",
+            activeTab === 'profile' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
-          <Menu size={20} />
-          <span className="text-xs mt-1">Menu</span>
+          <UserRound size={20} />
+          <span className="text-xs mt-1">Profile</span>
         </Link>
       </div>
     </div>

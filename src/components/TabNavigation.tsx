@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Bell, Calendar, Compass, UserRound, Home } from 'lucide-react';
+import { Bell, Calendar, Compass, UserRound, Home, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -73,15 +73,14 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         </Link>
         
         <Link 
-          to="/profile" 
+          to="/menu" 
           className={cn(
             "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/5" : "w-16",
-            activeTab === 'profile' ? 'text-primary' : 'text-muted-foreground'
+            isMobile ? "w-1/5" : "w-16"
           )}
         >
-          <UserRound size={20} />
-          <span className="text-xs mt-1">Profile</span>
+          <Menu size={20} />
+          <span className="text-xs mt-1">Menu</span>
         </Link>
       </div>
     </div>

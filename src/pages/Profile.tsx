@@ -48,7 +48,7 @@ const Profile = () => {
   
   const sections = [
     { id: 'kiki-circles', label: 'Kiki Circles', icon: <Users className="h-4 w-4" /> },
-    { id: 'earnings', label: 'Earnings History', icon: <BarChart2 className="h-4 w-4" /> },
+    { id: 'earnings', label: 'Rent Saved', icon: <BarChart2 className="h-4 w-4" /> },
     { id: 'list-home', label: 'List Your Home', icon: <Building className="h-4 w-4" /> },
     { id: 'faq', label: 'FAQ', icon: <List className="h-4 w-4" /> },
     { id: 'market', label: 'Market Analysis', icon: <BarChart2 className="h-4 w-4" /> }

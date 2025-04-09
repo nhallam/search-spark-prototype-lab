@@ -15,6 +15,7 @@ import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
 import Profile from "./pages/Profile";
+import YourHome from "./pages/YourHome";
 import Bookings from "./pages/Bookings";
 import BookingDetails from "./pages/BookingDetails";
 import Notifications from "./pages/Notifications";
@@ -96,7 +97,7 @@ const AppContent = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/photos" element={<PhotoApp />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/your-home" element={<Profile />} />
+        <Route path="/your-home" element={<YourHome />} />
         <Route path="/my-home" element={<MyHome />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/booking/:id" element={<BookingDetails />} />

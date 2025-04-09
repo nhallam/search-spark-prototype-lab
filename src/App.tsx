@@ -21,6 +21,7 @@ import Notifications from "./pages/Notifications";
 import NavigationMenu from "./pages/NavigationMenu";
 import MarketAnalysis from "./pages/MarketAnalysis";
 import MyHome from "./pages/MyHome";
+import RatingExperiments from "./pages/RatingExperiments";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
 
@@ -102,6 +103,7 @@ const AppContent = () => {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/menu" element={<NavigationMenu />} />
         <Route path="/market-analysis" element={<MarketAnalysis />} />
+        <Route path="/rating-experiments" element={<RatingExperiments />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <TabNavigation activeTab={getActiveTab()} />

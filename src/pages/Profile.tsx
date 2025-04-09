@@ -339,7 +339,7 @@ const Profile = () => {
                 <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 mb-4">
                   <h3 className="font-medium text-lg mb-2 text-foreground">Make data-driven decisions</h3>
                   <p className="text-muted-foreground mb-4">
-                    Understand how NYC's rental market fluctuates throughout the year. Optimize your pricing,
+                    Understand how NYC&apos;s rental market fluctuates throughout the year. Optimize your pricing,
                     availability, and marketing based on seasonal demand patterns.
                   </p>
                   <ul className="space-y-2 mb-4">
@@ -407,7 +407,7 @@ const Profile = () => {
           <DialogHeader>
             <DialogTitle>Invite Friends to Kiki</DialogTitle>
             <DialogDescription>
-              Share Kiki with your friends and you'll both receive $30 in booking credits.
+              Share Kiki with your friends and you&apos;ll both receive $30 in booking credits.
             </DialogDescription>
           </DialogHeader>
           
@@ -426,7 +426,7 @@ const Profile = () => {
                 </TabsList>
                 <TabsContent value="email" className="mt-4 space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Friend's Email</Label>
+                    <Label htmlFor="email">Friend&apos;s Email</Label>
                     <Input 
                       id="email" 
                       placeholder="friend@example.com" 
@@ -436,7 +436,7 @@ const Profile = () => {
                     />
                   </div>
                   <div className="bg-brand/5 p-3 rounded-lg border border-brand/10 text-sm">
-                    <p>We'll send them an invitation with your personal invite code.</p>
+                    <p>We&apos;ll send them an invitation with your personal invite code.</p>
                   </div>
                 </TabsContent>
                 <TabsContent value="link" className="mt-4 space-y-4">
@@ -471,7 +471,7 @@ const Profile = () => {
                       <p className="font-medium">{inviteMethod === 'email' ? 'Send an invite email' : 'Share your unique link'}</p>
                       <p className="text-sm text-muted-foreground">
                         {inviteMethod === 'email' 
-                          ? 'We'll send your friend an email with your invitation.' 
+                          ? "We'll send your friend an email with your invitation." 
                           : 'Share your invite link with friends via text, email, or social media.'}
                       </p>
                     </div>
@@ -480,14 +480,14 @@ const Profile = () => {
                     <div className="flex-shrink-0 w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center font-medium">2</div>
                     <div className="flex-1">
                       <p className="font-medium">Your friend creates an account</p>
-                      <p className="text-sm text-muted-foreground">When they sign up using your invite code, they'll get $30 in credits.</p>
+                      <p className="text-sm text-muted-foreground">When they sign up using your invite code, they&apos;ll get $30 in credits.</p>
                     </div>
                   </li>
                   <li className="flex gap-3">
                     <div className="flex-shrink-0 w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center font-medium">3</div>
                     <div className="flex-1">
                       <p className="font-medium">You earn $30 in credits</p>
-                      <p className="text-sm text-muted-foreground">Once they complete their first booking, you'll receive $30 in Kiki credits.</p>
+                      <p className="text-sm text-muted-foreground">Once they complete their first booking, you&apos;ll receive $30 in Kiki credits.</p>
                     </div>
                   </li>
                 </ol>
@@ -501,7 +501,7 @@ const Profile = () => {
               <h3 className="text-xl font-semibold">Invitation Sent!</h3>
               <p className="text-muted-foreground">
                 {inviteMethod === 'email' 
-                  ? 'Your invitation has been sent. We'll notify you when your friend joins.'
+                  ? "Your invitation has been sent. We'll notify you when your friend joins."
                   : 'Your invite link has been copied to your clipboard. Share it with your friends!'}
               </p>
               <div className="bg-brand/5 p-4 rounded-lg border border-brand/10 mt-6">

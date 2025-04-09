@@ -178,7 +178,7 @@ const Profile = () => {
                 <p className="text-sm text-muted-foreground mb-1">Your Earnings Rank</p>
                 <p className="text-lg font-bold text-brand mb-1">#{userData.earningRank} Top Earner</p>
                 <div className="flex justify-center items-center gap-1.5">
-                  <span className="text-sm text-muted-foreground">Total Earned:</span>
+                  <span className="text-sm text-muted-foreground">Total Rent Saved:</span>
                   <span className="text-sm font-semibold">{formatCurrency(userData.totalEarnings)}</span>
                 </div>
               </div>

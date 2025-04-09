@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -233,9 +232,7 @@ const MyHome = () => {
                 </div>
               </CardContent>
               
-              <CardFooter className="border-t pt-4 flex justify-between">
-                <Button className="bg-brand hover:bg-brand/90">Manage Bookings</Button>
-              </CardFooter>
+              
             </Card>
           ))
         )}

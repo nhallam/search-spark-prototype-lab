@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -212,6 +213,20 @@ const Profile = () => {
                   <p className="text-sm text-muted-foreground mb-3">
                     List your NYC apartment on Kiki and earn while you travel.
                   </p>
+                  <ul className="space-y-2 mb-3 text-left">
+                    <li className="flex items-start gap-2">
+                      <div className="mt-0.5 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-xs">Earn up to $4,500 per month</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-0.5 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-xs">24/7 customer support</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="mt-0.5 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
+                      <span className="text-xs">$1M host protection included</span>
+                    </li>
+                  </ul>
                   <Button 
                     className="w-full bg-brand hover:bg-brand/90 text-sm" 
                     size="sm"

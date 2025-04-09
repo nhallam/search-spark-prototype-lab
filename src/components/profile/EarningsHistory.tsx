@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -51,7 +50,7 @@ const EarningsHistory = () => {
     <Card>
       <CardHeader>
         <CardTitle className="flex justify-between items-center">
-          <span>My Kiki History</span>
+          <span>My Earnings</span>
           <ChartLine size={20} />
         </CardTitle>
         <CardDescription>Track your earnings over time</CardDescription>

@@ -100,6 +100,7 @@ const MyHome = () => {
       address: `${listingData.street}, ${listingData.city}, ${listingData.state} ${listingData.zipCode}`,
       price: Number(listingData.price),
       image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBhcnRtZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
+      listedDate: new Date(), // Add the current date to fix the build error
       availabilityDates: []
     };
     
@@ -112,12 +113,19 @@ const MyHome = () => {
     <div className="min-h-screen bg-gray-50 pb-24">
       <header className="bg-white text-brand shadow-sm py-6">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-brand">My Home</h1>
+          <div className="flex justify-between items-center">
+            <div className="flex flex-col">
+              <h1 className="text-2xl font-bold text-brand">My Home</h1>
+              {listings.length > 0 && (
+                <div className="text-sm text-muted-foreground mt-1">
+                  Listed on {format(listings[0].listedDate, "MMMM d, yyyy")}
+                </div>
+              )}
+            </div>
             {listings.length > 0 && (
-              <div className="text-sm text-muted-foreground mt-1">
-                Listed on {format(listings[0].listedDate, "MMMM d, yyyy")}
-              </div>
+              <Button variant="outline" className="border-gray-300">
+                Edit Listing
+              </Button>
             )}
           </div>
         </div>
@@ -226,9 +234,6 @@ const MyHome = () => {
               </CardContent>
               
               <CardFooter className="border-t pt-4 flex justify-between">
-                <Button variant="outline" className="border-gray-300">
-                  Edit Listing
-                </Button>
                 <Button className="bg-brand hover:bg-brand/90">Manage Bookings</Button>
               </CardFooter>
             </Card>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -148,93 +147,131 @@ const MyHome = () => {
             </CardContent>
           </Card>
         ) : (
-          listings.map(listing => (
-            <Card key={listing.id} className="mb-6">
-              <CardHeader className="pb-0">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle className="text-xl">{listing.title}</CardTitle>
-                    <CardDescription className="mt-1">{listing.address}</CardDescription>
+          <div className="space-y-6">
+            {listings.map(listing => (
+              <Card key={listing.id} className="mb-6">
+                <CardHeader className="pb-0">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <CardTitle className="text-xl">{listing.title}</CardTitle>
+                      <CardDescription className="mt-1">{listing.address}</CardDescription>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold text-lg">${listing.price}</p>
+                      <p className="text-sm text-muted-foreground">per night</p>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-lg">${listing.price}</p>
-                    <p className="text-sm text-muted-foreground">per night</p>
-                  </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="pt-4">
-                <div className="aspect-video w-full mb-4 bg-gray-100 rounded-lg overflow-hidden">
-                  <img 
-                    src={listing.image} 
-                    alt={listing.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                </CardHeader>
                 
-                <p className="text-muted-foreground mb-4">{listing.description}</p>
-                
-                <div>
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-semibold">Available Dates</h3>
-                    <Button 
-                      variant="outline"
-                      className="border-brand text-brand hover:bg-brand/10"
-                      onClick={() => setIsDateDialogOpen(true)}
-                    >
-                      <PlusCircle size={16} className="mr-2" />
-                      Add Dates
-                    </Button>
+                <CardContent className="pt-4">
+                  <div className="aspect-video w-full mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                    <img 
+                      src={listing.image} 
+                      alt={listing.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
-                  {listing.availabilityDates.length > 0 ? (
-                    <div className="space-y-2">
-                      {listing.availabilityDates.map(date => (
-                        <div 
-                          key={date.id} 
-                          className="flex justify-between items-center p-3 rounded-lg border hover:bg-gray-50"
-                        >
-                          <div className="flex items-center">
-                            <div className="bg-brand/10 p-2 rounded-full mr-3">
-                              <CalendarIcon size={16} className="text-brand" />
-                            </div>
-                            <div>
-                              <p className="font-medium">
-                                {format(date.startDate, "MMM d, yyyy")} - {format(date.endDate, "MMM d, yyyy")}
-                              </p>
-                              <p className="text-xs text-muted-foreground">
-                                {Math.ceil((date.endDate.getTime() - date.startDate.getTime()) / (1000 * 60 * 60 * 24))} days
-                              </p>
-                            </div>
-                          </div>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
-                            className="text-red-500 hover:bg-red-50 hover:text-red-500"
-                            onClick={() => handleRemoveDate(date.id)}
-                          >
-                            Remove
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-center py-8">
-                      <p className="text-muted-foreground">No availability dates set</p>
+                  <p className="text-muted-foreground mb-4">{listing.description}</p>
+                  
+                  <div>
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="font-semibold">Available Dates</h3>
                       <Button 
-                        variant="outline" 
-                        className="mt-3 border-brand text-brand hover:bg-brand/10"
+                        variant="outline"
+                        className="border-brand text-brand hover:bg-brand/10"
                         onClick={() => setIsDateDialogOpen(true)}
                       >
-                        Add Availability Dates
+                        <PlusCircle size={16} className="mr-2" />
+                        Add Dates
                       </Button>
                     </div>
-                  )}
+                    
+                    {listing.availabilityDates.length > 0 ? (
+                      <div className="space-y-2">
+                        {listing.availabilityDates.map(date => (
+                          <div 
+                            key={date.id} 
+                            className="flex justify-between items-center p-3 rounded-lg border hover:bg-gray-50"
+                          >
+                            <div className="flex items-center">
+                              <div className="bg-brand/10 p-2 rounded-full mr-3">
+                                <CalendarIcon size={16} className="text-brand" />
+                              </div>
+                              <div>
+                                <p className="font-medium">
+                                  {format(date.startDate, "MMM d, yyyy")} - {format(date.endDate, "MMM d, yyyy")}
+                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                  {Math.ceil((date.endDate.getTime() - date.startDate.getTime()) / (1000 * 60 * 60 * 24))} days
+                                </p>
+                              </div>
+                            </div>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="text-red-500 hover:bg-red-50 hover:text-red-500"
+                              onClick={() => handleRemoveDate(date.id)}
+                            >
+                              Remove
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="text-center py-8">
+                        <p className="text-muted-foreground">No availability dates set</p>
+                        <Button 
+                          variant="outline" 
+                          className="mt-3 border-brand text-brand hover:bg-brand/10"
+                          onClick={() => setIsDateDialogOpen(true)}
+                        >
+                          Add Availability Dates
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <HomeIcon size={20} />
+                  Hosting Tips
+                </CardTitle>
+                <CardDescription>Make the most of your NYC property</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="p-4 bg-brand/5 rounded-lg border border-brand/10">
+                    <h3 className="font-medium mb-1">Seasonal Pricing</h3>
+                    <p className="text-sm text-muted-foreground">
+                      New York City sees higher tourist traffic during summer and winter holidays. 
+                      Consider adjusting your pricing to maximize earnings during these peak seasons.
+                    </p>
+                  </div>
+                  
+                  <div className="p-4 bg-brand/5 rounded-lg border border-brand/10">
+                    <h3 className="font-medium mb-1">Add Local Recommendations</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Guests love personalized recommendations from locals. Add your favorite restaurants, 
+                      coffee shops, and hidden gems to your listing description.
+                    </p>
+                  </div>
+                  
+                  <div className="p-4 bg-brand/5 rounded-lg border border-brand/10">
+                    <h3 className="font-medium mb-1">Quality Photos</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Listings with professional photos receive 25% more bookings. Consider upgrading
+                      your listing photos to showcase your space in the best light.
+                    </p>
+                  </div>
                 </div>
               </CardContent>
-              
             </Card>
-          ))
+          </div>
         )}
       </main>
       

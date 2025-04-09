@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -46,10 +47,10 @@ const Profile = () => {
     totalEarnings: totalEarnings
   };
   
+  // Updated sections array - removed bookings section
   const sections = [
     { id: 'kiki-circles', label: 'Kiki Circles', icon: <Users className="h-4 w-4" /> },
     { id: 'earnings', label: 'Earnings History', icon: <BarChart2 className="h-4 w-4" /> },
-    { id: 'bookings', label: 'Booking Requests', icon: <Calendar className="h-4 w-4" /> },
     { id: 'list-home', label: 'List Your Home', icon: <Building className="h-4 w-4" /> },
     { id: 'faq', label: 'FAQ', icon: <List className="h-4 w-4" /> },
     { id: 'market', label: 'Market Analysis', icon: <BarChart2 className="h-4 w-4" /> }
@@ -62,10 +63,7 @@ const Profile = () => {
     }
   };
   
-  const mockBookings = [
-    { id: 1, property: 'Manhattan Loft', date: '2025-05-15', status: 'pending' },
-    { id: 2, property: 'Brooklyn Heights Apartment', date: '2025-06-22', status: 'confirmed' },
-  ];
+  // Removed mockBookings array as it's no longer needed
   
   const faqs = [
     {
@@ -245,49 +243,7 @@ const Profile = () => {
               <EarningsHistory />
             </div>
             
-            <Card id="bookings">
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span>Booking Requests</span>
-                  <Calendar size={20} />
-                </CardTitle>
-                <CardDescription>Manage your upcoming stays</CardDescription>
-              </CardHeader>
-              <CardContent>
-                {mockBookings.length > 0 ? (
-                  <div className="space-y-4">
-                    {mockBookings.map(booking => (
-                      <div 
-                        key={booking.id} 
-                        className="flex justify-between items-center p-3 rounded-lg border hover:bg-gray-50 cursor-pointer"
-                      >
-                        <div>
-                          <p className="font-medium">{booking.property}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {new Date(booking.date).toLocaleDateString('en-US', { 
-                              month: 'short', day: 'numeric', year: 'numeric' 
-                            })}
-                          </p>
-                        </div>
-                        <div className="flex items-center">
-                          <Badge variant={booking.status === 'confirmed' ? 'default' : 'outline'} className="mr-2">
-                            {booking.status}
-                          </Badge>
-                          <ChevronRight size={16} className="text-muted-foreground" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-center text-muted-foreground py-4">No booking requests yet</p>
-                )}
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10" asChild>
-                  <Link to="/bookings">View All Bookings</Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            {/* Booking Requests section has been removed */}
             
             <Card id="list-home">
               <CardHeader>

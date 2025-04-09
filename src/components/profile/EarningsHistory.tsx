@@ -77,53 +77,44 @@ const EarningsHistory = () => {
           ))}
         </div>
         
-        <div style={{ height: '200px', width: '100%' }} className="mb-4">
+        <div className="h-[200px] w-full mb-4">
           <ResponsiveContainer width="100%" height="100%">
-            <ChartContainer
-              config={{
-                earnings: {
-                  label: "Earnings",
-                  color: "#1FA598",
-                },
-              }}
+            <AreaChart
+              data={mockData[timePeriod]}
+              margin={{ top: 5, right: 10, left: 10, bottom: 15 }}
             >
-              <AreaChart
-                data={mockData[timePeriod]}
-                margin={{ top: 5, right: 10, left: 10, bottom: 15 }}
-              >
-                <defs>
-                  <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#1FA598" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#1FA598" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <XAxis
-                  dataKey="month"
-                  tickLine={false}
-                  axisLine={false}
-                  tick={{ fontSize: 10 }}
-                  dy={10}
-                />
-                <YAxis
-                  tickFormatter={formatCurrency}
-                  tickLine={false}
-                  axisLine={false}
-                  tick={{ fontSize: 10 }}
-                  dx={-5}
-                  width={60}
-                />
-                <ChartTooltip content={<ChartTooltipContent labelFormatter={(label) => `${label}`} />} />
-                <Area
-                  type="monotone"
-                  dataKey="earnings"
-                  name="Earnings"
-                  stroke="#1FA598"
-                  fillOpacity={1}
-                  fill="url(#colorEarnings)"
-                  strokeWidth={2}
-                />
-              </AreaChart>
-            </ChartContainer>
+              <defs>
+                <linearGradient id="colorEarnings" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#1FA598" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#1FA598" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis
+                dataKey="month"
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 10 }}
+                dy={10}
+              />
+              <YAxis
+                tickFormatter={formatCurrency}
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 10 }}
+                dx={-5}
+                width={60}
+              />
+              <ChartTooltip content={<ChartTooltipContent labelFormatter={(label) => `${label}`} />} />
+              <Area
+                type="monotone"
+                dataKey="earnings"
+                name="Earnings"
+                stroke="#1FA598"
+                fillOpacity={1}
+                fill="url(#colorEarnings)"
+                strokeWidth={2}
+              />
+            </AreaChart>
           </ResponsiveContainer>
         </div>
         

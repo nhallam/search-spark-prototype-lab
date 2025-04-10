@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from 'sonner';
@@ -53,18 +52,24 @@ const Profile = () => {
           />
           
           <div className="md:col-span-2 space-y-6">
-            <KikiCircles 
-              connections={connections}
-              openInviteDialog={openInviteDialog}
-            />
+            <div id="kiki-circles">
+              <KikiCircles 
+                connections={connections}
+                openInviteDialog={openInviteDialog}
+              />
+            </div>
             
             <div id="earnings">
               <EarningsHistory />
             </div>
             
-            <FrequentlyAskedQuestions />
+            <div id="faq">
+              <FrequentlyAskedQuestions />
+            </div>
             
-            <MarketAnalysis />
+            <div id="market">
+              <MarketAnalysis />
+            </div>
           </div>
         </div>
       </main>

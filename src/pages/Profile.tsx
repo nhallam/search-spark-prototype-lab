@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Link } from 'react-router-dom';
@@ -14,7 +13,6 @@ import {
 import { connections } from '@/data/photoAppData';
 
 // Import components
-import ProfileNavigation from '@/components/profile/ProfileNavigation';
 import UserProfileCard from '@/components/profile/UserProfileCard';
 import InviteDialog from '@/components/profile/InviteDialog';
 import HomeListingForm from '@/components/profile/HomeListingForm';
@@ -88,8 +86,6 @@ const Profile = () => {
   
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      <ProfileNavigation />
-      
       <main className="container mx-auto px-4 py-8">
         <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-12 md:gap-6">
           {/* Profile card on the left in desktop */}

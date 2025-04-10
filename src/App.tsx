@@ -27,6 +27,9 @@ import ProfileCircles from "./pages/ProfileCircles";
 import MyHome from "./pages/MyHome";
 import Bookings from "./pages/Bookings";
 import BookingDetails from "./pages/BookingDetails";
+import BookingAgreement from "./pages/BookingAgreement";
+import BookingListing from "./pages/BookingListing";
+import BookingPayment from "./pages/BookingPayment";
 import Notifications from "./pages/Notifications";
 import NavigationMenu from "./pages/NavigationMenu";
 import MarketAnalysis from "./pages/MarketAnalysis";
@@ -114,6 +117,9 @@ const AppContent = () => {
         <Route path="/my-home" element={<MyHome />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/booking/:id" element={<BookingDetails />} />
+        <Route path="/booking/:id/agreement" element={<BookingAgreement />} />
+        <Route path="/booking/:id/listing" element={<BookingListing />} />
+        <Route path="/booking/:id/payment" element={<BookingPayment />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/menu" element={<NavigationMenu />} />
         <Route path="/market-analysis" element={<MarketAnalysis />} />

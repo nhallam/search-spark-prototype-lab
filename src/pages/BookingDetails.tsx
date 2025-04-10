@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, FileText, HomeIcon, CreditCard } from 'lucide-react';
@@ -16,12 +15,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { 
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { toast } from "sonner";
 
 // Mock booking data - in a real app, this would come from an API based on the ID
@@ -350,135 +343,66 @@ const BookingDetails = () => {
             </div>
           </div>
           
-          {/* Additional Details Section */}
-          <div className="grid grid-cols-1 gap-6">
+          {/* Additional Details Section - Now clickable cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Sublet Agreement */}
-            <Card>
-              <CardHeader className="pb-2 flex flex-row items-center">
-                <FileText className="h-5 w-5 mr-2 text-gray-500" />
+            <Card 
+              className="cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => navigate(`/booking/${id}/agreement`)}
+            >
+              <CardHeader className="flex flex-row items-center pb-2">
+                <FileText className="h-5 w-5 mr-2 text-brand" />
                 <CardTitle className="text-lg">Sublet Agreement</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-gray-500">Agreement ID</p>
-                      <p className="font-medium">{booking.agreementDetails?.agreementId || 'Not available'}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Status</p>
-                      <p className="font-medium">
-                        {booking.agreementDetails?.signed ? (
-                          <span className="text-green-600">Signed on {formatDate(booking.agreementDetails.signedDate)}</span>
-                        ) : (
-                          <span className="text-amber-600">Pending signature</span>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm text-gray-500">Cancellation Policy</p>
-                    <p className="font-medium">{booking.agreementDetails?.cancellationPolicy || 'Standard policy applies'}</p>
-                  </div>
-                  
-                  {!booking.agreementDetails?.signed && booking.status !== 'cancelled' && (
-                    <Button className="mt-4">
-                      Sign Agreement
-                    </Button>
+                <p className="text-sm text-gray-500">View and manage your sublet agreement details</p>
+                <p className="text-sm font-medium mt-2">
+                  {booking.agreementDetails?.signed ? (
+                    <span className="text-green-600">Signed</span>
+                  ) : (
+                    <span className="text-amber-600">Pending signature</span>
                   )}
-                  
-                  {booking.agreementDetails?.signed && (
-                    <Button variant="outline" className="mt-4">
-                      View Agreement
-                    </Button>
-                  )}
-                </div>
+                </p>
               </CardContent>
             </Card>
             
             {/* Listing Details */}
-            <Card>
-              <CardHeader className="pb-2 flex flex-row items-center">
-                <HomeIcon className="h-5 w-5 mr-2 text-gray-500" />
+            <Card 
+              className="cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => navigate(`/booking/${id}/listing`)}
+            >
+              <CardHeader className="flex flex-row items-center pb-2">
+                <HomeIcon className="h-5 w-5 mr-2 text-brand" />
                 <CardTitle className="text-lg">Listing Details</CardTitle>
               </CardHeader>
               <CardContent>
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value="amenities">
-                    <AccordionTrigger>Amenities</AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {booking.amenities?.map((amenity, index) => (
-                          <li key={index} className="flex items-center">
-                            <span className="w-2 h-2 bg-brand rounded-full mr-2"></span>
-                            {amenity}
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="house-rules">
-                    <AccordionTrigger>House Rules</AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2">
-                        {booking.houseRules?.map((rule, index) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-brand rounded-full mr-2 mt-2"></span>
-                            {rule}
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
+                <p className="text-sm text-gray-500">View amenities, house rules, and property information</p>
+                <p className="text-sm font-medium mt-2">
+                  {booking.amenities?.length || 0} amenities • {booking.houseRules?.length || 0} house rules
+                </p>
               </CardContent>
             </Card>
             
             {/* Payment Details */}
-            <Card>
-              <CardHeader className="pb-2 flex flex-row items-center">
-                <CreditCard className="h-5 w-5 mr-2 text-gray-500" />
+            <Card 
+              className="cursor-pointer hover:shadow-md transition-shadow"
+              onClick={() => navigate(`/booking/${id}/payment`)}
+            >
+              <CardHeader className="flex flex-row items-center pb-2">
+                <CreditCard className="h-5 w-5 mr-2 text-brand" />
                 <CardTitle className="text-lg">Payment Details</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-gray-500">Payment Method</p>
-                      <p className="font-medium">{booking.paymentDetails?.paymentMethod || 'Not specified'}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Payment Status</p>
-                      <p className="font-medium">
-                        {booking.paymentDetails?.paymentStatus === 'Paid in full' ? (
-                          <span className="text-green-600">{booking.paymentDetails.paymentStatus}</span>
-                        ) : booking.paymentDetails?.paymentStatus === 'Refunded' ? (
-                          <span className="text-amber-600">{booking.paymentDetails.paymentStatus}</span>
-                        ) : (
-                          <span className="text-gray-600">{booking.paymentDetails?.paymentStatus || 'Unknown'}</span>
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <p className="text-sm text-gray-500">Security Deposit</p>
-                    <p className="font-medium">${booking.paymentDetails?.depositAmount || 'N/A'}</p>
-                  </div>
-                  
-                  {booking.status === 'pending' && (
-                    <Button className="mt-4">
-                      Complete Payment
-                    </Button>
+                <p className="text-sm text-gray-500">View payment history, receipts and manage payment methods</p>
+                <p className="text-sm font-medium mt-2">
+                  {booking.paymentDetails?.paymentStatus === 'Paid in full' ? (
+                    <span className="text-green-600">Paid in full</span>
+                  ) : booking.paymentDetails?.paymentStatus === 'Refunded' ? (
+                    <span className="text-amber-600">Refunded</span>
+                  ) : (
+                    <span className="text-gray-600">Payment pending</span>
                   )}
-                  
-                  {booking.status === 'confirmed' && (
-                    <Button variant="outline" className="mt-4">
-                      Download Receipt
-                    </Button>
-                  )}
-                </div>
+                </p>
               </CardContent>
             </Card>
           </div>

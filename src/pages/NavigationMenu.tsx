@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Home, CalendarDays, Bell, UserCircle, Sparkles, Heart, Settings, HelpCircle, LogOut, Star } from 'lucide-react';
+import { Home, CalendarDays, Bell, UserCircle, Sparkles, Heart, Settings, HelpCircle, LogOut, Star, MessageCircle } from 'lucide-react';
 
 const NavigationMenu: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ const NavigationMenu: React.FC = () => {
   const menuItems = [
     { name: 'Home', icon: Home, path: '/' },
     { name: 'Bookings', icon: CalendarDays, path: '/bookings' },
+    { name: 'Messages', icon: MessageCircle, path: '/messages' },
     { name: 'Notifications', icon: Bell, path: '/notifications' },
     { name: 'Profile', icon: UserCircle, path: '/profile' },
     { name: 'My Home', icon: Sparkles, path: '/my-home' },

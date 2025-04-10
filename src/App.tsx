@@ -34,6 +34,7 @@ import Notifications from "./pages/Notifications";
 import NavigationMenu from "./pages/NavigationMenu";
 import MarketAnalysis from "./pages/MarketAnalysis";
 import RatingExperiments from "./pages/RatingExperiments";
+import Messages from "./pages/Messages";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
 
@@ -92,6 +93,7 @@ const AppContent = () => {
     if (path === '/notifications') return 'notifications';
     if (path === '/my-home') return 'my-home';
     if (path === '/profile') return 'profile';
+    if (path === '/messages') return 'messages';
     
     return undefined;
   };
@@ -121,6 +123,7 @@ const AppContent = () => {
         <Route path="/booking/:id/listing" element={<BookingListing />} />
         <Route path="/booking/:id/payment" element={<BookingPayment />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/messages" element={<Messages />} />
         <Route path="/menu" element={<NavigationMenu />} />
         <Route path="/market-analysis" element={<MarketAnalysis />} />
         <Route path="/rating-experiments" element={<RatingExperiments />} />

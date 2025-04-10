@@ -1,46 +1,24 @@
 
 import React, { useState } from 'react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
-import { LogOut, Calendar, Copy, Check, ChevronRight, Building, Menu, BarChart2, Users, List, Mail, Share2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from 'sonner';
-import EarningsHistory from '@/components/profile/EarningsHistory';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import HomeListingForm from '@/components/profile/HomeListingForm';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-
 import { generateMockData } from '@/components/profile/EarningsHistory';
 import { connections } from '@/data/photoAppData';
 
+// Import the refactored components
+import ProfileHeader from '@/components/profile/ProfileHeader';
+import ProfileNavigation from '@/components/profile/ProfileNavigation';
+import UserProfileCard from '@/components/profile/UserProfileCard';
+import KikiCircles from '@/components/profile/KikiCircles';
+import EarningsHistory from '@/components/profile/EarningsHistory';
+import FrequentlyAskedQuestions from '@/components/profile/FrequentlyAskedQuestions';
+import MarketAnalysis from '@/components/profile/MarketAnalysis';
+import InviteDialog from '@/components/profile/InviteDialog';
+import HomeListingForm from '@/components/profile/HomeListingForm';
+
 const Profile = () => {
-  const [copied, setCopied] = useState(false);
   const [isListingDialogOpen, setIsListingDialogOpen] = useState(false);
   const [isInviteDialogOpen, setIsInviteDialogOpen] = useState(false);
-  const [inviteMethod, setInviteMethod] = useState<'email' | 'link'>('email');
-  const [emailInput, setEmailInput] = useState('');
-  const [inviteSuccess, setInviteSuccess] = useState(false);
   
   const allTimeEarningsData = generateMockData(24);
   const totalEarnings = allTimeEarningsData.reduce((sum, item) => sum + item.earnings, 0);
@@ -54,338 +32,39 @@ const Profile = () => {
     totalEarnings: totalEarnings
   };
   
-  const sections = [
-    { id: 'kiki-circles', label: 'Kiki Circles', icon: <Users className="h-4 w-4" /> },
-    { id: 'earnings', label: 'Rent Saved', icon: <BarChart2 className="h-4 w-4" /> },
-    { id: 'list-home', label: 'List Your Home', icon: <Building className="h-4 w-4" /> },
-    { id: 'faq', label: 'FAQ', icon: <List className="h-4 w-4" /> },
-    { id: 'market', label: 'Market Analysis', icon: <BarChart2 className="h-4 w-4" /> }
-  ];
-  
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  
-  const faqs = [
-    {
-      question: 'How do I edit my profile?',
-      answer: 'You can edit your profile by clicking on the "Edit Profile" button on this page. From there, you can update your name, email, and profile picture.'
-    },
-    {
-      question: 'What is my invite code for?',
-      answer: 'Your unique invite code allows friends to join Kiki with special benefits. Share it with friends and both of you will receive booking credits when they sign up.'
-    },
-    {
-      question: 'How do I manage my bookings?',
-      answer: 'You can view and manage all your bookings in the "Booking Requests" section of your profile. Click on any booking to see details or make changes.'
-    },
-    {
-      question: 'Can I change my payment method?',
-      answer: 'Yes, you can update your payment methods by visiting the "Payment Methods" section in your account settings.'
-    }
-  ];
-  
-  const handleCopyInviteCode = () => {
-    navigator.clipboard.writeText(userData.inviteCode);
-    setCopied(true);
-    toast.success('Invite code copied to clipboard');
-    setTimeout(() => setCopied(false), 2000);
-  };
-  
-  const handleLogout = () => {
-    toast.info('Logging out...');
-    window.location.href = '/';
-  };
-  
-  const formatCurrency = (value: number) => {
-    return `$${value.toLocaleString()}`;
-  };
-  
   const openListingDialog = () => {
     setIsListingDialogOpen(true);
   };
   
   const openInviteDialog = () => {
     setIsInviteDialogOpen(true);
-    setInviteSuccess(false);
-  };
-  
-  const handleSendInvite = () => {
-    if (inviteMethod === 'email' && emailInput) {
-      // Simulate sending email invitation
-      toast.success(`Invitation sent to ${emailInput}`);
-      setInviteSuccess(true);
-      setEmailInput('');
-    } else if (inviteMethod === 'link') {
-      // Copy invite link to clipboard
-      const inviteLink = `https://kiki.com/invite?code=${userData.inviteCode}`;
-      navigator.clipboard.writeText(inviteLink);
-      toast.success('Invite link copied to clipboard');
-      setInviteSuccess(true);
-    }
   };
   
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      <header className="bg-white text-brand shadow-sm py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-brand">My Profile</h1>
-            <div className="flex items-center gap-2">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="rounded-full w-10 h-10 p-0">
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuItem asChild>
-                    <Link to="/">Home</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/photos">Photos</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/bookings">My Bookings</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/notifications">Notifications</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/market-analysis">Market Analysis</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              <Button variant="outline" onClick={handleLogout} className="border-brand text-brand hover:bg-brand/10">
-                <LogOut size={16} className="mr-2" />
-                Log Out
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-      
-      <div className="bg-white border-b py-2 sticky top-0 z-10">
-        <div className="container mx-auto px-4">
-          <NavigationMenu>
-            <NavigationMenuList className="flex-wrap justify-start">
-              {sections.map((section) => (
-                <NavigationMenuItem key={section.id}>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-sm flex items-center gap-1"
-                    onClick={() => scrollToSection(section.id)}
-                  >
-                    {section.icon}
-                    {section.label}
-                  </Button>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
-      </div>
+      <ProfileHeader />
+      <ProfileNavigation />
       
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="md:col-span-1">
-            <CardHeader className="flex flex-col items-center">
-              <Avatar className="h-24 w-24 mb-4">
-                <AvatarImage src={userData.avatar} alt={userData.name} />
-                <AvatarFallback>{userData.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-              </Avatar>
-              <CardTitle className="text-xl">{userData.name}</CardTitle>
-              <CardDescription>{userData.email}</CardDescription>
-            </CardHeader>
-            <CardContent className="text-center">
-              <div className="bg-brand/5 p-4 rounded-lg mb-4 border border-brand/10">
-                <p className="text-sm text-muted-foreground mb-1">Your Earnings Rank</p>
-                <p className="text-lg font-bold text-brand mb-1">#{userData.earningRank} Top Earner</p>
-                <div className="flex justify-center items-center gap-1.5">
-                  <span className="text-sm text-muted-foreground">Total Rent Saved:</span>
-                  <span className="text-sm font-semibold">{formatCurrency(userData.totalEarnings)}</span>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                <p className="text-sm text-muted-foreground mb-2">Your Invite Code</p>
-                <div className="flex justify-center items-center space-x-2">
-                  <span className="text-xl font-mono font-bold">{userData.inviteCode}</span>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={handleCopyInviteCode}
-                    className="h-8 w-8 p-0"
-                  >
-                    {copied ? <Check size={16} /> : <Copy size={16} />}
-                  </Button>
-                </div>
-              </div>
-              <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10 mb-4">
-                Edit Profile
-              </Button>
-              
-              <Card className="border border-brand/10">
-                <CardHeader>
-                  <CardTitle className="flex justify-between items-center text-base">
-                    <span>My Home</span>
-                    <Building size={18} />
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-3">
-                  <p className="text-sm text-muted-foreground mb-3">
-                    List your NYC apartment on Kiki and earn while you travel.
-                  </p>
-                  <ul className="space-y-2 mb-3 text-left">
-                    <li className="flex items-start gap-2">
-                      <div className="mt-0.5 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-xs">Earn up to $4,500 per month</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="mt-0.5 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-xs">24/7 customer support</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="mt-0.5 h-4 w-4 rounded-full bg-brand flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-xs">$1M host protection included</span>
-                    </li>
-                  </ul>
-                  <Button 
-                    className="w-full bg-brand hover:bg-brand/90 text-sm" 
-                    size="sm"
-                    onClick={openListingDialog}
-                  >
-                    List My Home
-                  </Button>
-                </CardContent>
-              </Card>
-            </CardContent>
-          </Card>
+          <UserProfileCard 
+            userData={userData}
+            openListingDialog={openListingDialog}
+          />
           
           <div className="md:col-span-2 space-y-6">
-            <Card className="bg-white shadow-sm border-brand/10" id="kiki-circles">
-              <CardHeader>
-                <CardTitle className="flex justify-between items-center">
-                  <span className="flex items-center gap-2">
-                    <Users size={20} />
-                    Kiki Circles
-                  </span>
-                </CardTitle>
-                <CardDescription>Your connections on Kiki</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {connections.map(connection => (
-                    <div key={connection.id} className="flex flex-col items-center text-center">
-                      <Avatar className="w-16 h-16 mb-2">
-                        <AvatarImage src={connection.avatar} alt={connection.username} />
-                        <AvatarFallback>{connection.username.substring(0, 2).toUpperCase()}</AvatarFallback>
-                      </Avatar>
-                      <p className="font-medium text-sm">{connection.username}</p>
-                      <p className="text-xs text-gray-500">{connection.relationship}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" size="sm" className="w-full border-brand text-brand hover:bg-brand/10" onClick={openInviteDialog}>
-                  Invite Friends
-                </Button>
-              </CardFooter>
-            </Card>
+            <KikiCircles 
+              connections={connections}
+              openInviteDialog={openInviteDialog}
+            />
             
             <div id="earnings">
               <EarningsHistory />
             </div>
             
-            <Card id="faq">
-              <CardHeader>
-                <CardTitle>Frequently Asked Questions</CardTitle>
-                <CardDescription>Get answers to common questions</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Accordion type="single" collapsible className="w-full">
-                  {faqs.map((faq, index) => (
-                    <AccordionItem key={index} value={`item-${index}`}>
-                      <AccordionTrigger>{faq.question}</AccordionTrigger>
-                      <AccordionContent>{faq.answer}</AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </CardContent>
-              <CardFooter>
-                <Button variant="outline" className="w-full border-brand text-brand hover:bg-brand/10">
-                  Contact Support
-                </Button>
-              </CardFooter>
-            </Card>
+            <FrequentlyAskedQuestions />
             
-            <div id="market" className="overflow-hidden rounded-xl shadow-lg border border-primary/20">
-              <div className="bg-gradient-to-r from-primary to-brand px-6 py-4">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                    <BarChart2 size={20} className="text-primary-foreground/80" />
-                    NYC Market Analysis
-                  </h3>
-                </div>
-                <p className="text-primary-foreground/80 text-sm mt-1">View seasonal trends to optimize your listing</p>
-              </div>
-              
-              <div className="p-6 bg-white">
-                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20 mb-4">
-                  <h3 className="font-medium text-lg mb-2 text-foreground">Make data-driven decisions</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Understand how NYC&apos;s rental market fluctuates throughout the year. Optimize your pricing,
-                    availability, and marketing based on seasonal demand patterns.
-                  </p>
-                  <ul className="space-y-2 mb-4">
-                    <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-primary flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm text-foreground">Analyze supply and demand across all seasons</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-primary flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm text-foreground">Track average pricing by month and season</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="mt-1 h-4 w-4 rounded-full bg-primary flex items-center justify-center text-white text-xs">✓</div>
-                      <span className="text-sm text-foreground">Get strategic insights to maximize your revenue</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="grid grid-cols-4 gap-2 mb-4">
-                  <div className="bg-blue-100 p-2 rounded text-center">
-                    <p className="text-xs text-blue-600 font-medium">Winter</p>
-                    <p className="text-lg font-bold text-blue-800">$195</p>
-                    <p className="text-xs text-blue-500">Avg. price</p>
-                  </div>
-                  <div className="bg-green-100 p-2 rounded text-center">
-                    <p className="text-xs text-green-600 font-medium">Spring</p>
-                    <p className="text-lg font-bold text-green-800">$230</p>
-                    <p className="text-xs text-green-500">Avg. price</p>
-                  </div>
-                  <div className="bg-amber-100 p-2 rounded text-center">
-                    <p className="text-xs text-amber-600 font-medium">Summer</p>
-                    <p className="text-lg font-bold text-amber-800">$300</p>
-                    <p className="text-xs text-amber-500">Avg. price</p>
-                  </div>
-                  <div className="bg-primary/10 p-2 rounded text-center">
-                    <p className="text-xs text-primary font-medium">Fall</p>
-                    <p className="text-lg font-bold text-primary-foreground">$240</p>
-                    <p className="text-xs text-primary/70">Avg. price</p>
-                  </div>
-                </div>
-                
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-                  <Link to="/market-analysis">View Full Market Analysis</Link>
-                </Button>
-              </div>
-            </div>
+            <MarketAnalysis />
           </div>
         </div>
       </main>
@@ -401,141 +80,12 @@ const Profile = () => {
           <HomeListingForm onClose={() => setIsListingDialogOpen(false)} />
         </DialogContent>
       </Dialog>
-      
-      <Dialog open={isInviteDialogOpen} onOpenChange={setIsInviteDialogOpen}>
-        <DialogContent className="sm:max-w-[500px]">
-          <DialogHeader>
-            <DialogTitle>Invite Friends to Kiki</DialogTitle>
-            <DialogDescription>
-              Share Kiki with your friends and you&apos;ll both receive $30 in booking credits.
-            </DialogDescription>
-          </DialogHeader>
-          
-          {!inviteSuccess ? (
-            <>
-              <Tabs defaultValue="email" className="w-full" onValueChange={(value) => setInviteMethod(value as 'email' | 'link')}>
-                <TabsList className="grid grid-cols-2 w-full">
-                  <TabsTrigger value="email" className="flex items-center gap-2">
-                    <Mail size={16} />
-                    Email
-                  </TabsTrigger>
-                  <TabsTrigger value="link" className="flex items-center gap-2">
-                    <Share2 size={16} />
-                    Share Link
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="email" className="mt-4 space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Friend&apos;s Email</Label>
-                    <Input 
-                      id="email" 
-                      placeholder="friend@example.com" 
-                      type="email"
-                      value={emailInput}
-                      onChange={(e) => setEmailInput(e.target.value)}
-                    />
-                  </div>
-                  <div className="bg-brand/5 p-3 rounded-lg border border-brand/10 text-sm">
-                    <p>We&apos;ll send them an invitation with your personal invite code.</p>
-                  </div>
-                </TabsContent>
-                <TabsContent value="link" className="mt-4 space-y-4">
-                  <div className="space-y-2">
-                    <Label>Your Invite Link</Label>
-                    <div className="flex items-center gap-2">
-                      <Input 
-                        value={`https://kiki.com/invite?code=${userData.inviteCode}`}
-                        readOnly
-                        className="font-mono text-sm"
-                      />
-                      <Button variant="outline" size="icon" onClick={() => {
-                        navigator.clipboard.writeText(`https://kiki.com/invite?code=${userData.inviteCode}`);
-                        toast.success('Invite link copied to clipboard');
-                      }}>
-                        <Copy size={16} />
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="bg-brand/5 p-3 rounded-lg border border-brand/10 text-sm">
-                    <p>Share this link via message, social media, or email.</p>
-                  </div>
-                </TabsContent>
-              </Tabs>
-              
-              <div className="space-y-3 my-4">
-                <h3 className="font-medium text-lg">How it works</h3>
-                <ol className="space-y-3">
-                  <li className="flex gap-3">
-                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center font-medium">1</div>
-                    <div className="flex-1">
-                      <p className="font-medium">{inviteMethod === 'email' ? 'Send an invite email' : 'Share your unique link'}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {inviteMethod === 'email' 
-                          ? "We'll send your friend an email with your invitation." 
-                          : 'Share your invite link with friends via text, email, or social media.'}
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex gap-3">
-                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center font-medium">2</div>
-                    <div className="flex-1">
-                      <p className="font-medium">Your friend creates an account</p>
-                      <p className="text-sm text-muted-foreground">When they sign up using your invite code, they&apos;ll get $30 in credits.</p>
-                    </div>
-                  </li>
-                  <li className="flex gap-3">
-                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-brand text-white flex items-center justify-center font-medium">3</div>
-                    <div className="flex-1">
-                      <p className="font-medium">You earn $30 in credits</p>
-                      <p className="text-sm text-muted-foreground">Once they complete their first booking, you&apos;ll receive $30 in Kiki credits.</p>
-                    </div>
-                  </li>
-                </ol>
-              </div>
-            </>
-          ) : (
-            <div className="py-8 text-center space-y-4">
-              <div className="mx-auto bg-green-100 rounded-full p-3 w-16 h-16 flex items-center justify-center mb-4">
-                <Check size={32} className="text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold">Invitation Sent!</h3>
-              <p className="text-muted-foreground">
-                {inviteMethod === 'email' 
-                  ? "Your invitation has been sent. We'll notify you when your friend joins."
-                  : 'Your invite link has been copied to your clipboard. Share it with your friends!'}
-              </p>
-              <div className="bg-brand/5 p-4 rounded-lg border border-brand/10 mt-6">
-                <p className="font-medium">Keep inviting and earn more</p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  You can invite up to 10 friends per month and earn up to $300 in credits.
-                </p>
-              </div>
-            </div>
-          )}
-          
-          <DialogFooter>
-            {!inviteSuccess ? (
-              <>
-                <Button variant="outline" onClick={() => setIsInviteDialogOpen(false)}>Cancel</Button>
-                <Button 
-                  className="bg-brand hover:bg-brand/90" 
-                  onClick={handleSendInvite}
-                  disabled={inviteMethod === 'email' && !emailInput}
-                >
-                  {inviteMethod === 'email' ? 'Send Invitation' : 'Copy & Share'}
-                </Button>
-              </>
-            ) : (
-              <Button 
-                className="bg-brand hover:bg-brand/90 w-full" 
-                onClick={() => setIsInviteDialogOpen(false)}
-              >
-                Done
-              </Button>
-            )}
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+
+      <InviteDialog 
+        isOpen={isInviteDialogOpen}
+        onOpenChange={setIsInviteDialogOpen}
+        inviteCode={userData.inviteCode}
+      />
     </div>
   );
 };

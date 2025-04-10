@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Bell, Calendar, Compass, UserRound, Home, Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Badge } from '@/components/ui/badge';
 
 interface TabNavigationProps {
   activeTab?: 'explore' | 'bookings' | 'notifications' | 'profile' | 'my-home';
@@ -51,12 +52,21 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         <Link 
           to="/my-home" 
           className={cn(
-            "flex flex-col items-center justify-center py-2",
+            "flex flex-col items-center justify-center py-2 relative",
             isMobile ? "w-1/5" : "w-16",
             activeTab === 'my-home' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
-          <Home size={20} />
+          <div className="relative">
+            <Home size={20} />
+            <Badge 
+              variant="secondary" 
+              size="sm" 
+              className="absolute -top-2 -right-4 bg-red-500 text-white border-none px-1 py-0"
+            >
+              New
+            </Badge>
+          </div>
           <span className="text-xs mt-1">My Home</span>
         </Link>
         

@@ -38,7 +38,7 @@ const AppHeader = () => {
               <Badge 
                 variant="secondary" 
                 size="sm" 
-                className="absolute -top-1 -right-1 bg-red-500 text-white border-none px-1.5 py-0.5 min-w-[18px] min-h-[18px] flex items-center justify-center"
+                className="absolute -top-1 -right-1 bg-red-500 text-white border-none w-[20px] h-[20px] p-0 rounded-full flex items-center justify-center text-xs"
               >
                 3
               </Badge>

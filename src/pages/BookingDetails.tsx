@@ -345,20 +345,32 @@ const BookingDetails = () => {
                     </Badge>
                   </div>
                 </div>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-xl md:text-2xl">{booking.property}</CardTitle>
-                  <p className="text-gray-500">{booking.address}</p>
+                <CardHeader className="pb-2 bg-gray-50 border-b">
+                  <div className="flex flex-col space-y-1 mb-2">
+                    <span className="text-brand text-sm font-medium">You are staying at {booking.host}'s place!</span>
+                    <CardTitle className="text-xl md:text-2xl">{booking.property}</CardTitle>
+                    <p className="text-gray-500">{booking.address}</p>
+                  </div>
+                  <div className="flex items-center justify-between mt-2 bg-brand/5 p-3 rounded-md">
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="h-5 w-5 text-brand" />
+                      <div>
+                        <span className="block font-semibold">{formatDate(booking.checkIn)}</span>
+                        <span className="text-xs text-gray-500">Check-in</span>
+                      </div>
+                    </div>
+                    <div className="h-8 w-px bg-gray-200"></div>
+                    <div className="flex items-center space-x-2">
+                      <div className="text-right">
+                        <span className="block font-semibold">{formatDate(booking.checkOut)}</span>
+                        <span className="text-xs text-gray-500">Check-out</span>
+                      </div>
+                      <Calendar className="h-5 w-5 text-brand" />
+                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <div>
-                      <p className="text-sm text-gray-500">Check-in</p>
-                      <p className="font-medium">{formatDate(booking.checkIn)}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">Check-out</p>
-                      <p className="font-medium">{formatDate(booking.checkOut)}</p>
-                    </div>
                     <div>
                       <p className="text-sm text-gray-500">Guests</p>
                       <p className="font-medium">{booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}</p>

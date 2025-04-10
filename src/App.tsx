@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+
+// Import pages
 import Index from "./pages/Index";
 import PropertyDetails from "./pages/PropertyDetails";
 import NotFound from "./pages/NotFound";
@@ -15,6 +18,12 @@ import SignUp from "./pages/SignUp";
 import Welcome from "./pages/Welcome";
 import PhotoApp from "./pages/PhotoApp";
 import Profile from "./pages/Profile";
+import ProfileBankDetails from "./pages/ProfileBankDetails";
+import ProfileSavedListings from "./pages/ProfileSavedListings";
+import ProfileFaqs from "./pages/ProfileFaqs";
+import ProfilePricingAdvice from "./pages/ProfilePricingAdvice";
+import ProfileEarnings from "./pages/ProfileEarnings";
+import ProfileCircles from "./pages/ProfileCircles";
 import MyHome from "./pages/MyHome";
 import Bookings from "./pages/Bookings";
 import BookingDetails from "./pages/BookingDetails";
@@ -96,6 +105,12 @@ const AppContent = () => {
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/photos" element={<PhotoApp />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/bank-details" element={<ProfileBankDetails />} />
+        <Route path="/profile/saved-listings" element={<ProfileSavedListings />} />
+        <Route path="/profile/faqs" element={<ProfileFaqs />} />
+        <Route path="/profile/pricing-advice" element={<ProfilePricingAdvice />} />
+        <Route path="/profile/earnings" element={<ProfileEarnings />} />
+        <Route path="/profile/circles" element={<ProfileCircles />} />
         <Route path="/my-home" element={<MyHome />} />
         <Route path="/bookings" element={<Bookings />} />
         <Route path="/booking/:id" element={<BookingDetails />} />

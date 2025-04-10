@@ -335,20 +335,6 @@ const Notifications = () => {
   
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      <header className="bg-white text-brand shadow-sm py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-brand flex items-center">
-              <Bell className="mr-2 h-5 w-5" />
-              Notifications
-              {unreadCount > 0 && (
-                <Badge className="ml-2 bg-primary text-white">{unreadCount} new</Badge>
-              )}
-            </h1>
-          </div>
-        </div>
-      </header>
-      
       <main className="container mx-auto px-4 py-8">
         <Card>
           <CardHeader>

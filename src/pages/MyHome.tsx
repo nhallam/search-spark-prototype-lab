@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { CalendarIcon, PlusCircle, Home as HomeIcon, Check } from "lucide-react";
+import { CalendarIcon, PlusCircle, Home as HomeIcon, Check, Image } from "lucide-react";
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -26,6 +27,7 @@ interface HomeListing {
   address: string;
   price: number;
   image: string;
+  photos: string[];
   listedDate: Date;
   availabilityDates: AvailabilityDate[];
 }
@@ -46,6 +48,7 @@ const MyHome = () => {
       address: '123 Broadway, New York, NY 10001',
       price: 250,
       image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+      photos: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg'],
       listedDate: new Date(2024, 2, 15), // March 15, 2024
       availabilityDates: [
         {
@@ -99,7 +102,8 @@ const MyHome = () => {
       address: `${listingData.street}, ${listingData.city}, ${listingData.state} ${listingData.zipCode}`,
       price: Number(listingData.price),
       image: 'https://images.unsplash.com/photo-1496307653780-42ee777d4833?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      listedDate: new Date(), // Add the current date to fix the build error
+      photos: [],
+      listedDate: new Date(),
       availabilityDates: []
     };
     
@@ -164,12 +168,16 @@ const MyHome = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-4">
-                  <div className="aspect-video w-full mb-4 bg-gray-100 rounded-lg overflow-hidden">
+                  <div className="aspect-video w-full mb-4 bg-gray-100 rounded-lg overflow-hidden relative">
                     <img 
                       src={listing.image} 
                       alt={listing.title}
                       className="w-full h-full object-cover"
                     />
+                    <Badge className="absolute bottom-2 right-2 bg-black/70 text-white flex items-center gap-1">
+                      <Image size={14} />
+                      {listing.photos.length} {listing.photos.length === 1 ? 'photo' : 'photos'}
+                    </Badge>
                   </div>
                   
                   <p className="text-muted-foreground mb-4">{listing.description}</p>

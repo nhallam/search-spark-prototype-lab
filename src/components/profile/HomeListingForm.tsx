@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { DialogFooter } from '@/components/ui/dialog';
 import { toast } from 'sonner';
-import { Check } from 'lucide-react';
+import { Check, X } from 'lucide-react';
 
 type Step = 'basicInfo' | 'photos' | 'amenities' | 'pricing' | 'confirmation';
 
@@ -16,6 +15,7 @@ interface HomeListingFormProps {
 
 const HomeListingForm: React.FC<HomeListingFormProps> = ({ onClose }) => {
   const [currentStep, setCurrentStep] = useState<Step>('basicInfo');
+  const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
   const [formData, setFormData] = useState({
     address: '',
     neighborhood: '',
@@ -83,6 +83,24 @@ const HomeListingForm: React.FC<HomeListingFormProps> = ({ onClose }) => {
     // In a real app, this would save to a database
     toast.success('Your home has been listed successfully!');
     onClose();
+  };
+
+  const handlePhotoUpload = () => {
+    // Simulate adding a photo
+    if (uploadedPhotos.length < 10) {
+      const newPhoto = `photo-${uploadedPhotos.length + 1}`;
+      setUploadedPhotos([...uploadedPhotos, newPhoto]);
+      toast.success('Photo uploaded successfully');
+    } else {
+      toast.error('Maximum 10 photos allowed');
+    }
+  };
+
+  const handleRemovePhoto = (index: number) => {
+    const updatedPhotos = [...uploadedPhotos];
+    updatedPhotos.splice(index, 1);
+    setUploadedPhotos(updatedPhotos);
+    toast.success('Photo removed');
   };
 
   const renderStepIndicator = () => {
@@ -190,27 +208,58 @@ const HomeListingForm: React.FC<HomeListingFormProps> = ({ onClose }) => {
         Upload at least 5 photos of your space.
       </p>
       
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="font-medium">Photos ({uploadedPhotos.length}/10)</h3>
+        <div className="text-sm text-muted-foreground">
+          {uploadedPhotos.length === 0 ? (
+            <span className="text-amber-500">No photos uploaded yet</span>
+          ) : uploadedPhotos.length < 5 ? (
+            <span className="text-amber-500">{5 - uploadedPhotos.length} more recommended</span>
+          ) : (
+            <span className="text-green-500">✓ Minimum photos uploaded</span>
+          )}
+        </div>
+      </div>
+      
       <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
         <div className="flex flex-col items-center">
-          <Button variant="outline" className="mb-4">Upload Photos</Button>
+          <Button 
+            variant="outline" 
+            className="mb-4" 
+            onClick={handlePhotoUpload}
+            disabled={uploadedPhotos.length >= 10}
+          >
+            Upload Photos
+          </Button>
           <span className="text-sm text-muted-foreground">
             JPG, PNG or GIF, up to 5MB each
           </span>
         </div>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-        {/* This would display uploaded photos in a real implementation */}
-        <div className="aspect-square bg-gray-100 rounded flex items-center justify-center">
-          <span className="text-sm text-gray-400">Photo 1</span>
+      {uploadedPhotos.length > 0 && (
+        <div className="space-y-2">
+          <div className="flex justify-between items-center">
+            <h4 className="text-sm font-medium">Uploaded Photos</h4>
+            <span className="text-xs text-muted-foreground">
+              {uploadedPhotos.length}/10 photos
+            </span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2">
+            {uploadedPhotos.map((photo, index) => (
+              <div key={photo} className="relative aspect-square bg-gray-100 rounded-md flex items-center justify-center group">
+                <span className="text-sm text-gray-400">Photo {index + 1}</span>
+                <button 
+                  className="absolute top-1 right-1 bg-white rounded-full p-1 shadow opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={() => handleRemovePhoto(index)}
+                >
+                  <X size={14} className="text-red-500" />
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="aspect-square bg-gray-100 rounded flex items-center justify-center">
-          <span className="text-sm text-gray-400">Photo 2</span>
-        </div>
-        <div className="aspect-square bg-gray-100 rounded flex items-center justify-center">
-          <span className="text-sm text-gray-400">Photo 3</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 
@@ -302,6 +351,11 @@ const HomeListingForm: React.FC<HomeListingFormProps> = ({ onClose }) => {
         <div>
           <h4 className="text-sm font-medium text-gray-500">Property</h4>
           <p>{formData.propertyType} · {formData.bedrooms} bed · {formData.bathrooms} bath</p>
+        </div>
+        
+        <div>
+          <h4 className="text-sm font-medium text-gray-500">Photos</h4>
+          <p>{uploadedPhotos.length} {uploadedPhotos.length === 1 ? 'photo' : 'photos'} uploaded</p>
         </div>
         
         {formData.amenities.length > 0 && (

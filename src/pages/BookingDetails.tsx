@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, FileText, HomeIcon, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +16,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { 
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { toast } from "sonner";
 
 // Mock booking data - in a real app, this would come from an API based on the ID
@@ -32,6 +39,24 @@ const mockBookings = [
     host: 'Jane Smith',
     hostImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80',
     description: 'Beautiful loft apartment with panoramic views of the Manhattan skyline. Features high ceilings, modern decor, and a fully equipped kitchen.',
+    amenities: ['WiFi', 'Kitchen', 'Washer/Dryer', 'Air Conditioning', 'Elevator'],
+    houseRules: ['No smoking', 'No pets', 'No parties or events', 'Check-in after 3 PM'],
+    paymentDetails: {
+      baseRate: 1250,
+      cleaningFee: 95,
+      serviceFee: 85,
+      taxRate: 0.08,
+      depositAmount: 500,
+      paymentMethod: 'Credit Card ending in 4242',
+      paymentStatus: 'Paid in full'
+    },
+    agreementDetails: {
+      agreementId: 'SA-2025-1234',
+      signed: true,
+      signedDate: '2025-04-01',
+      cancellationPolicy: 'Moderate: Full refund 5 days prior to arrival',
+      termsAccepted: true
+    }
   },
   { 
     id: "2", 
@@ -46,6 +71,24 @@ const mockBookings = [
     host: 'Michael Johnson',
     hostImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80',
     description: 'Charming Brooklyn Heights apartment close to the Promenade with beautiful views of Manhattan. Features hardwood floors, exposed brick, and modern amenities.',
+    amenities: ['WiFi', 'Kitchen', 'TV', 'Air Conditioning', 'Heating'],
+    houseRules: ['No smoking', 'Pets allowed', 'No parties or events', 'Check-in after 2 PM'],
+    paymentDetails: {
+      baseRate: 980,
+      cleaningFee: 75,
+      serviceFee: 70,
+      taxRate: 0.08,
+      depositAmount: 400,
+      paymentMethod: 'Pending',
+      paymentStatus: 'Awaiting payment'
+    },
+    agreementDetails: {
+      agreementId: 'SA-2025-2345',
+      signed: false,
+      signedDate: null,
+      cancellationPolicy: 'Flexible: Full refund 1 day prior to arrival',
+      termsAccepted: false
+    }
   },
   { 
     id: "3", 
@@ -60,6 +103,24 @@ const mockBookings = [
     host: 'Sarah Williams',
     hostImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1061&q=80',
     description: 'Modern studio apartment in the heart of Chelsea. Walking distance to the High Line, Chelsea Market, and many art galleries.',
+    amenities: ['WiFi', 'Kitchen', 'TV', 'Air Conditioning'],
+    houseRules: ['No smoking', 'No pets', 'No parties or events'],
+    paymentDetails: {
+      baseRate: 850,
+      cleaningFee: 65,
+      serviceFee: 60,
+      taxRate: 0.08,
+      depositAmount: 300,
+      paymentMethod: 'Credit Card ending in 5678',
+      paymentStatus: 'Refunded'
+    },
+    agreementDetails: {
+      agreementId: 'SA-2025-3456',
+      signed: true,
+      signedDate: '2025-05-15',
+      cancellationPolicy: 'Strict: 50% refund up until 1 week prior to arrival',
+      termsAccepted: true
+    }
   },
 ];
 
@@ -124,6 +185,8 @@ const BookingDetails = () => {
   
   const nights = getTotalNights(booking.checkIn, booking.checkOut);
   const totalPrice = booking.price * nights;
+  const taxes = Math.round((totalPrice + 95 + 85) * (booking.paymentDetails?.taxRate || 0.08));
+  const grandTotal = totalPrice + 95 + 85 + taxes;
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -141,142 +204,281 @@ const BookingDetails = () => {
       </header>
 
       <main className="container mx-auto px-4 py-6">
-        <div className="flex flex-col md:flex-row gap-6">
-          {/* Left column - Property image and details */}
-          <div className="w-full md:w-2/3">
-            <Card>
-              <div className="relative w-full h-64 rounded-t-lg overflow-hidden">
-                <img 
-                  src={booking.image} 
-                  alt={booking.property}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 right-4">
-                  <Badge 
-                    variant="outline" 
-                    className={`${getStatusColor(booking.status)} bg-opacity-20 border-opacity-20 border-current px-3 py-1 text-white capitalize`}
-                  >
-                    {booking.status}
-                  </Badge>
+        <div className="flex flex-col gap-6">
+          {/* Main booking card - Property image and details */}
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="w-full md:w-2/3">
+              <Card>
+                <div className="relative w-full h-64 rounded-t-lg overflow-hidden">
+                  <img 
+                    src={booking.image} 
+                    alt={booking.property}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <Badge 
+                      variant="outline" 
+                      className={`${getStatusColor(booking.status)} bg-opacity-20 border-opacity-20 border-current px-3 py-1 text-white capitalize`}
+                    >
+                      {booking.status}
+                    </Badge>
+                  </div>
                 </div>
-              </div>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xl md:text-2xl">{booking.property}</CardTitle>
-                <p className="text-gray-500">{booking.address}</p>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-xl md:text-2xl">{booking.property}</CardTitle>
+                  <p className="text-gray-500">{booking.address}</p>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                      <p className="text-sm text-gray-500">Check-in</p>
+                      <p className="font-medium">{formatDate(booking.checkIn)}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Check-out</p>
+                      <p className="font-medium">{formatDate(booking.checkOut)}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Guests</p>
+                      <p className="font-medium">{booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Length of stay</p>
+                      <p className="font-medium">{nights} {nights === 1 ? 'night' : 'nights'}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <h3 className="font-medium mb-2">Property Description</h3>
+                    <p className="text-gray-600">{booking.description}</p>
+                  </div>
+                  
+                  <div className="mt-6 flex items-center">
+                    <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
+                      <img 
+                        src={booking.hostImage} 
+                        alt={booking.host}
+                        className="w-full h-full object-cover" 
+                      />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Hosted by</p>
+                      <p className="font-medium">{booking.host}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            {/* Right column - Price breakdown */}
+            <div className="w-full md:w-1/3">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Price Breakdown</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex justify-between">
+                      <span>${booking.price} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
+                      <span>${booking.price * nights}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Cleaning fee</span>
+                      <span>$95</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Service fee</span>
+                      <span>$85</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Taxes</span>
+                      <span>${taxes}</span>
+                    </div>
+                    <div className="border-t pt-3 mt-3">
+                      <div className="flex justify-between font-semibold">
+                        <span>Total</span>
+                        <span>${grandTotal}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {booking.status === 'pending' && (
+                    <div className="mt-6 space-y-3">
+                      <Button className="w-full">Accept Booking</Button>
+                      <Button variant="outline" className="w-full">Decline</Button>
+                    </div>
+                  )}
+                  
+                  {booking.status === 'confirmed' && (
+                    <div className="mt-6">
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-50">
+                            Cancel Booking
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Cancel your booking?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently cancel your reservation
+                              at {booking.property} and you may be subject to cancellation fees according
+                              to the host's cancellation policy.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Keep Reservation</AlertDialogCancel>
+                            <AlertDialogAction 
+                              onClick={handleCancelBooking}
+                              className="bg-red-500 hover:bg-red-600"
+                            >
+                              Yes, Cancel Booking
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </div>
+                  )}
+                  
+                  {booking.status === 'cancelled' && (
+                    <div className="mt-6 p-3 bg-red-50 border border-red-200 rounded-md">
+                      <p className="text-red-600 text-sm">This booking has been cancelled.</p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+          
+          {/* Additional Details Section */}
+          <div className="grid grid-cols-1 gap-6">
+            {/* Sublet Agreement */}
+            <Card>
+              <CardHeader className="pb-2 flex flex-row items-center">
+                <FileText className="h-5 w-5 mr-2 text-gray-500" />
+                <CardTitle className="text-lg">Sublet Agreement</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500">Agreement ID</p>
+                      <p className="font-medium">{booking.agreementDetails?.agreementId || 'Not available'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Status</p>
+                      <p className="font-medium">
+                        {booking.agreementDetails?.signed ? (
+                          <span className="text-green-600">Signed on {formatDate(booking.agreementDetails.signedDate)}</span>
+                        ) : (
+                          <span className="text-amber-600">Pending signature</span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  
                   <div>
-                    <p className="text-sm text-gray-500">Check-in</p>
-                    <p className="font-medium">{formatDate(booking.checkIn)}</p>
+                    <p className="text-sm text-gray-500">Cancellation Policy</p>
+                    <p className="font-medium">{booking.agreementDetails?.cancellationPolicy || 'Standard policy applies'}</p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Check-out</p>
-                    <p className="font-medium">{formatDate(booking.checkOut)}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Guests</p>
-                    <p className="font-medium">{booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Length of stay</p>
-                    <p className="font-medium">{nights} {nights === 1 ? 'night' : 'nights'}</p>
-                  </div>
-                </div>
-                
-                <div className="mt-6">
-                  <h3 className="font-medium mb-2">Property Description</h3>
-                  <p className="text-gray-600">{booking.description}</p>
-                </div>
-                
-                <div className="mt-6 flex items-center">
-                  <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
-                    <img 
-                      src={booking.hostImage} 
-                      alt={booking.host}
-                      className="w-full h-full object-cover" 
-                    />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Hosted by</p>
-                    <p className="font-medium">{booking.host}</p>
-                  </div>
+                  
+                  {!booking.agreementDetails?.signed && booking.status !== 'cancelled' && (
+                    <Button className="mt-4">
+                      Sign Agreement
+                    </Button>
+                  )}
+                  
+                  {booking.agreementDetails?.signed && (
+                    <Button variant="outline" className="mt-4">
+                      View Agreement
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
-          </div>
-          
-          {/* Right column - Price breakdown */}
-          <div className="w-full md:w-1/3">
+            
+            {/* Listing Details */}
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Price Breakdown</CardTitle>
+              <CardHeader className="pb-2 flex flex-row items-center">
+                <HomeIcon className="h-5 w-5 mr-2 text-gray-500" />
+                <CardTitle className="text-lg">Listing Details</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span>${booking.price} x {nights} {nights === 1 ? 'night' : 'nights'}</span>
-                    <span>${booking.price * nights}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Cleaning fee</span>
-                    <span>$95</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Service fee</span>
-                    <span>$85</span>
-                  </div>
-                  <div className="border-t pt-3 mt-3">
-                    <div className="flex justify-between font-semibold">
-                      <span>Total</span>
-                      <span>${totalPrice + 95 + 85}</span>
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="amenities">
+                    <AccordionTrigger>Amenities</AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {booking.amenities?.map((amenity, index) => (
+                          <li key={index} className="flex items-center">
+                            <span className="w-2 h-2 bg-brand rounded-full mr-2"></span>
+                            {amenity}
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="house-rules">
+                    <AccordionTrigger>House Rules</AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-2">
+                        {booking.houseRules?.map((rule, index) => (
+                          <li key={index} className="flex items-start">
+                            <span className="w-2 h-2 bg-brand rounded-full mr-2 mt-2"></span>
+                            {rule}
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </CardContent>
+            </Card>
+            
+            {/* Payment Details */}
+            <Card>
+              <CardHeader className="pb-2 flex flex-row items-center">
+                <CreditCard className="h-5 w-5 mr-2 text-gray-500" />
+                <CardTitle className="text-lg">Payment Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500">Payment Method</p>
+                      <p className="font-medium">{booking.paymentDetails?.paymentMethod || 'Not specified'}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500">Payment Status</p>
+                      <p className="font-medium">
+                        {booking.paymentDetails?.paymentStatus === 'Paid in full' ? (
+                          <span className="text-green-600">{booking.paymentDetails.paymentStatus}</span>
+                        ) : booking.paymentDetails?.paymentStatus === 'Refunded' ? (
+                          <span className="text-amber-600">{booking.paymentDetails.paymentStatus}</span>
+                        ) : (
+                          <span className="text-gray-600">{booking.paymentDetails?.paymentStatus || 'Unknown'}</span>
+                        )}
+                      </p>
                     </div>
                   </div>
+                  
+                  <div>
+                    <p className="text-sm text-gray-500">Security Deposit</p>
+                    <p className="font-medium">${booking.paymentDetails?.depositAmount || 'N/A'}</p>
+                  </div>
+                  
+                  {booking.status === 'pending' && (
+                    <Button className="mt-4">
+                      Complete Payment
+                    </Button>
+                  )}
+                  
+                  {booking.status === 'confirmed' && (
+                    <Button variant="outline" className="mt-4">
+                      Download Receipt
+                    </Button>
+                  )}
                 </div>
-                
-                {booking.status === 'pending' && (
-                  <div className="mt-6 space-y-3">
-                    <Button className="w-full">Accept Booking</Button>
-                    <Button variant="outline" className="w-full">Decline</Button>
-                  </div>
-                )}
-                
-                {booking.status === 'confirmed' && (
-                  <div className="mt-6">
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-50">
-                          Cancel Booking
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Cancel your booking?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            This action cannot be undone. This will permanently cancel your reservation
-                            at {booking.property} and you may be subject to cancellation fees according
-                            to the host's cancellation policy.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel>Keep Reservation</AlertDialogCancel>
-                          <AlertDialogAction 
-                            onClick={handleCancelBooking}
-                            className="bg-red-500 hover:bg-red-600"
-                          >
-                            Yes, Cancel Booking
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </div>
-                )}
-                
-                {booking.status === 'cancelled' && (
-                  <div className="mt-6 p-3 bg-red-50 border border-red-200 rounded-md">
-                    <p className="text-red-600 text-sm">This booking has been cancelled.</p>
-                  </div>
-                )}
               </CardContent>
             </Card>
           </div>

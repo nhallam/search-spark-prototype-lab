@@ -22,7 +22,7 @@ interface PropertyGridProps {
 
 const PropertyGrid: React.FC<PropertyGridProps> = ({ properties, isLoading = false, dateRange }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = 16;
+  const propertiesPerPage = 24; // Increased from 16 to 24
   
   // Calculate pagination
   const totalPages = Math.ceil(properties.length / propertiesPerPage);

@@ -32,7 +32,7 @@ const AppHeader = () => {
           <Link to="/notifications" className="relative">
             <Button variant="ghost" size="icon" className="relative">
               <Bell className={cn(
-                "h-5 w-5",
+                "h-6 w-6", // Increased from h-5 w-5 to h-6 w-6
                 location.pathname === '/notifications' ? 'text-primary' : 'text-muted-foreground'
               )} />
               <Badge 

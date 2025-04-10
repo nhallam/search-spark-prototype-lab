@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -151,7 +150,6 @@ const MyHome = () => {
                 </div>
               )}
             </div>
-            {/* Edit button removed from here */}
           </div>
         </div>
       </header>
@@ -221,7 +219,6 @@ const MyHome = () => {
                   
                   <p className="text-muted-foreground mb-4">{listing.description}</p>
                   
-                  {/* Amenities Section */}
                   <div className="mb-6">
                     <h3 className="font-semibold text-lg mb-3">Amenities</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

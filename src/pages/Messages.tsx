@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -223,10 +222,6 @@ const Messages = () => {
   if (isMobile) {
     return (
       <div className="h-screen flex flex-col bg-background pb-16">
-        <div className="p-4 border-b">
-          <h1 className="text-xl font-bold">Messages</h1>
-        </div>
-        
         {selectedConversation ? (
           <>
             <Button 
@@ -248,10 +243,6 @@ const Messages = () => {
   // For desktop, we show both side by side
   return (
     <div className="h-screen flex flex-col bg-background pb-16">
-      <div className="p-4 border-b">
-        <h1 className="text-xl font-bold">Messages</h1>
-      </div>
-      
       <div className="flex flex-1 overflow-hidden">
         <ConversationList />
         <MessageView />

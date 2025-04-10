@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 import HomeListingForm from '@/components/profile/HomeListingForm';
 import { DateRange } from "react-day-picker";
 import { Separator } from '@/components/ui/separator';
-import PropertyPhotoGrid from '@/components/PropertyPhotoGrid';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface AvailabilityDate {
   id: string;
@@ -174,7 +174,22 @@ const MyHome = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-4">
-                  <PropertyPhotoGrid photos={listing.photos} title={listing.title} />
+                  <div className="relative mb-4 rounded-lg overflow-hidden">
+                    <AspectRatio ratio={16/9} className="bg-gray-100">
+                      <img 
+                        src={listing.image} 
+                        alt={listing.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </AspectRatio>
+                    
+                    {listing.photos.length > 0 && (
+                      <Badge className="absolute bottom-2 right-2 bg-black/70 text-white flex items-center gap-1">
+                        <Image size={14} />
+                        {listing.photos.length} photos
+                      </Badge>
+                    )}
+                  </div>
                   
                   <p className="text-muted-foreground mb-4">{listing.description}</p>
                   

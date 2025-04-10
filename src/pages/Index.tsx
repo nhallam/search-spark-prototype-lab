@@ -6,9 +6,7 @@ import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { UserPlus } from 'phosphor-react';
 import { Button } from '@/components/ui/button';
-import PretzelLogo from '@/components/PretzelLogo';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { findPropertyCombinations } from '@/utils/combinationUtils';
 import PropertyCombinations from '@/components/PropertyCombinations';
@@ -139,7 +137,6 @@ const Index = () => {
             <div>
               <Link to="/invite">
                 <Button className="bg-brand hover:bg-brand/90 text-white">
-                  <UserPlus weight="bold" className="mr-2 h-4 w-4" />
                   Sign Up
                 </Button>
               </Link>

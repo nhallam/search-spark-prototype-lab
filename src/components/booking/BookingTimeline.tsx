@@ -104,7 +104,7 @@ const BookingTimeline: React.FC<BookingTimelineProps> = ({ events }) => {
                     <div className={`h-8 w-8 rounded-full flex items-center justify-center text-white ${getStatusColor(event.status)} mr-4 z-10`}>
                       {event.icon}
                     </div>
-                    <div className="flex-grow">
+                    <div className="flex-grow text-left">
                       <div className="font-medium">{event.title}</div>
                       <div className="text-sm text-gray-500">{formatDate(event.date)}</div>
                     </div>
@@ -117,7 +117,7 @@ const BookingTimeline: React.FC<BookingTimelineProps> = ({ events }) => {
                     </Badge>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="pl-12 pr-4 text-gray-600">
+                <AccordionContent className="pl-12 pr-4 text-gray-600 text-left">
                   <p className="mb-4">{event.description}</p>
                   {event.action && (
                     <Button 

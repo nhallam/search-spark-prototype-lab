@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, FileText, HomeIcon, CreditCard, Camera, DollarSign, Calendar, LogOut, RotateCcw } from 'lucide-react';
@@ -469,10 +470,6 @@ const BookingDetails = () => {
             </div>
           </div>
           
-          <div className="mb-6">
-            <BookingTimeline events={timelineEvents} />
-          </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card 
               className="cursor-pointer hover:shadow-md transition-shadow"
@@ -531,6 +528,10 @@ const BookingDetails = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+          
+          <div className="mt-2">
+            <BookingTimeline events={timelineEvents} />
           </div>
         </div>
       </main>

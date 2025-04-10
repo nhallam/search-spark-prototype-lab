@@ -14,6 +14,7 @@ import HomeListingForm from '@/components/profile/HomeListingForm';
 import { DateRange } from "react-day-picker";
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Wifi, WashingMachine, Conciergebell, Utensils, Tv, Lock } from 'lucide-react';
 
 interface AvailabilityDate {
   id: string;
@@ -31,6 +32,11 @@ interface HomeListing {
   photos: string[];
   listedDate: Date;
   availabilityDates: AvailabilityDate[];
+  amenities: {
+    icon: React.ElementType;
+    name: string;
+    description?: string;
+  }[];
 }
 
 const MyHome = () => {
@@ -68,6 +74,14 @@ const MyHome = () => {
           startDate: new Date(2025, 4, 5),
           endDate: new Date(2025, 4, 15),
         }
+      ],
+      amenities: [
+        { icon: Wifi, name: 'High-speed WiFi', description: 'Gigabit fiber connection' },
+        { icon: WashingMachine, name: 'Washer/Dryer', description: 'In-unit with detergent provided' },
+        { icon: Conciergebell, name: '24/7 Doorman', description: 'Professional and secure building staff' },
+        { icon: Utensils, name: 'Fully Equipped Kitchen', description: 'Premium appliances and cookware' },
+        { icon: Tv, name: 'Smart TV', description: '65" with Netflix and streaming services' },
+        { icon: Lock, name: 'Smart Lock', description: 'Keyless entry system' }
       ]
     }
   ]);
@@ -193,6 +207,26 @@ const MyHome = () => {
                   </div>
                   
                   <p className="text-muted-foreground mb-4">{listing.description}</p>
+                  
+                  {/* Amenities Section */}
+                  <div className="mb-6">
+                    <h3 className="font-semibold text-lg mb-3">Amenities</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {listing.amenities.map((amenity, index) => (
+                        <div key={index} className="flex items-center p-3 rounded-lg border hover:bg-gray-50">
+                          <div className="bg-brand/10 p-2.5 rounded-full mr-3">
+                            <amenity.icon size={18} className="text-brand" />
+                          </div>
+                          <div>
+                            <p className="font-medium">{amenity.name}</p>
+                            {amenity.description && (
+                              <p className="text-xs text-muted-foreground">{amenity.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                   
                   <div>
                     <div className="flex justify-between items-center mb-4">

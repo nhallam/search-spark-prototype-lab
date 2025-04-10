@@ -405,9 +405,6 @@ const Notifications = () => {
                               <Badge size="sm" className={`${getTagColor(notification.type)} border`} variant="outline">
                                 {getTagLabel(notification.type)}
                               </Badge>
-                              {!notification.read && (
-                                <span className="h-2 w-2 rounded-full bg-primary"></span>
-                              )}
                             </div>
                             <p className={`text-sm ${!notification.read ? 'font-medium' : ''}`}>
                               {notification.message}
@@ -417,8 +414,13 @@ const Notifications = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          {formatDate(notification.date)}
+                        <div className="flex items-center gap-2">
+                          {!notification.read && (
+                            <span className="h-2 w-2 rounded-full bg-primary"></span>
+                          )}
+                          <div className="text-xs text-muted-foreground">
+                            {formatDate(notification.date)}
+                          </div>
                         </div>
                       </div>
                     </div>

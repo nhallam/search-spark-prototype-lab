@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
@@ -51,12 +50,9 @@ const Index = () => {
       const filtered = filterProperties(mockProperties, params);
       setFilteredProperties(filtered);
       
-      // Find property combinations if date range is provided
       if (params.dateRange.from && params.dateRange.to) {
-        // Calculate stay duration
         const days = Math.round((params.dateRange.to.getTime() - params.dateRange.from.getTime()) / (1000 * 60 * 60 * 24));
         
-        // Only suggest combinations for longer stays (more than 14 days)
         if (days > 14) {
           const combinations = findPropertyCombinations(
             filtered, 
@@ -108,7 +104,6 @@ const Index = () => {
       const filtered = filterProperties(mockProperties, searchParams);
       setFilteredProperties(filtered);
       
-      // Recalculate property combinations with new filters
       if (searchParams.dateRange.from && searchParams.dateRange.to) {
         const combinations = findPropertyCombinations(
           filtered,
@@ -137,7 +132,6 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <PretzelLogo className="h-8 w-8 text-brand" />
               <h1 className="text-3xl font-bold text-brand">
                 Kiki
               </h1>
@@ -171,7 +165,6 @@ const Index = () => {
             />
           </div>
           
-          {/* Show property combinations for long stays */}
           {searchPerformed && searchParams.dateRange.from && searchParams.dateRange.to && (
             <PropertyCombinations 
               combinations={propertyCombinations} 

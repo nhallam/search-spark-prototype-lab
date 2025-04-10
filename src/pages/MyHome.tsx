@@ -139,21 +139,6 @@ const MyHome = () => {
   
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      <header className="bg-white text-brand shadow-sm py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col">
-              <h1 className="text-2xl font-bold text-brand">My Home</h1>
-              {listings.length > 0 && (
-                <div className="text-sm text-muted-foreground mt-1">
-                  Listed on {format(listings[0].listedDate, "MMMM d, yyyy")}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
-      
       <main className="container mx-auto px-4 py-8">
         {listings.length === 0 ? (
           <Card className="text-center p-8">

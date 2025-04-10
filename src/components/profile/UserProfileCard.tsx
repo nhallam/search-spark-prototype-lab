@@ -33,8 +33,8 @@ const UserProfileCard: React.FC<UserProfileCardProps> = ({ userData, openListing
           <AvatarImage src={userData.avatar} alt={userData.name} />
           <AvatarFallback>{userData.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
         </Avatar>
-        <CardTitle className="text-xl">{userData.name}</CardTitle>
-        <CardDescription>{userData.email}</CardDescription>
+        <CardTitle className="text-2xl font-bold">{userData.name}</CardTitle>
+        <CardDescription className="text-lg mt-1">{userData.email}</CardDescription>
       </CardHeader>
       <CardContent className="text-center">
         <div className="bg-gray-50 p-4 rounded-lg mb-4">

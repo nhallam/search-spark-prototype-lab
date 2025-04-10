@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import HomeListingForm from '@/components/profile/HomeListingForm';
 import { DateRange } from "react-day-picker";
 import { Separator } from '@/components/ui/separator';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface AvailabilityDate {
   id: string;
@@ -48,7 +49,13 @@ const MyHome = () => {
       address: '123 Broadway, New York, NY 10001',
       price: 250,
       image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
-      photos: ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg', 'photo5.jpg'],
+      photos: [
+        'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+        'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+      ],
       listedDate: new Date(2024, 2, 15), // March 15, 2024
       availabilityDates: [
         {
@@ -168,15 +175,51 @@ const MyHome = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-4">
-                  <div className="aspect-video w-full mb-4 bg-gray-100 rounded-lg overflow-hidden relative">
-                    <img 
-                      src={listing.image} 
-                      alt={listing.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <Badge className="absolute bottom-2 right-2 bg-black/70 text-white flex items-center gap-1">
+                  {/* Photo Grid Layout */}
+                  <div className="grid grid-cols-4 grid-rows-2 gap-2 mb-4 rounded-lg overflow-hidden">
+                    <div className="col-span-2 row-span-2 relative">
+                      <AspectRatio ratio={4/5} className="bg-gray-100">
+                        <img 
+                          src={listing.photos[0]} 
+                          alt={`${listing.title} - Main Photo`}
+                          className="w-full h-full object-cover"
+                        />
+                      </AspectRatio>
+                    </div>
+                    
+                    <div className="col-span-2 row-span-1 relative">
+                      <AspectRatio ratio={16/9} className="bg-gray-100">
+                        <img 
+                          src={listing.photos[1]} 
+                          alt={`${listing.title} - Photo 2`}
+                          className="w-full h-full object-cover"
+                        />
+                      </AspectRatio>
+                    </div>
+                    
+                    <div className="col-span-1 row-span-1 relative">
+                      <AspectRatio ratio={1} className="bg-gray-100">
+                        <img 
+                          src={listing.photos[2]} 
+                          alt={`${listing.title} - Photo 3`}
+                          className="w-full h-full object-cover"
+                        />
+                      </AspectRatio>
+                    </div>
+                    
+                    <div className="col-span-1 row-span-1 relative">
+                      <AspectRatio ratio={1} className="bg-gray-100">
+                        <img 
+                          src={listing.photos[3]} 
+                          alt={`${listing.title} - Photo 4`}
+                          className="w-full h-full object-cover"
+                        />
+                      </AspectRatio>
+                    </div>
+                    
+                    <Badge className="absolute bottom-2 right-2 bg-black/70 text-white flex items-center gap-1 z-10">
                       <Image size={14} />
-                      {listing.photos.length} {listing.photos.length === 1 ? 'photo' : 'photos'}
+                      {listing.photos.length} photos
                     </Badge>
                   </div>
                   

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, FileText, HomeIcon, CreditCard } from 'lucide-react';
+import { ArrowLeft, FileText, HomeIcon, CreditCard, Camera, DollarSign, Calendar, LogOut, RotateCcw } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,8 +16,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import BookingTimeline, { TimelineEvent } from '@/components/booking/BookingTimeline';
 
-// Mock booking data - in a real app, this would come from an API based on the ID
 const mockBookings = [
   { 
     id: "1", 
@@ -181,6 +181,134 @@ const BookingDetails = () => {
   const taxes = Math.round((totalPrice + 95 + 85) * (booking.paymentDetails?.taxRate || 0.08));
   const grandTotal = totalPrice + 95 + 85 + taxes;
 
+  const generateTimelineEvents = () => {
+    if (!booking) return [];
+
+    const checkInDate = new Date(booking.checkIn);
+    const checkOutDate = new Date(booking.checkOut);
+    
+    const agreementDate = booking.agreementDetails?.signedDate 
+      ? new Date(booking.agreementDetails.signedDate) 
+      : new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    
+    const depositDueDate = new Date(checkInDate);
+    depositDueDate.setDate(checkInDate.getDate() - 14);
+    
+    const moveInPhotosDate = new Date(checkInDate);
+    moveInPhotosDate.setDate(checkInDate.getDate() + 1);
+    
+    const rentDueDate = new Date(checkInDate);
+    rentDueDate.setDate(1);
+    
+    const moveOutPhotosDate = new Date(checkOutDate);
+    
+    const depositRefundDate = new Date(checkOutDate);
+    depositRefundDate.setDate(checkOutDate.getDate() + 7);
+    
+    const now = new Date();
+
+    const events: TimelineEvent[] = [
+      {
+        id: 'agreement',
+        title: 'Sublet Agreement',
+        date: agreementDate.toISOString(),
+        status: booking.agreementDetails?.signed ? 'completed' : 'in-progress',
+        description: booking.agreementDetails?.signed 
+          ? `The sublet agreement was signed on ${formatDate(booking.agreementDetails.signedDate as string)}.` 
+          : 'The sublet agreement needs to be signed by both parties.',
+        icon: <FileText className="h-4 w-4" />,
+        action: booking.agreementDetails?.signed ? undefined : {
+          label: 'View Agreement',
+          onClick: () => navigate(`/booking/${id}/agreement`),
+          disabled: false
+        }
+      },
+      {
+        id: 'deposit',
+        title: 'Security Deposit',
+        date: depositDueDate.toISOString(),
+        status: now > depositDueDate ? 'completed' : 'upcoming',
+        description: `Security deposit of $${booking.paymentDetails?.depositAmount} is due by ${formatDate(depositDueDate.toISOString())}. This can be paid via credit card or bank transfer.`,
+        icon: <DollarSign className="h-4 w-4" />,
+        action: {
+          label: 'Pay Deposit',
+          onClick: () => navigate(`/booking/${id}/payment`),
+          disabled: now > depositDueDate
+        }
+      },
+      {
+        id: 'moveInPhotos',
+        title: 'Move In Condition Photos',
+        date: moveInPhotosDate.toISOString(),
+        status: now > moveInPhotosDate ? 'completed' : (now >= checkInDate ? 'in-progress' : 'upcoming'),
+        description: 'Take photos of the property condition when you move in. These will be used for comparison when you move out.',
+        icon: <Camera className="h-4 w-4" />,
+        action: {
+          label: 'Upload Photos',
+          onClick: () => toast.success("This feature is coming soon!"),
+          disabled: now < checkInDate
+        }
+      },
+      {
+        id: 'moveIn',
+        title: 'Move In',
+        date: checkInDate.toISOString(),
+        status: now >= checkInDate ? 'completed' : 'upcoming',
+        description: `You're scheduled to move in on ${formatDate(checkInDate.toISOString())}. Make sure to coordinate with the host for key handover.`,
+        icon: <HomeIcon className="h-4 w-4" />,
+        action: undefined
+      },
+      {
+        id: 'rentDue',
+        title: 'Rent Due',
+        date: rentDueDate.toISOString(),
+        status: now > rentDueDate ? 'completed' : 'upcoming',
+        description: `Monthly rent of $${booking.price} is due on the ${formatDate(rentDueDate.toISOString())} of each month. Late payments may incur additional fees.`,
+        icon: <Calendar className="h-4 w-4" />,
+        action: {
+          label: 'Pay Rent',
+          onClick: () => navigate(`/booking/${id}/payment`),
+          disabled: now < rentDueDate
+        }
+      },
+      {
+        id: 'moveOut',
+        title: 'Move Out',
+        date: checkOutDate.toISOString(),
+        status: now >= checkOutDate ? 'completed' : 'upcoming',
+        description: `Your check-out date is ${formatDate(checkOutDate.toISOString())}. The property should be left in the same condition as when you moved in.`,
+        icon: <LogOut className="h-4 w-4" />,
+        action: undefined
+      },
+      {
+        id: 'moveOutPhotos',
+        title: 'Move Out Condition Photos',
+        date: checkOutDate.toISOString(),
+        status: now > checkOutDate ? 'completed' : (now >= checkOutDate ? 'in-progress' : 'upcoming'),
+        description: 'Take photos of the property condition when you move out. These will be compared with move-in photos.',
+        icon: <Camera className="h-4 w-4" />,
+        action: {
+          label: 'Upload Photos',
+          onClick: () => toast.success("This feature is coming soon!"),
+          disabled: now < checkOutDate
+        }
+      },
+      {
+        id: 'depositRefund',
+        title: 'Security Deposit Refund',
+        date: depositRefundDate.toISOString(),
+        status: now > depositRefundDate ? 'completed' : 'upcoming',
+        description: `Your security deposit of $${booking.paymentDetails?.depositAmount} will be refunded within 7 days after checkout, assuming no damages or outstanding charges.`,
+        icon: <RotateCcw className="h-4 w-4" />,
+        action: undefined
+      }
+    ];
+
+    return events;
+  };
+
+  const timelineEvents = generateTimelineEvents();
+
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
       <header className="bg-white shadow-sm py-4">
@@ -198,7 +326,6 @@ const BookingDetails = () => {
 
       <main className="container mx-auto px-4 py-6">
         <div className="flex flex-col gap-6">
-          {/* Main booking card - Property image and details */}
           <div className="flex flex-col md:flex-row gap-6">
             <div className="w-full md:w-2/3">
               <Card>
@@ -263,7 +390,6 @@ const BookingDetails = () => {
               </Card>
             </div>
             
-            {/* Right column - Price breakdown */}
             <div className="w-full md:w-1/3">
               <Card>
                 <CardHeader>
@@ -343,9 +469,11 @@ const BookingDetails = () => {
             </div>
           </div>
           
-          {/* Additional Details Section - Now clickable cards */}
+          <div className="mb-6">
+            <BookingTimeline events={timelineEvents} />
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Sublet Agreement */}
             <Card 
               className="cursor-pointer hover:shadow-md transition-shadow"
               onClick={() => navigate(`/booking/${id}/agreement`)}
@@ -366,7 +494,6 @@ const BookingDetails = () => {
               </CardContent>
             </Card>
             
-            {/* Listing Details */}
             <Card 
               className="cursor-pointer hover:shadow-md transition-shadow"
               onClick={() => navigate(`/booking/${id}/listing`)}
@@ -383,7 +510,6 @@ const BookingDetails = () => {
               </CardContent>
             </Card>
             
-            {/* Payment Details */}
             <Card 
               className="cursor-pointer hover:shadow-md transition-shadow"
               onClick={() => navigate(`/booking/${id}/payment`)}

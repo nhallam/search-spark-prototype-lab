@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -44,7 +45,7 @@ const MyHome = () => {
     {
       id: '1',
       title: 'Modern Manhattan Loft',
-      description: 'Beautiful spacious loft in the heart of Manhattan',
+      description: 'Beautiful spacious loft in the heart of Manhattan with stunning floor-to-ceiling windows offering breathtaking views of the city skyline. This bright, open-concept space features hardwood floors throughout, a fully equipped chef\'s kitchen with stainless steel appliances, and a cozy dining area perfect for entertaining. The living space is thoughtfully designed with contemporary furnishings, creating an elegant yet comfortable atmosphere. The bedroom area includes a premium queen-sized bed with luxury linens and blackout curtains for a perfect night\'s sleep. The modern bathroom includes a walk-in rainfall shower, heated floors, and high-end fixtures. Located in a secure building with 24/7 doorman, elevator access, and just steps away from excellent restaurants, shopping, and public transportation. Ideal for business travelers, couples, or anyone looking to experience the vibrant energy of Manhattan.',
       address: '123 Broadway, New York, NY 10001',
       price: 250,
       image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',

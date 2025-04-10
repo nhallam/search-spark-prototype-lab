@@ -392,7 +392,7 @@ const Notifications = () => {
                 filterNotifications().map((notification, index) => (
                   <React.Fragment key={notification.id}>
                     <div 
-                      className={`p-4 ${!notification.read ? 'bg-primary/5 border-l-4 border-primary' : ''}`}
+                      className={`p-4 ${!notification.read ? 'bg-primary/5' : ''}`}
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex">

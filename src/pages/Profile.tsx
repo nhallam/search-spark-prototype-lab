@@ -13,8 +13,7 @@ import {
 } from 'lucide-react';
 import { connections } from '@/data/photoAppData';
 
-// Import the refactored components
-import ProfileHeader from '@/components/profile/ProfileHeader';
+// Import components
 import ProfileNavigation from '@/components/profile/ProfileNavigation';
 import UserProfileCard from '@/components/profile/UserProfileCard';
 import InviteDialog from '@/components/profile/InviteDialog';
@@ -89,7 +88,6 @@ const Profile = () => {
   
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      <ProfileHeader />
       <ProfileNavigation />
       
       <main className="container mx-auto px-4 py-8">

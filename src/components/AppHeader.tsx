@@ -17,13 +17,37 @@ const AppHeader = () => {
   // Check if we're on the home page
   const isHomePage = location.pathname === '/';
   
+  // Determine the title based on the current route
+  const getPageTitle = () => {
+    const path = location.pathname;
+    
+    if (isHomePage) return "Kiki";
+    if (path === '/profile') return "My Profile";
+    if (path === '/bookings') return "My Bookings";
+    if (path === '/my-home') return "My Home";
+    if (path === '/messages') return "Messages";
+    if (path === '/notifications') return "Notifications";
+    if (path.includes('/profile/bank-details')) return "Bank Details";
+    if (path.includes('/profile/saved-listings')) return "Saved Listings";
+    if (path.includes('/profile/faqs')) return "Frequently Asked Questions";
+    if (path.includes('/profile/pricing-advice')) return "Pricing Advice";
+    if (path.includes('/profile/earnings')) return "Your Earnings";
+    if (path.includes('/profile/circles')) return "Kiki Circles";
+    if (path.includes('/market-analysis')) return "Market Analysis";
+    if (path.includes('/rating-experiments')) return "Rating Experiments";
+    
+    // Default title for other pages
+    return "";
+  };
+  
+  const pageTitle = getPageTitle();
+  
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div className="container flex h-16 items-center px-4 sm:justify-between sm:space-x-0">
         <div className="flex gap-2 items-center">
-          {/* Only show Kiki title on the home page */}
-          {isHomePage && (
-            <h1 className="text-2xl font-bold text-brand">Kiki</h1>
+          {pageTitle && (
+            <h1 className="text-2xl font-bold text-brand">{pageTitle}</h1>
           )}
         </div>
         

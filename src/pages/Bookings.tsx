@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar } from "lucide-react";
 
 const Bookings = () => {
   const navigate = useNavigate();
@@ -74,17 +73,6 @@ const Bookings = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
-      <header className="bg-white text-brand shadow-sm py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-brand flex items-center">
-              <Calendar className="mr-2 h-5 w-5" />
-              My Bookings
-            </h1>
-          </div>
-        </div>
-      </header>
-
       <main className="container mx-auto px-4 py-8">
         <Card>
           <CardHeader>

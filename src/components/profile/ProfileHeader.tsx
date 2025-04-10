@@ -2,18 +2,9 @@
 import React from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
+// This component is no longer used as we've moved the header to AppHeader.tsx
 const ProfileHeader = () => {
-  const isMobile = useIsMobile();
-  
-  return (
-    <header className="bg-white text-brand shadow-sm py-6">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-brand">My Profile</h1>
-        </div>
-      </div>
-    </header>
-  );
+  return null;
 };
 
 export default ProfileHeader;

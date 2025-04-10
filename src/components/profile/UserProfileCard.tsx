@@ -12,8 +12,6 @@ interface UserProfileCardProps {
     email: string;
     avatar: string;
     inviteCode: string;
-    earningRank: number;
-    totalEarnings: number;
   };
   openListingDialog: () => void;
 }
@@ -28,10 +26,6 @@ const UserProfileCard: React.FC<UserProfileCardProps> = ({ userData, openListing
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const formatCurrency = (value: number) => {
-    return `$${value.toLocaleString()}`;
-  };
-
   return (
     <Card className="md:col-span-1">
       <CardHeader className="flex flex-col items-center">
@@ -43,15 +37,6 @@ const UserProfileCard: React.FC<UserProfileCardProps> = ({ userData, openListing
         <CardDescription>{userData.email}</CardDescription>
       </CardHeader>
       <CardContent className="text-center">
-        <div className="bg-brand/5 p-4 rounded-lg mb-4 border border-brand/10">
-          <p className="text-sm text-muted-foreground mb-1">Your Earnings Rank</p>
-          <p className="text-lg font-bold text-brand mb-1">#{userData.earningRank} Top Earner</p>
-          <div className="flex justify-center items-center gap-1.5">
-            <span className="text-sm text-muted-foreground">Total Rent Saved:</span>
-            <span className="text-sm font-semibold">{formatCurrency(userData.totalEarnings)}</span>
-          </div>
-        </div>
-        
         <div className="bg-gray-50 p-4 rounded-lg mb-4">
           <p className="text-sm text-muted-foreground mb-2">Your Invite Code</p>
           <div className="flex justify-center items-center space-x-2">

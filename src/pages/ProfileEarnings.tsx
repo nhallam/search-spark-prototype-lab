@@ -4,6 +4,16 @@ import ProfileHeader from '@/components/profile/ProfileHeader';
 import ProfileNavigation from '@/components/profile/ProfileNavigation';
 import EarningsHistory from '@/components/profile/EarningsHistory';
 
+// Sample user data that would typically come from a user context or API
+const userData = {
+  name: 'Alex Johnson',
+  email: 'alex@example.com',
+  avatar: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=100&h=100',
+  inviteCode: 'AB123',
+  earningRank: 11,
+  totalEarnings: 12500
+};
+
 const ProfileEarnings = () => {
   return (
     <div className="min-h-screen bg-gray-50 pb-24">
@@ -14,6 +24,15 @@ const ProfileEarnings = () => {
         <div className="mb-6">
           <h1 className="text-2xl font-bold">Your Earnings</h1>
           <p className="text-muted-foreground">Track your earnings and rent savings over time</p>
+        </div>
+        
+        <div className="bg-brand/5 p-4 rounded-lg mb-6 border border-brand/10 max-w-md">
+          <p className="text-sm text-muted-foreground mb-1">Your Earnings Rank</p>
+          <p className="text-lg font-bold text-brand mb-1">#{userData.earningRank} Top Earner</p>
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm text-muted-foreground">Total Rent Saved:</span>
+            <span className="text-sm font-semibold">${userData.totalEarnings.toLocaleString()}</span>
+          </div>
         </div>
         
         <EarningsHistory />

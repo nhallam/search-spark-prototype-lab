@@ -8,7 +8,8 @@ import {
   HelpCircleIcon, 
   BarChart2Icon, 
   DollarSignIcon, 
-  UsersIcon 
+  UsersIcon,
+  LogOut
 } from 'lucide-react';
 import { connections } from '@/data/photoAppData';
 
@@ -18,6 +19,7 @@ import ProfileNavigation from '@/components/profile/ProfileNavigation';
 import UserProfileCard from '@/components/profile/UserProfileCard';
 import InviteDialog from '@/components/profile/InviteDialog';
 import HomeListingForm from '@/components/profile/HomeListingForm';
+import { toast } from 'sonner';
 
 const Profile = () => {
   const [isListingDialogOpen, setIsListingDialogOpen] = useState(false);
@@ -39,6 +41,11 @@ const Profile = () => {
   
   const openInviteDialog = () => {
     setIsInviteDialogOpen(true);
+  };
+
+  const handleLogout = () => {
+    toast.info('Logging out...');
+    window.location.href = '/';
   };
 
   const menuItems = [
@@ -108,6 +115,20 @@ const Profile = () => {
                 </div>
               </Link>
             ))}
+
+            {/* Logout button styled like menu items */}
+            <button 
+              onClick={handleLogout}
+              className="bg-white rounded-lg shadow p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors w-full text-left"
+            >
+              <div className="bg-primary/10 p-2 rounded-full text-primary">
+                <LogOut size={20} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-medium">Log Out</h3>
+                <p className="text-sm text-muted-foreground">Sign out of your account</p>
+              </div>
+            </button>
           </div>
         </div>
       </main>

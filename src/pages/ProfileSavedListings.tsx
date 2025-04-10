@@ -2,9 +2,10 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Star, MapPin, BookmarkIcon } from 'lucide-react';
+import { Star, MapPin, BookmarkIcon, ArrowLeft } from 'lucide-react';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import ProfileNavigation from '@/components/profile/ProfileNavigation';
+import { Link } from 'react-router-dom';
 
 const ProfileSavedListings = () => {
   const savedListings = [
@@ -38,8 +39,15 @@ const ProfileSavedListings = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Saved Listings</h1>
-          <p className="text-muted-foreground">View and manage your saved properties</p>
+          <div className="flex items-center gap-3 mb-2">
+            <Button variant="ghost" size="icon" asChild className="rounded-full">
+              <Link to="/profile">
+                <ArrowLeft size={20} />
+              </Link>
+            </Button>
+            <h1 className="text-2xl font-bold">Saved Listings</h1>
+          </div>
+          <p className="text-muted-foreground ml-10">View and manage your saved properties</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -3,6 +3,9 @@ import React from 'react';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import ProfileNavigation from '@/components/profile/ProfileNavigation';
 import FrequentlyAskedQuestions from '@/components/profile/FrequentlyAskedQuestions';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const ProfileFaqs = () => {
   return (
@@ -12,8 +15,15 @@ const ProfileFaqs = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Frequently Asked Questions</h1>
-          <p className="text-muted-foreground">Get answers to common questions about Kiki</p>
+          <div className="flex items-center gap-3 mb-2">
+            <Button variant="ghost" size="icon" asChild className="rounded-full">
+              <Link to="/profile">
+                <ArrowLeft size={20} />
+              </Link>
+            </Button>
+            <h1 className="text-2xl font-bold">Frequently Asked Questions</h1>
+          </div>
+          <p className="text-muted-foreground ml-10">Get answers to common questions about Kiki</p>
         </div>
         
         <FrequentlyAskedQuestions />

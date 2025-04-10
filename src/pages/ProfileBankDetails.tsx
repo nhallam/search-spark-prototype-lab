@@ -2,9 +2,10 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { BanknoteIcon, CreditCardIcon, PlusCircleIcon } from 'lucide-react';
+import { BanknoteIcon, CreditCardIcon, PlusCircleIcon, ArrowLeft } from 'lucide-react';
 import ProfileHeader from '@/components/profile/ProfileHeader';
 import ProfileNavigation from '@/components/profile/ProfileNavigation';
+import { Link } from 'react-router-dom';
 
 const ProfileBankDetails = () => {
   const paymentMethods = [
@@ -31,8 +32,15 @@ const ProfileBankDetails = () => {
       
       <main className="container mx-auto px-4 py-8">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Bank Details</h1>
-          <p className="text-muted-foreground">Manage your payment methods and bank accounts</p>
+          <div className="flex items-center gap-3 mb-2">
+            <Button variant="ghost" size="icon" asChild className="rounded-full">
+              <Link to="/profile">
+                <ArrowLeft size={20} />
+              </Link>
+            </Button>
+            <h1 className="text-2xl font-bold">Bank Details</h1>
+          </div>
+          <p className="text-muted-foreground ml-10">Manage your payment methods and bank accounts</p>
         </div>
         
         <div className="space-y-6">

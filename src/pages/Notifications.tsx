@@ -414,9 +414,9 @@ const Notifications = () => {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 h-full">
                           {!notification.read && (
-                            <span className="h-2.2 w-2.2 rounded-full bg-primary self-center"></span>
+                            <span className="h-2.4 w-2.4 rounded-full bg-primary my-auto"></span>
                           )}
                           <div className="text-xs text-muted-foreground">
                             {formatDate(notification.date)}

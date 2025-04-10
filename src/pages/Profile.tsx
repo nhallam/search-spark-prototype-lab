@@ -93,42 +93,48 @@ const Profile = () => {
       <ProfileNavigation />
       
       <main className="container mx-auto px-4 py-8">
-        <div className="space-y-6">
-          <UserProfileCard 
-            userData={userData}
-            openListingDialog={openListingDialog}
-          />
+        <div className="space-y-6 md:space-y-0 md:grid md:grid-cols-12 md:gap-6">
+          {/* Profile card on the left in desktop */}
+          <div className="md:col-span-4">
+            <UserProfileCard 
+              userData={userData}
+              openListingDialog={openListingDialog}
+            />
+          </div>
           
-          <div className="grid gap-4">
-            {menuItems.map((item) => (
-              <Link 
-                key={item.title} 
-                to={item.path}
-                className="bg-white rounded-lg shadow p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+          {/* Menu items on the right in desktop */}
+          <div className="md:col-span-8">
+            <div className="grid gap-4">
+              {menuItems.map((item) => (
+                <Link 
+                  key={item.title} 
+                  to={item.path}
+                  className="bg-white rounded-lg shadow p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="bg-primary/10 p-2 rounded-full text-primary">
+                    {item.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-medium">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                  </div>
+                </Link>
+              ))}
+
+              {/* Logout button styled like menu items */}
+              <button 
+                onClick={handleLogout}
+                className="bg-white rounded-lg shadow p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors w-full text-left"
               >
                 <div className="bg-primary/10 p-2 rounded-full text-primary">
-                  {item.icon}
+                  <LogOut size={20} />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                  <h3 className="font-medium">Log Out</h3>
+                  <p className="text-sm text-muted-foreground">Sign out of your account</p>
                 </div>
-              </Link>
-            ))}
-
-            {/* Logout button styled like menu items */}
-            <button 
-              onClick={handleLogout}
-              className="bg-white rounded-lg shadow p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors w-full text-left"
-            >
-              <div className="bg-primary/10 p-2 rounded-full text-primary">
-                <LogOut size={20} />
-              </div>
-              <div className="flex-1">
-                <h3 className="font-medium">Log Out</h3>
-                <p className="text-sm text-muted-foreground">Sign out of your account</p>
-              </div>
-            </button>
+              </button>
+            </div>
           </div>
         </div>
       </main>

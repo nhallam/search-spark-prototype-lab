@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -14,7 +13,7 @@ import HomeListingForm from '@/components/profile/HomeListingForm';
 import { DateRange } from "react-day-picker";
 import { Separator } from '@/components/ui/separator';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { Wifi, WashingMachine, Conciergebell, Utensils, Tv, Lock } from 'lucide-react';
+import { Wifi, WashingMachine, ConciergeBell, Utensils, Tv, Lock } from 'lucide-react';
 
 interface AvailabilityDate {
   id: string;
@@ -78,7 +77,7 @@ const MyHome = () => {
       amenities: [
         { icon: Wifi, name: 'High-speed WiFi', description: 'Gigabit fiber connection' },
         { icon: WashingMachine, name: 'Washer/Dryer', description: 'In-unit with detergent provided' },
-        { icon: Conciergebell, name: '24/7 Doorman', description: 'Professional and secure building staff' },
+        { icon: ConciergeBell, name: '24/7 Doorman', description: 'Professional and secure building staff' },
         { icon: Utensils, name: 'Fully Equipped Kitchen', description: 'Premium appliances and cookware' },
         { icon: Tv, name: 'Smart TV', description: '65" with Netflix and streaming services' },
         { icon: Lock, name: 'Smart Lock', description: 'Keyless entry system' }
@@ -125,7 +124,12 @@ const MyHome = () => {
       image: 'https://images.unsplash.com/photo-1496307653780-42ee777d4833?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
       photos: [],
       listedDate: new Date(),
-      availabilityDates: []
+      availabilityDates: [],
+      amenities: [
+        { icon: Wifi, name: 'WiFi', description: 'High-speed internet' },
+        { icon: Tv, name: 'TV', description: 'Smart TV with streaming services' },
+        { icon: WashingMachine, name: 'Laundry', description: 'In-unit washer/dryer' }
+      ]
     };
     
     setListings([...listings, newListing]);

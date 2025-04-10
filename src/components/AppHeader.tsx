@@ -21,10 +21,9 @@ const AppHeader = () => {
     <header className="sticky top-0 z-40 w-full bg-white border-b border-gray-200 dark:border-gray-700 shadow-sm">
       <div className="container flex h-16 items-center px-4 sm:justify-between sm:space-x-0">
         <div className="flex gap-2 items-center">
-          {!isHomePage && (
-            <Link to="/">
-              <h1 className="text-2xl font-bold text-brand">Kiki</h1>
-            </Link>
+          {/* Only show Kiki title on the home page */}
+          {isHomePage && (
+            <h1 className="text-2xl font-bold text-brand">Kiki</h1>
           )}
         </div>
         

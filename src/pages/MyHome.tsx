@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,7 +12,7 @@ import { toast } from 'sonner';
 import HomeListingForm from '@/components/profile/HomeListingForm';
 import { DateRange } from "react-day-picker";
 import { Separator } from '@/components/ui/separator';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
+import PropertyPhotoGrid from '@/components/PropertyPhotoGrid';
 
 interface AvailabilityDate {
   id: string;
@@ -175,53 +174,7 @@ const MyHome = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-4">
-                  {/* Photo Grid Layout */}
-                  <div className="grid grid-cols-4 grid-rows-2 gap-2 mb-4 rounded-lg overflow-hidden">
-                    <div className="col-span-2 row-span-2 relative">
-                      <AspectRatio ratio={4/5} className="bg-gray-100">
-                        <img 
-                          src={listing.photos[0]} 
-                          alt={`${listing.title} - Main Photo`}
-                          className="w-full h-full object-cover"
-                        />
-                      </AspectRatio>
-                    </div>
-                    
-                    <div className="col-span-2 row-span-1 relative">
-                      <AspectRatio ratio={16/9} className="bg-gray-100">
-                        <img 
-                          src={listing.photos[1]} 
-                          alt={`${listing.title} - Photo 2`}
-                          className="w-full h-full object-cover"
-                        />
-                      </AspectRatio>
-                    </div>
-                    
-                    <div className="col-span-1 row-span-1 relative">
-                      <AspectRatio ratio={1} className="bg-gray-100">
-                        <img 
-                          src={listing.photos[2]} 
-                          alt={`${listing.title} - Photo 3`}
-                          className="w-full h-full object-cover"
-                        />
-                      </AspectRatio>
-                    </div>
-                    
-                    <div className="col-span-1 row-span-1 relative">
-                      <AspectRatio ratio={1} className="bg-gray-100">
-                        <img 
-                          src={listing.photos[3]} 
-                          alt={`${listing.title} - Photo 4`}
-                          className="w-full h-full object-cover"
-                        />
-                      </AspectRatio>
-                    </div>
-                    
-                    <Badge className="absolute bottom-2 right-2 bg-black/70 text-white flex items-center gap-1 z-10">
-                      <Image size={14} />
-                      {listing.photos.length} photos
-                    </Badge>
-                  </div>
+                  <PropertyPhotoGrid photos={listing.photos} title={listing.title} />
                   
                   <p className="text-muted-foreground mb-4">{listing.description}</p>
                   

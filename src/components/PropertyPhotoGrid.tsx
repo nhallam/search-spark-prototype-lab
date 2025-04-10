@@ -19,7 +19,7 @@ const PropertyPhotoGrid: React.FC<PropertyPhotoGridProps> = ({ photos, title }) 
   }
   
   return (
-    <div className="grid grid-cols-4 grid-rows-2 gap-2 mb-4 rounded-lg overflow-hidden">
+    <div className="grid grid-cols-4 grid-rows-2 gap-4 mb-4 rounded-lg overflow-hidden">
       <div className="col-span-2 row-span-2 relative">
         <AspectRatio ratio={4/5} className="bg-gray-100">
           <img 

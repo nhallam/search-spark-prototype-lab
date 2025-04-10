@@ -37,6 +37,7 @@ import RatingExperiments from "./pages/RatingExperiments";
 import Messages from "./pages/Messages";
 import { SignUpProvider } from "./contexts/SignUpContext";
 import TabNavigation from "./components/TabNavigation";
+import AppHeader from "./components/AppHeader";
 
 const queryClient = new QueryClient();
 
@@ -90,7 +91,6 @@ const AppContent = () => {
     if (path === '/') return 'explore';
     if (path.includes('/property')) return 'explore';
     if (path === '/bookings' || path.includes('/booking/')) return 'bookings';
-    if (path === '/notifications') return 'notifications';
     if (path === '/my-home') return 'my-home';
     if (path === '/profile') return 'profile';
     if (path === '/messages') return 'messages';
@@ -100,6 +100,7 @@ const AppContent = () => {
   
   return (
     <>
+      <AppHeader />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/property/:id" element={<PropertyDetails />} />

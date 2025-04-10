@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
 import PropertyGrid from '@/components/PropertyGrid';
 import { mockProperties, filterProperties } from '@/data/mockProperties';
 import { Property } from '@/components/PropertyCard';
 import { toast } from 'sonner';
 import FilterDrawer from '@/components/FilterDrawer';
-import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { findPropertyCombinations } from '@/utils/combinationUtils';
 import PropertyCombinations from '@/components/PropertyCombinations';
@@ -133,13 +131,6 @@ const Index = () => {
               <h1 className="text-3xl font-bold text-brand">
                 Kiki
               </h1>
-            </div>
-            <div>
-              <Link to="/invite">
-                <Button className="bg-brand hover:bg-brand/90 text-white">
-                  Sign Up
-                </Button>
-              </Link>
             </div>
           </div>
         </div>

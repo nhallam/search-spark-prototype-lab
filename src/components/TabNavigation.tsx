@@ -1,13 +1,13 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Bell, Calendar, Compass, UserRound, Home, MessageCircle } from 'lucide-react';
+import { Calendar, Compass, UserRound, Home, MessageCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Badge } from '@/components/ui/badge';
 
 interface TabNavigationProps {
-  activeTab?: 'explore' | 'bookings' | 'notifications' | 'profile' | 'my-home' | 'messages';
+  activeTab?: 'explore' | 'bookings' | 'profile' | 'my-home' | 'messages';
 }
 
 const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
@@ -29,7 +29,7 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
           to="/" 
           className={cn(
             "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/6" : "w-16",
+            isMobile ? "w-1/5" : "w-16",
             activeTab === 'explore' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
@@ -41,7 +41,7 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
           to="/bookings" 
           className={cn(
             "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/6" : "w-16",
+            isMobile ? "w-1/5" : "w-16",
             activeTab === 'bookings' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
@@ -53,7 +53,7 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
           to="/my-home" 
           className={cn(
             "flex flex-col items-center justify-center py-2 relative",
-            isMobile ? "w-1/6" : "w-16",
+            isMobile ? "w-1/5" : "w-16",
             activeTab === 'my-home' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
@@ -74,7 +74,7 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
           to="/messages" 
           className={cn(
             "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/6" : "w-16",
+            isMobile ? "w-1/5" : "w-16",
             activeTab === 'messages' ? 'text-primary' : 'text-muted-foreground'
           )}
         >
@@ -83,22 +83,10 @@ const TabNavigation = ({ activeTab = 'explore' }: TabNavigationProps) => {
         </Link>
         
         <Link 
-          to="/notifications" 
-          className={cn(
-            "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/6" : "w-16",
-            activeTab === 'notifications' ? 'text-primary' : 'text-muted-foreground'
-          )}
-        >
-          <Bell size={20} />
-          <span className="text-xs mt-1">Notifications</span>
-        </Link>
-        
-        <Link 
           to="/profile" 
           className={cn(
             "flex flex-col items-center justify-center py-2",
-            isMobile ? "w-1/6" : "w-16",
+            isMobile ? "w-1/5" : "w-16",
             activeTab === 'profile' ? 'text-primary' : 'text-muted-foreground'
           )}
         >

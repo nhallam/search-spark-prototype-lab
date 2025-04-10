@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -5,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
-import { CalendarIcon, PlusCircle, Home as HomeIcon, Check, Image } from "lucide-react";
+import { CalendarIcon, PlusCircle, Home as HomeIcon, Check, Image, Pencil } from "lucide-react";
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -150,11 +151,7 @@ const MyHome = () => {
                 </div>
               )}
             </div>
-            {listings.length > 0 && (
-              <Button variant="outline" className="border-gray-300">
-                Edit Listing
-              </Button>
-            )}
+            {/* Edit button removed from here */}
           </div>
         </div>
       </header>
@@ -193,6 +190,18 @@ const MyHome = () => {
                 </CardHeader>
                 
                 <CardContent className="pt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <div></div>
+                    <Button 
+                      variant="outline" 
+                      className="border-gray-300 flex items-center gap-2"
+                      onClick={() => toast.info('Edit functionality coming soon!')}
+                    >
+                      <Pencil size={16} />
+                      Edit Listing
+                    </Button>
+                  </div>
+                  
                   <div className="relative mb-4 rounded-lg overflow-hidden">
                     <AspectRatio ratio={16/9} className="bg-gray-100">
                       <img 
